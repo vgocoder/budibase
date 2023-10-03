@@ -4,7 +4,7 @@
   import { getContext } from "svelte"
   import { Grid } from "@budibase/frontend-core"
 
-  export let table
+  export let datasource
   export let allowAddRows = true
   export let allowEditRows = true
   export let allowDeleteRows = true
@@ -15,6 +15,9 @@
   export let fixedRowHeight = null
   export let columns = null
   export let onRowClick = null
+
+  // Legacy settings
+  export let table
 
   const component = getContext("component")
   const { styleable, API, builderStore, notificationStore } = getContext("sdk")
@@ -40,7 +43,7 @@
   class:in-builder={$builderStore.inBuilder}
 >
   <Grid
-    datasource={table}
+    datasource={datasource || table}
     {API}
     {stripeRows}
     {initialFilter}
