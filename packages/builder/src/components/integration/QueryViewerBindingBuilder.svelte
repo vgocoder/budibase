@@ -1,14 +1,33 @@
 <script>
   import KeyValueBuilder from "components/integration/KeyValueBuilder.svelte"
   import { getUserBindings } from "builderStore/dataBinding"
+  import { IntegrationTypes } from "constants/backend"
   export let queryBindings = []
+  export let source
 
   const userBindings = getUserBindings()
 
   let internalBindings = queryBindings.reduce((acc, binding) => {
-    acc[binding.name] = binding.default
+    acc[binding.name] = {
+      value: binding.default,
+      extendedType: binding.extendedType,
+    }
     return acc
   }, {})
+
+  let extendedTypes =
+    source === IntegrationTypes.MONGODB
+      ? [
+          "Binary",
+          "Decimal128",
+          "Double",
+          "Int32",
+          "Long",
+          "ObjectId",
+          "Timestamp",
+          "UUID",
+        ]
+      : undefined
 </script>
 
 <KeyValueBuilder
@@ -22,5 +41,6 @@
   bindings={[...userBindings]}
   bindingDrawerLeft="260px"
   allowHelpers={false}
+  {extendedTypes}
   on:change
 />

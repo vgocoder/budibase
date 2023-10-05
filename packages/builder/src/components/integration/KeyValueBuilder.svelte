@@ -35,15 +35,23 @@
   export let bindingDrawerLeft
   export let allowHelpers = true
   export let customButtonText = null
+  export let extendedTypes
 
   let fields = Object.entries(object || {}).map(([name, value]) => ({
     name,
-    value,
+    value: value.value,
+    extendedType: value.extendedType,
   }))
   let fieldActivity = buildFieldActivity(activity)
 
   $: object = fields.reduce(
-    (acc, next) => ({ ...acc, [next.name]: next.value }),
+    (acc, next) => ({
+      ...acc,
+      [next.name]: {
+        value: next.value,
+        extendedType: next.extendedType,
+      },
+    }),
     {}
   )
 
@@ -61,7 +69,7 @@
   }
 
   export function addEntry() {
-    fields = [...fields, { name: "", value: "" }]
+    fields = [...fields, { name: "", value: "", extendedType: "" }]
     fieldActivity = [...fieldActivity, true]
     changed()
   }
@@ -92,6 +100,9 @@
     <div class="container" class:container-active={toggle}>
       <Label {tooltip}>{keyHeading || keyPlaceholder}</Label>
       <Label>{valueHeading || valuePlaceholder}</Label>
+      {#if extendedTypes}
+        <Label>Type</Label>
+      {/if}
       {#if toggle}
         <Label>Active</Label>
       {/if}
@@ -136,6 +147,14 @@
           on:blur={changed}
         />
       {/if}
+      {#if extendedTypes}
+        <Select
+          placeholder={"Default"}
+          bind:value={field.extendedType}
+          on:change={changed}
+          options={extendedTypes}
+        />
+      {/if}
       {#if toggle}
         <Toggle bind:value={fieldActivity[idx]} on:change={changed} />
       {/if}
@@ -172,7 +191,7 @@
 <style>
   .container {
     display: grid;
-    grid-template-columns: 1fr 1fr 20px;
+    grid-template-columns: 1fr 1fr 1fr 20px;
     grid-gap: var(--spacing-m);
     align-items: center;
     margin-bottom: var(--spacing-m);
