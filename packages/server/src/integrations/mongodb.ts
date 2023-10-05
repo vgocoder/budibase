@@ -19,6 +19,8 @@ import {
   Document,
 } from "mongodb"
 import environment from "../environment"
+import sdk from "../sdk"
+import cloneDeep from "lodash/fp/cloneDeep"
 
 interface MongoDBConfig {
   connectionString: string
@@ -29,10 +31,19 @@ interface MongoDBConfig {
 }
 
 interface MongoDBQuery {
+  parameters?: {
+    [key: string]: ExtendedTypeParam
+  }
   json: object | string
   extra: {
     [key: string]: string
   }
+}
+
+interface ExtendedTypeParam {
+  name: string
+  default: any
+  extendedType: string
 }
 
 const getSchema = () => {
@@ -394,6 +405,45 @@ class MongoIntegration implements IntegrationBase {
     )
   }
 
+  async enrichQuery(
+    json: string,
+    parameters:
+      | {
+          [key: string]: ExtendedTypeParam
+        }
+      | undefined
+  ): Promise<object> {
+    let extendedParams: {
+      [key: string]: any
+    } = cloneDeep(parameters || {})
+    for (let [key, value] of Object.entries(parameters || {})) {
+      if (value.extendedType === "ObjectId") {
+        extendedParams[key] = {
+          id: `"${
+            Date.now().toString(36) + Math.random().toString(36).substring(2)
+          }"`,
+          value: ObjectId.createFromHexString(value.default),
+        }
+      }
+    }
+    let placeholderParams: any = cloneDeep(parameters)
+    for (let key of Object.keys(placeholderParams || {})) {
+      placeholderParams[key] = extendedParams[key].id
+    }
+    let enriched = await sdk.queries.enrichContext({ json }, placeholderParams)
+    for (let extended of Object.values(extendedParams || {})) {
+      for (let field of Object.keys(enriched.json || {})) {
+        if (
+          enriched.json[field] ===
+          extended.id.substring(1, extended.id.length - 1)
+        ) {
+          enriched.json[field] = extended.value
+        }
+      }
+    }
+    return enriched.json
+  }
+
   createObjectIds(json: any): any {
     const self = this
 
@@ -525,7 +575,10 @@ class MongoIntegration implements IntegrationBase {
       await this.connect()
       const db = this.client.db(this.config.db)
       const collection = db.collection(query.extra.collection)
-      let json = this.createObjectIds(query.json)
+      let json = await this.enrichQuery(
+        query.json?.toString(),
+        query.parameters
+      )
 
       switch (query.extra.actionType) {
         case "find": {
@@ -559,7 +612,7 @@ class MongoIntegration implements IntegrationBase {
           return await collection.countDocuments(json)
         }
         case "distinct": {
-          return await collection.distinct(json)
+          //return await collection.distinct(json)
         }
         default: {
           throw new Error(

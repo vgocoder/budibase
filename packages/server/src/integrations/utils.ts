@@ -188,6 +188,10 @@ export function isSQL(datasource: Datasource) {
   return helpers.isSQL(datasource)
 }
 
+export function hasExtendedTypes(datasource: Datasource) {
+  return helpers.hasExtendedTypes(datasource)
+}
+
 export function isIsoDateString(str: string) {
   const trimmedValue = str.trim()
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/.test(trimmedValue)) {

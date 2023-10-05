@@ -8,9 +8,8 @@ import { context, cache, auth } from "@budibase/backend-core"
 import { getGlobalIDFromUserMetadataID } from "../db/utils"
 import sdk from "../sdk"
 import { cloneDeep } from "lodash/fp"
-import { SourceName } from "@budibase/types"
 
-import { isSQL } from "../integrations/utils"
+import { hasExtendedTypes, isSQL } from "../integrations/utils"
 import { interpolateSQL } from "../integrations/queries/sql"
 import { Query } from "@budibase/types"
 
@@ -96,9 +95,16 @@ class QueryRunner {
     }
 
     let query
-    // handle SQL injections by interpolating the variables
     if (isSQL(datasourceClone)) {
+      // handle SQL injections by interpolating the variables
       query = await interpolateSQL(fieldsClone, enrichedContext, integration)
+    } else if (hasExtendedTypes(datasourceClone)) {
+      // handle extended type binding mapping in the integration
+      for (const param in parameters) {
+        delete enrichedContext[param]
+      }
+      query = fieldsClone
+      query.parameters = parameters
     } else {
       query = await sdk.queries.enrichContext(fieldsClone, enrichedContext)
     }
