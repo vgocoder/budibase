@@ -15,6 +15,8 @@ import {
   UpdateOptions,
   OperationOptions,
   MongoClientOptions,
+  WithId,
+  Document,
 } from "mongodb"
 import environment from "../environment"
 
@@ -426,6 +428,29 @@ class MongoIntegration implements IntegrationBase {
     return interpolateObjectIds(json)
   }
 
+  convertResponseType(doc: WithId<Document> | null): object | null {
+    if (!doc) {
+      return doc
+    }
+    for (let [key, value] of Object.entries(doc)) {
+      switch (value?._bsontype) {
+        case "Timestamp":
+          doc[key] = value.toJSON()["$timestamp"]
+          break
+        case "Decimal128":
+          doc[key] = value.toString()
+          break
+      }
+    }
+    return doc
+  }
+  convertResponseTypes(response: WithId<Document>[]): object {
+    for (let doc of response) {
+      this.convertResponseType(doc)
+    }
+    return response
+  }
+
   parseQueryParams(params: string, mode: string) {
     let queryParams = []
     let openCount = 0
@@ -505,13 +530,15 @@ class MongoIntegration implements IntegrationBase {
       switch (query.extra.actionType) {
         case "find": {
           if (json) {
-            return await collection.find(json).toArray()
+            return this.convertResponseTypes(
+              await collection.find(json).toArray()
+            )
           } else {
-            return await collection.find().toArray()
+            return this.convertResponseTypes(await collection.find().toArray())
           }
         }
         case "findOne": {
-          return await collection.findOne(json)
+          return this.convertResponseType(await collection.findOne(json))
         }
         case "findOneAndUpdate": {
           if (typeof query.json === "string") {
