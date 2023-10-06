@@ -9,6 +9,7 @@ import {
 import {
   MongoClient,
   ObjectId,
+  Decimal128,
   Filter,
   UpdateFilter,
   FindOneAndUpdateOptions,
@@ -440,6 +441,11 @@ class MongoIntegration implements IntegrationBase {
         extendedParams[key] = {
           id: `"${id}"`,
           value: ObjectId.createFromHexString(value.default),
+        }
+      } else if (value.extendedType === "Decimal128") {
+        extendedParams[key] = {
+          id: `"${id}"`,
+          value: Decimal128.fromString(value.default),
         }
       } else {
         extendedParams[key] = {
