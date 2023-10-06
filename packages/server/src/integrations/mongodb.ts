@@ -417,12 +417,17 @@ class MongoIntegration implements IntegrationBase {
       [key: string]: any
     } = cloneDeep(parameters || {})
     for (let [key, value] of Object.entries(parameters || {})) {
+      const id =
+        Date.now().toString(36) + Math.random().toString(36).substring(2)
       if (value.extendedType === "ObjectId") {
         extendedParams[key] = {
-          id: `"${
-            Date.now().toString(36) + Math.random().toString(36).substring(2)
-          }"`,
+          id: `"${id}"`,
           value: ObjectId.createFromHexString(value.default),
+        }
+      } else {
+        extendedParams[key] = {
+          id: `"${id}"`,
+          value: value.default,
         }
       }
     }
