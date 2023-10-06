@@ -46,6 +46,12 @@ interface ExtendedTypeParam {
   extendedType: string
 }
 
+interface MongoDBQueryParams {
+  filter: object
+  update?: object
+  options?: object
+}
+
 const getSchema = () => {
   let schema = {
     docs: "https://github.com/mongodb/node-mongodb-native",
@@ -413,6 +419,17 @@ class MongoIntegration implements IntegrationBase {
         }
       | undefined
   ): Promise<object> {
+    function replaceTempIds(enriched: any, extended: any) {
+      for (let field of Object.keys(enriched || {})) {
+        if (
+          enriched[field] === extended.id.substring(1, extended.id.length - 1)
+        ) {
+          enriched[field] = extended.value
+        } else if (enriched[field] instanceof Object) {
+          replaceTempIds(enriched[field], extended)
+        }
+      }
+    }
     let extendedParams: {
       [key: string]: any
     } = cloneDeep(parameters || {})
@@ -437,14 +454,7 @@ class MongoIntegration implements IntegrationBase {
     }
     let enriched = await sdk.queries.enrichContext({ json }, placeholderParams)
     for (let extended of Object.values(extendedParams || {})) {
-      for (let field of Object.keys(enriched.json || {})) {
-        if (
-          enriched.json[field] ===
-          extended.id.substring(1, extended.id.length - 1)
-        ) {
-          enriched.json[field] = extended.value
-        }
-      }
+      replaceTempIds(enriched.json, extended)
     }
     return enriched.json
   }
@@ -506,14 +516,22 @@ class MongoIntegration implements IntegrationBase {
     return response
   }
 
-  parseQueryParams(params: string, mode: string) {
+  async parseQueryParams(
+    json: string,
+    mode: string,
+    parameters:
+      | {
+          [key: string]: ExtendedTypeParam
+        }
+      | undefined
+  ): Promise<MongoDBQueryParams> {
     let queryParams = []
     let openCount = 0
     let inQuotes = false
     let i = 0
     let startIndex = 0
-    for (let c of params) {
-      if (c === '"' && i > 0 && params[i - 1] !== "\\") {
+    for (let c of json) {
+      if (c === '"' && i > 0 && json[i - 1] !== "\\") {
         inQuotes = !inQuotes
       }
       if (c === "{" && !inQuotes) {
@@ -523,7 +541,7 @@ class MongoIntegration implements IntegrationBase {
         }
       } else if (c === "}" && !inQuotes) {
         if (openCount === 1) {
-          queryParams.push(JSON.parse(params.substring(startIndex, i + 1)))
+          queryParams.push(json.substring(startIndex, i + 1))
         }
         openCount--
       }
@@ -534,14 +552,14 @@ class MongoIntegration implements IntegrationBase {
     let group3 = queryParams[2] ?? {}
     if (mode === "update") {
       return {
-        filter: group1,
-        update: group2,
-        options: group3,
+        filter: await this.enrichQuery(group1, parameters),
+        update: await this.enrichQuery(group2, parameters),
+        options: await this.enrichQuery(group3, parameters),
       }
     }
     return {
-      filter: group1,
-      options: group2,
+      filter: await this.enrichQuery(group1, parameters),
+      options: await this.enrichQuery(group2, parameters),
     }
   }
 
@@ -600,7 +618,7 @@ class MongoIntegration implements IntegrationBase {
         }
         case "findOneAndUpdate": {
           if (typeof query.json === "string") {
-            json = this.parseQueryParams(query.json, "update")
+            json = this.parseQueryParams(query.json, "update", query.parameters)
           }
           let findAndUpdateJson = this.createObjectIds(json) as {
             filter: Filter<any>
@@ -638,28 +656,23 @@ class MongoIntegration implements IntegrationBase {
       await this.connect()
       const db = this.client.db(this.config.db)
       const collection = db.collection(query.extra.collection)
-      let queryJson = query.json
-      if (typeof queryJson === "string") {
-        queryJson = this.parseQueryParams(queryJson, "update")
-      }
-      let json = this.createObjectIds(queryJson) as {
-        filter: Filter<any>
-        update: UpdateFilter<any>
-        options: object
-      }
-
+      let json = await this.parseQueryParams(
+        query.json?.toString(),
+        "update",
+        query.parameters
+      )
       switch (query.extra.actionType) {
         case "updateOne": {
           return await collection.updateOne(
             json.filter,
-            json.update,
+            json.update || {},
             json.options as UpdateOptions
           )
         }
         case "updateMany": {
           return await collection.updateMany(
             json.filter,
-            json.update,
+            json.update || {},
             json.options as UpdateOptions
           )
         }
@@ -684,7 +697,7 @@ class MongoIntegration implements IntegrationBase {
       const collection = db.collection(query.extra.collection)
       let queryJson = query.json
       if (typeof queryJson === "string") {
-        queryJson = this.parseQueryParams(queryJson, "delete")
+        queryJson = this.parseQueryParams(queryJson, "delete", query.parameters)
       }
       let json = this.createObjectIds(queryJson) as {
         filter: Filter<any>
