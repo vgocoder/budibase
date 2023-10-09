@@ -475,6 +475,9 @@ class MongoIntegration implements IntegrationBase {
     for (let extended of Object.values(extendedParams || {})) {
       replaceTempIds(enriched.json, extended)
     }
+    if (typeof enriched?.json !== "object") {
+      throw "Invalid JSON"
+    }
     return enriched.json
   }
 
