@@ -5,7 +5,12 @@ export interface QueryEvent {
   datasource: any
   queryVerb: string
   fields: { [key: string]: any }
-  parameters: { [key: string]: any }
+  parameters: {
+    [key: string]: {
+      value: any
+      extendedType: string
+    }
+  }
   pagination?: any
   transformer: any
   queryId: string
