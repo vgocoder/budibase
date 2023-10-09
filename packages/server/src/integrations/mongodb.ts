@@ -486,47 +486,6 @@ class MongoIntegration implements IntegrationBase {
     return enriched.json
   }
 
-  /**
-   * Deprecated
-   * ----------
-   * ObjectIds are handled by enrichQuery when a user selects the ObjectId binding type.
-   *
-   * Remains for backwards compatibility
-   */
-  createObjectIds(json: any): any {
-    const self = this
-
-    function interpolateObjectIds(json: any) {
-      for (let field of Object.keys(json || {})) {
-        if (json[field] instanceof Object) {
-          json[field] = self.createObjectIds(json[field])
-        }
-        if (self.hasObjectId(json[field])) {
-          const id = self.matchId(json[field])
-          if (id) {
-            json[field] = ObjectId.createFromHexString(id)
-          }
-        }
-      }
-      return json
-    }
-
-    if (Array.isArray(json)) {
-      for (let i = 0; i < json.length; i++) {
-        if (self.hasObjectId(json[i])) {
-          const id = self.matchId(json[i])
-          if (id) {
-            json[i] = ObjectId.createFromHexString(id)
-          }
-        } else {
-          json[i] = interpolateObjectIds(json[i])
-        }
-      }
-      return json
-    }
-    return interpolateObjectIds(json)
-  }
-
   convertResponseType(doc: WithId<Document> | null): object | null {
     if (!doc) {
       return doc
