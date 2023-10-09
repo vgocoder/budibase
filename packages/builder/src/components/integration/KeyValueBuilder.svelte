@@ -97,7 +97,11 @@
 <!-- Builds Objects with Key Value Pairs. Useful for building things like Request Headers. -->
 {#if Object.keys(object || {}).length > 0}
   {#if headings}
-    <div class="container" class:container-active={toggle}>
+    <div
+      class="container"
+      class:container-active={toggle}
+      class:container-extended-types={extendedTypes}
+    >
       <Label {tooltip}>{keyHeading || keyPlaceholder}</Label>
       <Label>{valueHeading || valuePlaceholder}</Label>
       {#if extendedTypes}
@@ -114,6 +118,7 @@
     class:container-menu={showMenu}
     class:readOnly
     class:readOnly-menu={readOnly && showMenu}
+    class:container-extended-types={extendedTypes}
   >
     {#each fields as field, idx}
       <Input
@@ -189,9 +194,12 @@
 {/if}
 
 <style>
+  .container-extended-types {
+    grid-template-columns: 1fr 1fr 1fr 20px !important;
+  }
   .container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 20px;
+    grid-template-columns: 1fr 1fr 20px;
     grid-gap: var(--spacing-m);
     align-items: center;
     margin-bottom: var(--spacing-m);
