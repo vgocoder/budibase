@@ -17,16 +17,7 @@
 
   let extendedTypes =
     source === IntegrationTypes.MONGODB
-      ? [
-          "Binary",
-          "Decimal128",
-          "Double",
-          "Int32",
-          "Long",
-          "ObjectId",
-          "Timestamp",
-          "UUID",
-        ]
+      ? ["Decimal128", "Long", "ObjectId"]
       : undefined
 </script>
 

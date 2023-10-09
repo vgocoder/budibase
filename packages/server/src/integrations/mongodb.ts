@@ -10,11 +10,9 @@ import {
   MongoClient,
   ObjectId,
   Decimal128,
-  Filter,
-  UpdateFilter,
+  Long,
   FindOneAndUpdateOptions,
   UpdateOptions,
-  OperationOptions,
   MongoClientOptions,
   WithId,
   Document,
@@ -412,6 +410,13 @@ class MongoIntegration implements IntegrationBase {
     )
   }
 
+  getJsonString(value: object | string): string {
+    if (typeof value === "string") {
+      return value
+    }
+    return JSON.stringify(value)
+  }
+
   async enrichQuery(
     json: string,
     parameters:
@@ -419,11 +424,12 @@ class MongoIntegration implements IntegrationBase {
           [key: string]: ExtendedTypeParam
         }
       | undefined
-  ): Promise<object> {
+  ): Promise<object | object[]> {
     function replaceTempIds(enriched: any, extended: any) {
       for (let field of Object.keys(enriched || {})) {
         if (
-          enriched[field] === extended.id.substring(1, extended.id.length - 1)
+          enriched[field] ===
+          extended.tempId.substring(1, extended.tempId.length - 1)
         ) {
           enriched[field] = extended.value
         } else if (enriched[field] instanceof Object) {
@@ -435,28 +441,35 @@ class MongoIntegration implements IntegrationBase {
       [key: string]: any
     } = cloneDeep(parameters || {})
     for (let [key, value] of Object.entries(parameters || {})) {
-      const id =
+      const tempId =
         Date.now().toString(36) + Math.random().toString(36).substring(2)
-      if (value.extendedType === "ObjectId") {
+      if (value.extendedType === "Decimal128") {
         extendedParams[key] = {
-          id: `"${id}"`,
-          value: ObjectId.createFromHexString(value.default),
-        }
-      } else if (value.extendedType === "Decimal128") {
-        extendedParams[key] = {
-          id: `"${id}"`,
+          tempId: `"${tempId}"`,
           value: Decimal128.fromString(value.default),
+        }
+      } else if (value.extendedType === "Long") {
+        extendedParams[key] = {
+          tempId: `"${tempId}"`,
+          value: Long.fromString(value.default),
+        }
+      } else if (value.extendedType === "ObjectId") {
+        extendedParams[key] = {
+          tempId: `"${tempId}"`,
+          value: value.default
+            ? ObjectId.createFromHexString(value.default)
+            : new ObjectId(),
         }
       } else {
         extendedParams[key] = {
-          id: `"${id}"`,
+          tempId: `"${tempId}"`,
           value: value.default,
         }
       }
     }
     let placeholderParams: any = cloneDeep(parameters)
     for (let key of Object.keys(placeholderParams || {})) {
-      placeholderParams[key] = extendedParams[key].id
+      placeholderParams[key] = extendedParams[key].tempId
     }
     let enriched = await sdk.queries.enrichContext({ json }, placeholderParams)
     for (let extended of Object.values(extendedParams || {})) {
@@ -465,6 +478,13 @@ class MongoIntegration implements IntegrationBase {
     return enriched.json
   }
 
+  /**
+   * Deprecated
+   * ----------
+   * ObjectIds are handled by enrichQuery when a user selects the ObjectId binding type.
+   *
+   * Remains for backwards compatibility
+   */
   createObjectIds(json: any): any {
     const self = this
 
@@ -509,6 +529,9 @@ class MongoIntegration implements IntegrationBase {
           doc[key] = value.toJSON()["$timestamp"]
           break
         case "Decimal128":
+          doc[key] = value.toString()
+          break
+        case "Long":
           doc[key] = value.toString()
           break
       }
@@ -574,7 +597,10 @@ class MongoIntegration implements IntegrationBase {
       await this.connect()
       const db = this.client.db(this.config.db)
       const collection = db.collection(query.extra.collection)
-      let json = this.createObjectIds(query.json)
+      let json = await this.enrichQuery(
+        this.getJsonString(query.json),
+        query.parameters
+      )
 
       // For mongodb we add an extra actionType to specify
       // which method we want to call on the collection
@@ -583,7 +609,7 @@ class MongoIntegration implements IntegrationBase {
           return await collection.insertOne(json)
         }
         case "insertMany": {
-          return await collection.insertMany(json)
+          return await collection.insertMany(json as object[])
         }
         default: {
           throw new Error(
@@ -605,7 +631,7 @@ class MongoIntegration implements IntegrationBase {
       const db = this.client.db(this.config.db)
       const collection = db.collection(query.extra.collection)
       let json = await this.enrichQuery(
-        query.json?.toString(),
+        this.getJsonString(query.json),
         query.parameters
       )
 
@@ -623,25 +649,26 @@ class MongoIntegration implements IntegrationBase {
           return this.convertResponseType(await collection.findOne(json))
         }
         case "findOneAndUpdate": {
-          if (typeof query.json === "string") {
-            json = this.parseQueryParams(query.json, "update", query.parameters)
-          }
-          let findAndUpdateJson = this.createObjectIds(json) as {
-            filter: Filter<any>
-            update: UpdateFilter<any>
-            options: FindOneAndUpdateOptions
-          }
-          return await collection.findOneAndUpdate(
-            findAndUpdateJson.filter,
-            findAndUpdateJson.update,
-            findAndUpdateJson.options
+          let json = await this.parseQueryParams(
+            this.getJsonString(query.json),
+            "update",
+            query.parameters
+          )
+          return this.convertResponseType(
+            (
+              await collection.findOneAndUpdate(
+                json.filter,
+                json.update || {},
+                json.options as FindOneAndUpdateOptions
+              )
+            ).value
           )
         }
         case "count": {
           return await collection.countDocuments(json)
         }
         case "distinct": {
-          //return await collection.distinct(json)
+          return await collection.distinct(json?.toString())
         }
         default: {
           throw new Error(
@@ -663,7 +690,7 @@ class MongoIntegration implements IntegrationBase {
       const db = this.client.db(this.config.db)
       const collection = db.collection(query.extra.collection)
       let json = await this.parseQueryParams(
-        query.json?.toString(),
+        this.getJsonString(query.json),
         "update",
         query.parameters
       )
@@ -701,14 +728,11 @@ class MongoIntegration implements IntegrationBase {
       await this.connect()
       const db = this.client.db(this.config.db)
       const collection = db.collection(query.extra.collection)
-      let queryJson = query.json
-      if (typeof queryJson === "string") {
-        queryJson = this.parseQueryParams(queryJson, "delete", query.parameters)
-      }
-      let json = this.createObjectIds(queryJson) as {
-        filter: Filter<any>
-        options: OperationOptions
-      }
+      let json = await this.parseQueryParams(
+        this.getJsonString(query.json),
+        "delete",
+        query.parameters
+      )
       if (!json.options) {
         json = {
           filter: json,
@@ -738,9 +762,12 @@ class MongoIntegration implements IntegrationBase {
   }
 
   async aggregate(query: {
-    json: object
+    json: string | object
     steps: any[]
     extra: { [key: string]: string }
+    parameters?: {
+      [key: string]: ExtendedTypeParam
+    }
   }) {
     try {
       await this.connect()
@@ -748,20 +775,24 @@ class MongoIntegration implements IntegrationBase {
       const collection = db.collection(query.extra.collection)
       let response = []
       if (query.extra?.actionType === "pipeline") {
-        for await (const doc of collection.aggregate(
-          query.steps.map(({ key, value }) => {
-            let temp: any = {}
-            temp[key] = JSON.parse(value.value)
-            return this.createObjectIds(temp)
+        let steps = []
+        for (let step of query.steps) {
+          steps.push({
+            [step.key]: await this.enrichQuery(
+              step.value.value,
+              query.parameters
+            ),
           })
-        )) {
+        }
+        for await (const doc of collection.aggregate(steps)) {
           response.push(doc)
         }
       } else {
-        const stages: Array<any> = query.json as Array<any>
-        for await (const doc of collection.aggregate(
-          stages ? this.createObjectIds(stages) : []
-        )) {
+        const stages = (await this.enrichQuery(
+          this.getJsonString(query.json),
+          query.parameters
+        )) as object[]
+        for await (const doc of collection.aggregate(stages ?? [])) {
           response.push(doc)
         }
       }
