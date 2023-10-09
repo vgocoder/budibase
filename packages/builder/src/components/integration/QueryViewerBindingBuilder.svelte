@@ -17,7 +17,7 @@
 
   let extendedTypes =
     source === IntegrationTypes.MONGODB
-      ? ["Decimal128", "Long", "ObjectId"]
+      ? ["Date", "Decimal128", "Long", "ObjectId"]
       : undefined
 </script>
 

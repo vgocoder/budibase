@@ -460,6 +460,11 @@ class MongoIntegration implements IntegrationBase {
             ? ObjectId.createFromHexString(value.default)
             : new ObjectId(),
         }
+      } else if (value.extendedType === "Date") {
+        extendedParams[key] = {
+          tempId: `"${tempId}"`,
+          value: value.default ? new Date(value.default) : null,
+        }
       } else {
         extendedParams[key] = {
           tempId: `"${tempId}"`,
