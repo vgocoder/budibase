@@ -403,11 +403,49 @@ class MongoIntegration implements IntegrationBase {
   matchId(value?: string) {
     return value?.match(/(?<=objectid\(['"]).*(?=['"]\))/gi)?.[0]
   }
-
-  hasObjectId(value?: any): boolean {
-    return (
-      typeof value === "string" && value.toLowerCase().startsWith("objectid")
-    )
+  replaceTempIds(
+    enriched: { [key: string]: any },
+    extended: {
+      tempId: string
+      value: any
+    }
+  ) {
+    for (let field of Object.keys(enriched || {})) {
+      if (
+        enriched[field] ===
+        extended.tempId.substring(1, extended.tempId.length - 1)
+      ) {
+        enriched[field] = extended.value
+      } else if (
+        enriched[field] instanceof Object &&
+        !(enriched[field] instanceof ObjectId)
+      ) {
+        this.replaceTempIds(enriched[field], extended)
+      }
+    }
+  }
+  createObjectIds(
+    json: string,
+    extendedParams: { [key: string]: any }
+  ): object {
+    let tempId = this.matchId(json)
+    let regex = new RegExp(`(objectid\\(['"])${tempId}(['"]\\))`, "gi")
+    let objectIds = []
+    while (tempId) {
+      json = json.replace(regex, tempId.substring(1, tempId.length - 1))
+      objectIds.push(tempId)
+      tempId = this.matchId(json)
+    }
+    let jsonObj = JSON.parse(json)
+    for (let extended of Object.values(extendedParams || {})) {
+      if (objectIds.includes(extended.tempId)) {
+        this.replaceTempIds(jsonObj, {
+          tempId: extended.tempId,
+          value: ObjectId.createFromHexString(extended.value),
+        })
+      }
+    }
+    return jsonObj
   }
 
   getJsonString(value: object | string): string {
@@ -425,18 +463,6 @@ class MongoIntegration implements IntegrationBase {
         }
       | undefined
   ): Promise<object | object[]> {
-    function replaceTempIds(enriched: any, extended: any) {
-      for (let field of Object.keys(enriched || {})) {
-        if (
-          enriched[field] ===
-          extended.tempId.substring(1, extended.tempId.length - 1)
-        ) {
-          enriched[field] = extended.value
-        } else if (enriched[field] instanceof Object) {
-          replaceTempIds(enriched[field], extended)
-        }
-      }
-    }
     let extendedParams: {
       [key: string]: any
     } = cloneDeep(parameters || {})
@@ -477,8 +503,12 @@ class MongoIntegration implements IntegrationBase {
       placeholderParams[key] = extendedParams[key].tempId
     }
     let enriched = await sdk.queries.enrichContext({ json }, placeholderParams)
+    if (typeof enriched.json === "string") {
+      // create objectids from string for backwards compatibility
+      enriched.json = this.createObjectIds(enriched.json, extendedParams || {})
+    }
     for (let extended of Object.values(extendedParams || {})) {
-      replaceTempIds(enriched.json, extended)
+      this.replaceTempIds(enriched.json, extended)
     }
     if (typeof enriched?.json !== "object") {
       throw "Invalid JSON"
