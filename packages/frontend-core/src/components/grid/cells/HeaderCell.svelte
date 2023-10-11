@@ -92,6 +92,7 @@
     }
   }
 
+  // change
   const onContextMenu = e => {
     e.preventDefault()
     ui.actions.blur()
