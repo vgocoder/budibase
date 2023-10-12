@@ -7,7 +7,7 @@ export interface QueryEvent {
   fields: { [key: string]: any }
   parameters: {
     [key: string]: {
-      value: any
+      default: any
       extendedType: string
     }
   }

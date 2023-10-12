@@ -19,6 +19,7 @@ class QueryRunner {
   queryId: string
   fields: any
   parameters: any
+  extendedTypeParameters: any
   pagination: any
   transformer: any
   cachedVariables: any[]
@@ -34,7 +35,14 @@ class QueryRunner {
     this.datasource = input.datasource
     this.queryVerb = input.queryVerb
     this.fields = input.fields
-    this.parameters = input.parameters
+    this.parameters = Object.entries(input.parameters || {}).reduce(
+      (acc: any, [key, value]) => {
+        acc[key] = value.default
+        return acc
+      },
+      {}
+    )
+    this.extendedTypeParameters = input.parameters
     this.pagination = input.pagination
     this.transformer = input.transformer
     this.queryId = input.queryId
@@ -100,11 +108,8 @@ class QueryRunner {
       query = await interpolateSQL(fieldsClone, enrichedContext, integration)
     } else if (hasExtendedTypes(datasourceClone)) {
       // handle extended type binding mapping in the integration
-      for (const param in parameters) {
-        delete enrichedContext[param]
-      }
       query = fieldsClone
-      query.parameters = parameters
+      query.parameters = this.extendedTypeParameters
     } else {
       query = await sdk.queries.enrichContext(fieldsClone, enrichedContext)
     }
