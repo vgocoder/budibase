@@ -37,7 +37,7 @@ class QueryRunner {
     this.fields = input.fields
     this.parameters = Object.entries(input.parameters || {}).reduce(
       (acc: any, [key, value]) => {
-        acc[key] = value.default
+        acc[key] = value?.default ?? value
         return acc
       },
       {}
