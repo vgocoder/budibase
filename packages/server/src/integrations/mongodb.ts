@@ -424,9 +424,25 @@ class MongoIntegration implements IntegrationBase {
       }
     }
   }
-  createObjectIds(
+  createObjectIds(enriched: { [key: string]: any }) {
+    Object.keys(enriched || {}).forEach(field => {
+      if (typeof enriched[field] === "string") {
+        const objectId = this.matchId(enriched[field])
+        if (objectId) {
+          enriched[field] = ObjectId.createFromHexString(objectId)
+        }
+      } else if (
+        enriched[field] instanceof Object &&
+        !(enriched[field] instanceof ObjectId)
+      ) {
+        this.createObjectIds(enriched[field])
+      }
+    })
+    return enriched
+  }
+  createObjectIdsFromBindings(
     json: string,
-    extendedParams: { [key: string]: any }
+    extendedParams?: { [key: string]: any }
   ): object {
     let tempId = this.matchId(json)
     let regex = new RegExp(`(objectid\\(['"])${tempId}(['"]\\))`, "gi")
@@ -505,7 +521,10 @@ class MongoIntegration implements IntegrationBase {
     let enriched = await sdk.queries.enrichContext({ json }, placeholderParams)
     if (typeof enriched.json === "string") {
       // create objectids from string for backwards compatibility
-      enriched.json = this.createObjectIds(enriched.json, extendedParams || {})
+      enriched.json = this.createObjectIdsFromBindings(
+        enriched.json,
+        extendedParams || {}
+      )
     }
     for (let extended of Object.values(extendedParams || {})) {
       this.replaceTempIds(enriched.json, extended)
@@ -513,7 +532,7 @@ class MongoIntegration implements IntegrationBase {
     if (typeof enriched?.json !== "object") {
       throw "Invalid JSON"
     }
-    return enriched.json
+    return this.createObjectIds(enriched.json)
   }
 
   convertResponseType(doc: WithId<Document> | null): object | null {
@@ -627,10 +646,13 @@ class MongoIntegration implements IntegrationBase {
       await this.connect()
       const db = this.client.db(this.config.db)
       const collection = db.collection(query.extra.collection)
-      let json = await this.enrichQuery(
-        this.getJsonString(query.json),
-        query.parameters
-      )
+      let json = {}
+      if (query.extra.actionType !== "findOneAndUpdate") {
+        json = await this.enrichQuery(
+          this.getJsonString(query.json),
+          query.parameters
+        )
+      }
 
       switch (query.extra.actionType) {
         case "find": {
@@ -658,7 +680,7 @@ class MongoIntegration implements IntegrationBase {
                 json.update || {},
                 json.options as FindOneAndUpdateOptions
               )
-            ).value
+            )?.value
           )
         }
         case "count": {
