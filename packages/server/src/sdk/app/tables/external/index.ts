@@ -15,7 +15,6 @@ import {
   hasTypeChanged,
   setStaticSchemas,
 } from "../../../../api/controllers/table/utils"
-import { cloneDeep } from "lodash/fp"
 import { makeTableRequest } from "../../../../api/controllers/table/ExternalRequest"
 import {
   isRelationshipSetup,
@@ -137,9 +136,9 @@ export async function save(
   // GSheets is a specific case - only ever has a static primary key
   tableToSave = setStaticSchemas(datasource, tableToSave)
 
-  const oldTables = cloneDeep(datasource.entities)
-  const tables: Record<string, Table> = datasource.entities
+  const tables: Record<string, Table> = { ...datasource.entities }
 
+  const extraTablesToCreate = []
   const extraTablesToUpdate = []
 
   // check if relations need setup
@@ -176,7 +175,7 @@ export async function save(
         )
       }
       tables[junctionTable.name] = junctionTable
-      extraTablesToUpdate.push(junctionTable)
+      extraTablesToCreate.push(junctionTable)
     } else {
       const fkTable =
         relationType === RelationshipType.ONE_TO_MANY
@@ -224,9 +223,24 @@ export async function save(
   )
   // update any extra tables (like foreign keys in other tables)
   for (let extraTable of extraTablesToUpdate) {
-    const oldExtraTable = oldTables[extraTable.name]
-    let op = oldExtraTable ? Operation.UPDATE_TABLE : Operation.CREATE_TABLE
-    await makeTableRequest(datasource, op, extraTable, tables, oldExtraTable)
+    const oldExtraTable =
+      datasource.entities[extraTable.name] ||
+      (await sdk.tables.getTable(extraTable._id!))
+    await makeTableRequest(
+      datasource,
+      Operation.UPDATE_TABLE,
+      extraTable,
+      tables,
+      oldExtraTable
+    )
+  }
+  for (let extraTable of extraTablesToCreate) {
+    await makeTableRequest(
+      datasource,
+      Operation.CREATE_TABLE,
+      extraTable,
+      tables
+    )
   }
 
   // make sure the constrained list, all still exist
