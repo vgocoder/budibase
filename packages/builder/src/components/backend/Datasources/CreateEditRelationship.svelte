@@ -40,15 +40,9 @@
       part2: PrettyRelationshipDefinitions.MANY,
     },
   }
-  $: relationshipOpts1 =
-    relationshipPart2 === PrettyRelationshipDefinitions.ONE
-      ? [PrettyRelationshipDefinitions.MANY]
-      : Object.values(PrettyRelationshipDefinitions)
+  $: relationshipOpts1 = Object.values(PrettyRelationshipDefinitions)
 
-  $: relationshipOpts2 =
-    relationshipPart1 === PrettyRelationshipDefinitions.ONE
-      ? [PrettyRelationshipDefinitions.MANY]
-      : Object.values(PrettyRelationshipDefinitions)
+  $: relationshipOpts2 = Object.values(PrettyRelationshipDefinitions)
 
   let relationshipPart1 = PrettyRelationshipDefinitions.ONE
   let relationshipPart2 = PrettyRelationshipDefinitions.MANY
@@ -385,7 +379,6 @@
   <div class="headings">
     <Detail>Tables</Detail>
   </div>
-
   <RelationshipSelector
     bind:relationshipPart1
     bind:relationshipPart2
