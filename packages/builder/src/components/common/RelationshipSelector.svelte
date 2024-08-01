@@ -86,11 +86,12 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-m);
+    flex-wrap: wrap;
   }
   .relationship-part {
-    flex: 1 1 auto;
+    flex: 1 1 100%;
   }
   .relationship-type {
-    flex: 0 0 128px;
+    flex: 1 1 auto;
   }
 </style>
