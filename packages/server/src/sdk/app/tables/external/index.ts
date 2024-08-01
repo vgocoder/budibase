@@ -223,11 +223,13 @@ export async function save(
   )
   // update any extra tables (like foreign keys in other tables)
   for (let extraTable of extraTablesToUpdate) {
-    const oldExtraTable =
-      datasource.entities[extraTable.name] ||
-      (await sdk.tables.getTable(extraTable._id!))
+    let datasourceToUpdate = datasource
+    if (extraTable.sourceId !== datasource._id) {
+      datasourceToUpdate = await sdk.datasources.get(extraTable.sourceId)
+    }
+    const oldExtraTable = datasourceToUpdate.entities![extraTable.name]
     await makeTableRequest(
-      datasource,
+      datasourceToUpdate,
       Operation.UPDATE_TABLE,
       extraTable,
       tables,
