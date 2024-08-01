@@ -106,22 +106,9 @@
     // this parses any changes the user has made when creating a new internal relationship
     // into what we expect the schema to look like
     if (editableColumn.type === LINK_TYPE) {
-      relationshipTableIdPrimary = table._id
-      if (relationshipPart1 === PrettyRelationshipDefinitions.ONE) {
-        relationshipOpts2 = relationshipOpts2.filter(
-          opt => opt !== PrettyRelationshipDefinitions.ONE
-        )
-      } else {
-        relationshipOpts2 = Object.values(PrettyRelationshipDefinitions)
-      }
+      relationshipOpts1 = Object.values(PrettyRelationshipDefinitions)
+      relationshipOpts2 = Object.values(PrettyRelationshipDefinitions)
 
-      if (relationshipPart2 === PrettyRelationshipDefinitions.ONE) {
-        relationshipOpts1 = relationshipOpts1.filter(
-          opt => opt !== PrettyRelationshipDefinitions.ONE
-        )
-      } else {
-        relationshipOpts1 = Object.values(PrettyRelationshipDefinitions)
-      }
       // Determine the relationship type based on the selected values of both parts
       editableColumn.relationshipType = Object.entries(relationshipMap).find(
         ([_, parts]) =>
