@@ -1,5 +1,6 @@
 <script>
   import { Select, Input } from "@budibase/bbui"
+  import { datasources } from "stores/builder/datasources"
 
   export let relationshipPart1
   export let relationshipPart2
@@ -14,6 +15,15 @@
   export let primaryTableChanged
   export let secondaryTableChanged
   export let primaryDisabled = true
+
+  $: getDisplayName = table => {
+    const manySchemas = new Set(tableOptions.map(t => t.sourceId)).size > 1
+    return manySchemas
+      ? `${$datasources.list.find(d => d._id === table.sourceId)?.name} - ${
+          table.name
+        }`
+      : table.name
+  }
 </script>
 
 <div class="relationship-container">
@@ -56,7 +66,7 @@
       options={tableOptions.filter(
         table => table._id !== relationshipTableIdPrimary
       )}
-      getOptionLabel={table => table.name}
+      getOptionLabel={getDisplayName}
       getOptionValue={table => table._id}
       on:change={secondaryTableChanged}
     />

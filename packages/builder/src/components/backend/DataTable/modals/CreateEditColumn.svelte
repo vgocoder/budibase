@@ -172,10 +172,7 @@
     !editableColumn.autocolumn
   $: externalTable = table.sourceType === DB_TYPE_EXTERNAL
   // in the case of internal tables the sourceId will just be undefined
-  $: tableOptions = $tables.list.filter(
-    opt =>
-      opt.sourceType === table.sourceType && table.sourceId === opt.sourceId
-  )
+  $: tableOptions = $tables.list
   $: typeEnabled =
     !originalName ||
     (originalName &&
