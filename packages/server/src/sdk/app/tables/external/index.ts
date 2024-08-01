@@ -29,6 +29,7 @@ import { getTable } from "../getters"
 import { populateExternalTableSchemas } from "../validation"
 import datasourceSdk from "../../datasources"
 import * as viewSdk from "../../views"
+import sdk from "../../../../sdk"
 
 const DEFAULT_PRIMARY_COLUMN = "id"
 
@@ -146,10 +147,17 @@ export async function save(
     if (schema.type !== FieldType.LINK || isRelationshipSetup(schema)) {
       continue
     }
+
     const schemaTableId = schema.tableId
-    const relatedTable = Object.values(tables).find(
+    let relatedTable = Object.values(tables).find(
       table => table._id === schemaTableId
     )
+
+    if (!relatedTable) {
+      relatedTable = await sdk.tables.getTable(schema.tableId)
+      tables[relatedTable.name] = relatedTable
+    }
+
     if (!relatedTable) {
       continue
     }
