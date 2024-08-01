@@ -646,6 +646,9 @@ export class ExternalRequest<T extends Operation> {
       }
     }
     filters = this.prepareFilters(id, filters || {}, table)
+
+    await this.loadRelationshipExternalTables(table)
+
     const relationships = buildExternalRelationships(table, this.tables)
 
     const incRelationships =
@@ -743,6 +746,20 @@ export class ExternalRequest<T extends Operation> {
       ) as ExternalRequestReturnType<T>
     } else {
       return { row: output[0], table } as ExternalRequestReturnType<T>
+    }
+  }
+  private async loadRelationshipExternalTables(table: Table) {
+    const allRelationTableIds = new Set(
+      Object.values(table.schema)
+        .filter(f => f.type === FieldType.LINK)
+        .map(f => f.tableId)
+    )
+    const missingTableIds = [...allRelationTableIds].filter(
+      x => !Object.keys(this.tables).includes(x)
+    )
+    const missingTables = await sdk.tables.getTables([...missingTableIds])
+    for (const table of missingTables) {
+      this.tables[table.name] = table
     }
   }
 }
