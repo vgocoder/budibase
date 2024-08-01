@@ -155,7 +155,6 @@ export class ExternalRequest<T extends Operation> {
   private readonly tableId: string
   private datasource?: Datasource
   private tables: { [key: string]: Table } = {}
-  private tableList: Table[]
 
   constructor(operation: T, tableId: string, datasource?: Datasource) {
     this.operation = operation
@@ -164,7 +163,6 @@ export class ExternalRequest<T extends Operation> {
     if (datasource && datasource.entities) {
       this.tables = datasource.entities
     }
-    this.tableList = Object.values(this.tables)
   }
 
   private prepareFilters(
@@ -290,7 +288,6 @@ export class ExternalRequest<T extends Operation> {
         throw "No tables found, fetch tables before query."
       }
       this.tables = this.datasource.entities
-      this.tableList = Object.values(this.tables)
     }
     return { tables: this.tables, datasource: this.datasource }
   }
