@@ -2,6 +2,7 @@ import { Document } from "../../document"
 import { View, ViewV2 } from "../view"
 import { RenameColumn } from "../../../sdk"
 import { TableSchema } from "./schema"
+import { Brand } from "../../../shared"
 
 export const INTERNAL_TABLE_SOURCE_ID = "bb_internal"
 
@@ -10,7 +11,9 @@ export enum TableSourceType {
   INTERNAL = "internal",
 }
 
-export interface Table extends Document {
+export type TableId = Brand<string, "TableId">
+
+export interface Table extends Document<TableId> {
   type: "table"
   sourceType: TableSourceType
   views?: { [key: string]: View | ViewV2 }

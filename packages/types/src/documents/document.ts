@@ -72,8 +72,8 @@ export enum VirtualDocumentType {
   ROW_ACTION = "row_action",
 }
 
-export interface Document {
-  _id?: string
+export interface Document<T extends string = string> {
+  _id?: T
   _rev?: string
   createdAt?: string | number
   updatedAt?: string
