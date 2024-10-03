@@ -1,4 +1,4 @@
-import { prefixed, DocumentType } from "@budibase/types"
+import { prefixed, DocumentType, TableId } from "@budibase/types"
 
 export {
   SEPARATOR,
@@ -69,7 +69,7 @@ export const SQS_DATASOURCE_INTERNAL = "internal"
 export const BUDIBASE_DATASOURCE_TYPE = "budibase"
 export const SQLITE_DESIGN_DOC_ID = "_design/sqlite"
 export const DEFAULT_JOBS_TABLE_ID = "ta_bb_jobs"
-export const DEFAULT_INVENTORY_TABLE_ID = "ta_bb_inventory"
+export const DEFAULT_INVENTORY_TABLE_ID = "ta_bb_inventory" as TableId
 export const DEFAULT_EXPENSES_TABLE_ID = "ta_bb_expenses"
 export const DEFAULT_EMPLOYEE_TABLE_ID = "ta_bb_employee"
 export { DEFAULT_BB_DATASOURCE_ID } from "@budibase/shared-core"

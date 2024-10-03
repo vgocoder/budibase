@@ -1,5 +1,5 @@
 import { SearchFilter, SortOrder, SortType } from "../../api"
-import { UIFieldMetadata } from "./table"
+import { TableId, UIFieldMetadata } from "./table"
 import { Document } from "../document"
 import { DBView } from "../../sdk"
 
@@ -64,7 +64,7 @@ export interface ViewV2 {
   id: string
   name: string
   primaryDisplay?: string
-  tableId: string
+  tableId: TableId
   query?: SearchFilter[]
   sort?: {
     field: string

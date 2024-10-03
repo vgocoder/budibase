@@ -1,3 +1,4 @@
+import { TableId } from "@budibase/types"
 import {
   APP_PREFIX,
   DocumentType,
@@ -23,7 +24,7 @@ export const generateAppID = (tenantId?: string | null) => {
  * @returns The new table ID which the table doc can be stored under.
  */
 export function generateTableID() {
-  return `${DocumentType.TABLE}${SEPARATOR}${newid()}`
+  return `${DocumentType.TABLE}${SEPARATOR}${newid()}` as TableId
 }
 
 /**

@@ -9,6 +9,7 @@ import {
   JsonFieldSubType,
   RelationshipType,
 } from "./constants"
+import { TableId } from "./table"
 
 export interface UIFieldMetadata {
   order?: number
@@ -22,7 +23,7 @@ interface BaseRelationshipFieldMetadata
   type: FieldType.LINK
   main?: boolean
   fieldName: string
-  tableId: string
+  tableId: TableId
   tableRev?: string
   subtype?: AutoFieldSubType.CREATED_BY | AutoFieldSubType.UPDATED_BY
 }

@@ -7,9 +7,10 @@ import {
   RowSearchParams,
   Table,
   TableSourceType,
+  TableId,
 } from "@budibase/types"
 
-const tableId = "ta_a"
+const tableId = "ta_a" as TableId
 const tableWithUserCol: Table = {
   type: "table",
   _id: tableId,

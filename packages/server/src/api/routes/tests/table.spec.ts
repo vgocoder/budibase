@@ -313,7 +313,7 @@ describe.each([
         it("should add roleId and email field when adjusting user table schema", async () => {
           const table = await config.api.table.save({
             ...basicTable(datasource),
-            _id: "ta_users",
+            _id: InternalTable.USER_METADATA,
           })
           expect(table.schema.email).toBeDefined()
           expect(table.schema.roleId).toBeDefined()

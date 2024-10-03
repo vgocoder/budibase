@@ -7,7 +7,7 @@ import {
   TableSourceType,
 } from "@budibase/types"
 import { outputProcessing } from ".."
-import { generator, structures } from "@budibase/backend-core/tests"
+import { structures } from "@budibase/backend-core/tests"
 import { setEnv as setCoreEnv } from "@budibase/backend-core"
 import * as bbReferenceProcessor from "../bbReferenceProcessor"
 import TestConfiguration from "../../../tests/utilities/TestConfiguration"
@@ -48,7 +48,7 @@ describe("rowProcessor - outputProcessing", () => {
   it("fetches single user references given a populated field", async () => {
     await config.doInContext(config.getAppId(), async () => {
       const table: Table = {
-        _id: generator.guid(),
+        _id: structures.table.id(),
         name: "TestTable",
         type: "table",
         sourceId: INTERNAL_TABLE_SOURCE_ID,
@@ -98,7 +98,7 @@ describe("rowProcessor - outputProcessing", () => {
   it("fetches users references given a populated field", async () => {
     await config.doInContext(config.getAppId(), async () => {
       const table: Table = {
-        _id: generator.guid(),
+        _id: structures.table.id(),
         name: "TestTable",
         type: "table",
         sourceId: INTERNAL_TABLE_SOURCE_ID,
@@ -148,7 +148,7 @@ describe("rowProcessor - outputProcessing", () => {
   it("should handle attachment list correctly", async () => {
     await config.doInContext(config.getAppId(), async () => {
       const table: Table = {
-        _id: generator.guid(),
+        _id: structures.table.id(),
         name: "TestTable",
         type: "table",
         sourceId: INTERNAL_TABLE_SOURCE_ID,
@@ -193,7 +193,7 @@ describe("rowProcessor - outputProcessing", () => {
   it("should handle single attachment correctly", async () => {
     await config.doInContext(config.getAppId(), async () => {
       const table: Table = {
-        _id: generator.guid(),
+        _id: structures.table.id(),
         name: "TestTable",
         type: "table",
         sourceId: INTERNAL_TABLE_SOURCE_ID,
@@ -236,7 +236,7 @@ describe("rowProcessor - outputProcessing", () => {
   it("process output even when the field is not empty", async () => {
     await config.doInContext(config.getAppId(), async () => {
       const table: Table = {
-        _id: generator.guid(),
+        _id: structures.table.id(),
         name: "TestTable",
         type: "table",
         sourceId: INTERNAL_TABLE_SOURCE_ID,
@@ -279,7 +279,7 @@ describe("rowProcessor - outputProcessing", () => {
   it("does not fetch bb references when not in the schema", async () => {
     await config.doInContext(config.getAppId(), async () => {
       const table: Table = {
-        _id: generator.guid(),
+        _id: structures.table.id(),
         name: "TestTable",
         type: "table",
         sourceId: INTERNAL_TABLE_SOURCE_ID,

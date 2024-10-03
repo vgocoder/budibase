@@ -1,3 +1,5 @@
+import { TableId } from "./app"
+
 export const SEPARATOR = "_"
 export const UNICODE_MAX = "\ufff0"
 
@@ -61,8 +63,8 @@ export const DocumentTypesToImport: DocumentType[] = [
   DocumentType.LAYOUT,
 ]
 
-export enum InternalTable {
-  USER_METADATA = "ta_users",
+export const InternalTable = {
+  USER_METADATA: "ta_users" as TableId,
 }
 
 // these documents don't really exist, they are part of other

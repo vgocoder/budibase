@@ -30,7 +30,7 @@ describe("rowProcessor - inputProcessing", () => {
     const userId = generator.guid()
 
     const table: Table = {
-      _id: generator.guid(),
+      _id: structures.table.id(),
       name: "TestTable",
       type: "table",
       sourceId: INTERNAL_TABLE_SOURCE_ID,
@@ -82,7 +82,7 @@ describe("rowProcessor - inputProcessing", () => {
     const userId = generator.guid()
 
     const table: Table = {
-      _id: generator.guid(),
+      _id: structures.table.id(),
       name: "TestTable",
       type: "table",
       sourceId: INTERNAL_TABLE_SOURCE_ID,
@@ -134,7 +134,7 @@ describe("rowProcessor - inputProcessing", () => {
     const userId = generator.guid()
 
     const table: Table = {
-      _id: generator.guid(),
+      _id: structures.table.id(),
       name: "TestTable",
       type: "table",
       sourceId: INTERNAL_TABLE_SOURCE_ID,
@@ -176,7 +176,7 @@ describe("rowProcessor - inputProcessing", () => {
       const userId = generator.guid()
 
       const table: Table = {
-        _id: generator.guid(),
+        _id: structures.table.id(),
         name: "TestTable",
         type: "table",
         sourceId: INTERNAL_TABLE_SOURCE_ID,
@@ -232,7 +232,7 @@ describe("rowProcessor - inputProcessing", () => {
     const userId = generator.guid()
 
     const table: Table = {
-      _id: generator.guid(),
+      _id: structures.table.id(),
       name: "TestTable",
       type: "table",
       sourceId: INTERNAL_TABLE_SOURCE_ID,

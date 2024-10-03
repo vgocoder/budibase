@@ -18,6 +18,7 @@ import {
   TableSourceType,
   DatasourcePlusQueryResponse,
   BBReferenceFieldSubType,
+  TableId,
 } from "@budibase/types"
 import { OAuth2Client } from "google-auth-library"
 import {
@@ -297,7 +298,7 @@ export class GoogleSheetsIntegration implements DatasourcePlus {
     title: string,
     headerValues: string[],
     datasourceId: string,
-    id?: string
+    id?: TableId
   ) {
     // base table
     const table: Table = {

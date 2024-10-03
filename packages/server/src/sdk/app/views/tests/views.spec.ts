@@ -9,13 +9,13 @@ import {
   TableSourceType,
   ViewV2,
 } from "@budibase/types"
-import { generator } from "@budibase/backend-core/tests"
+import { generator, structures } from "@budibase/backend-core/tests"
 import { enrichSchema, syncSchema } from ".."
 import sdk from "../../../../sdk"
 
 describe("table sdk", () => {
   const basicTable: Table = {
-    _id: generator.guid(),
+    _id: structures.table.id(),
     name: "TestTable",
     type: "table",
     sourceId: INTERNAL_TABLE_SOURCE_ID,
@@ -296,7 +296,7 @@ describe("table sdk", () => {
             type: FieldType.LINK,
             relationshipType: RelationshipType.ONE_TO_MANY,
             fieldName: "table",
-            tableId: "otherTableId",
+            tableId: structures.table.id(),
           },
         },
       }
