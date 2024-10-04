@@ -68,7 +68,10 @@ async function updateAppUpdatedAt(ctx: UserCtx) {
   })
 }
 
-export default async function builder(ctx: UserCtx) {
+export default async function builder(
+  ctx: UserCtx,
+  opts?: { skipUpdateAtUpdate: boolean }
+) {
   const appId = ctx.appId
   // this only functions within an app context
   if (!appId) {
@@ -90,6 +93,9 @@ export default async function builder(ctx: UserCtx) {
   }
   // check locks
   await checkDevAppLocks(ctx)
-  // set updated at time on app
-  await updateAppUpdatedAt(ctx)
+
+  if (!opts?.skipUpdateAtUpdate) {
+    // set updated at time on app
+    await updateAppUpdatedAt(ctx)
+  }
 }

@@ -85,7 +85,7 @@ const authorized =
   (
     permType: PermissionType,
     permLevel?: PermissionLevel,
-    opts = { schema: false },
+    opts?: { schema?: boolean; skipUpdateAtUpdate?: boolean },
     resourcePath?: string
   ) =>
   async (ctx: UserCtx, next: any) => {
@@ -132,7 +132,7 @@ const authorized =
       }
 
       resourceRoles = getPermLevel(permLevel!)
-      if (opts && opts.schema) {
+      if (opts?.schema) {
         otherLevelRoles = getPermLevel(otherLevel!)
       }
     }
@@ -158,7 +158,9 @@ const authorized =
       permType === PermissionType.CREATOR ||
       permType === PermissionType.GLOBAL_BUILDER
     ) {
-      await builderMiddleware(ctx)
+      await builderMiddleware(ctx, {
+        skipUpdateAtUpdate: !!opts?.skipUpdateAtUpdate,
+      })
     }
 
     try {
@@ -166,7 +168,7 @@ const authorized =
       await checkAuthorized(ctx, resourceRoles, permType, permLevel!)
     } catch (err) {
       // this is a schema, check if
-      if (opts && opts.schema && permLevel) {
+      if (opts?.schema && permLevel) {
         await checkAuthorized(ctx, otherLevelRoles, permType, otherLevel)
       } else {
         throw err
@@ -180,7 +182,7 @@ const authorized =
 export default (
   permType: PermissionType,
   permLevel?: PermissionLevel,
-  opts = { schema: false }
+  opts?: { schema?: boolean; skipUpdateAtUpdate?: boolean }
 ) => authorized(permType, permLevel, opts)
 
 export const authorizedResource = (

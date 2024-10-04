@@ -10,7 +10,7 @@ const router: Router = new Router()
 router
   .post(
     "/api/applications/:appId/sync",
-    authorized(permissions.BUILDER),
+    authorized(permissions.BUILDER, undefined, { skipUpdateAtUpdate: true }),
     controller.sync
   )
   .post(
