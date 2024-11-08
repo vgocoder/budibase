@@ -162,6 +162,11 @@
     gridContext = grid.getContext()
     gridContext.minHeight.subscribe($height => (minHeight = $height))
   })
+
+  $: initialColumns = (() => {
+    const active = columns?.filter(c => c.active).map(c => c.field)
+    return active?.length ? active : undefined
+  })()
 </script>
 
 <div use:styleable={styles} class:in-builder={$builderStore.inBuilder}>
@@ -175,6 +180,7 @@
     {initialFilter}
     {initialSortColumn}
     {initialSortOrder}
+    {initialColumns}
     {fixedRowHeight}
     {schemaOverrides}
     canAddRows={allowAddRows}

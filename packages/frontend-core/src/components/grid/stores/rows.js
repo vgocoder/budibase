@@ -110,6 +110,8 @@ export const createActions = context => {
     hasBudibaseIdentifiers,
     refreshing,
     columnLookupMap,
+    visibleColumns,
+    initialColumns,
   } = context
   const instanceLoaded = writable(false)
 
@@ -139,6 +141,12 @@ export const createActions = context => {
     const $allFilters = get(allFilters)
     const $sort = get(sort)
 
+    const $columns = get(columns)
+    // If columns are not yet available, use the inital columns
+    const fields = $columns.length
+      ? get(visibleColumns).map(c => c.name)
+      : get(initialColumns)
+
     // Create new fetch model
     const newFetch = fetchData({
       API,
@@ -149,6 +157,7 @@ export const createActions = context => {
         sortOrder: $sort.order,
         limit: RowPageSize,
         paginate: true,
+        fields: fields.length ? fields : undefined,
 
         // Disable client side limiting, so that for queries and custom data
         // sources we don't impose fake row limits. We want all the data.

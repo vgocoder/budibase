@@ -74,6 +74,7 @@ export const initialise = context => {
     initialFilter,
     initialSortColumn,
     initialSortOrder,
+    visibleColumns,
   } = context
 
   // Keep a list of subscriptions so that we can clear them when the datasource
@@ -122,6 +123,23 @@ export const initialise = context => {
         $fetch.update({
           sortOrder: $sort.order || SortOrder.ASCENDING,
           sortColumn: $sort.column,
+        })
+      })
+    )
+
+    // Update fetch when columns change
+    unsubscribers.push(
+      visibleColumns.subscribe($visibleColumns => {
+        // Ensure we're updating the correct fetch
+        const $fetch = get(fetch)
+        if ($fetch?.options?.datasource?.tableId !== $datasource.tableId) {
+          return
+        }
+
+        $fetch.update({
+          fields: $visibleColumns?.length
+            ? $visibleColumns.map(c => c.name)
+            : undefined,
         })
       })
     )

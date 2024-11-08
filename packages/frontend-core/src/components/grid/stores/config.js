@@ -11,6 +11,7 @@ export const createStores = context => {
   const initialSortColumn = getProp("initialSortColumn")
   const initialSortOrder = getProp("initialSortOrder")
   const initialFilter = getProp("initialFilter")
+  const initialColumns = getProp("initialColumns")
   const fixedRowHeight = getProp("fixedRowHeight")
   const schemaOverrides = getProp("schemaOverrides")
   const notifySuccess = getProp("notifySuccess")
@@ -22,6 +23,7 @@ export const createStores = context => {
     initialSortColumn,
     initialSortOrder,
     initialFilter,
+    initialColumns,
     fixedRowHeight,
     schemaOverrides,
     notifySuccess,
