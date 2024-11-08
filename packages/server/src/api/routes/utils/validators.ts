@@ -136,6 +136,7 @@ export function internalSearchValidator() {
       bookmark: Joi.alternatives()
         .try(OPTIONAL_STRING, OPTIONAL_NUMBER)
         .optional(),
+      fields: Joi.array().items(Joi.string()).optional(),
     })
   )
 }
