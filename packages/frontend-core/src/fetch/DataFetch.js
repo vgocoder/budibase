@@ -48,6 +48,8 @@ export default class DataFetch {
       clientSideSearching: true,
       clientSideSorting: true,
       clientSideLimiting: true,
+
+      fields: null,
     }
 
     // State of the fetch

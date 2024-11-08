@@ -12,8 +12,15 @@ export default class TableFetch extends DataFetch {
   }
 
   async getData() {
-    const { datasource, limit, sortColumn, sortOrder, sortType, paginate } =
-      this.options
+    const {
+      datasource,
+      limit,
+      sortColumn,
+      sortOrder,
+      sortType,
+      paginate,
+      fields,
+    } = this.options
     const { tableId } = datasource
     const { cursor, query } = get(this.store)
 
@@ -28,6 +35,7 @@ export default class TableFetch extends DataFetch {
         sortType,
         paginate,
         bookmark: cursor,
+        fields,
       })
       return {
         rows: res?.rows || [],

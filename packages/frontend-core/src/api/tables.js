@@ -39,6 +39,7 @@ export const buildTableEndpoints = API => ({
     sortOrder,
     sortType,
     paginate,
+    fields,
   }) => {
     if (!tableId) {
       return {
@@ -55,6 +56,7 @@ export const buildTableEndpoints = API => ({
         sortOrder,
         sortType,
         paginate,
+        fields,
       },
     })
   },
