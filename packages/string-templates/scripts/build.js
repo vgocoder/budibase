@@ -16,7 +16,7 @@ const configs = [
 
 for (const config of configs) {
   coreBuild(config.input, config.output, {
-    platform: "neutral",
+    platform: "node",
     plugins: [nodeModulesPolyfillPlugin({ modules: ["vm"] })],
   })
 }
