@@ -44,7 +44,7 @@
       icon="JourneyVoyager"
       selected={open || automationCount}
       quiet
-      accentColor="#5610AD"
+      accentColor="#ff5c00"
     >
       Automations{automationCount ? `: ${automationCount}` : ""}
     </ActionButton>

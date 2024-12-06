@@ -55,7 +55,7 @@
       {disabled}
       on:click={openPopover}
       selected={open || filterCount > 0}
-      accentColor="#004EA6"
+      accentColor="#ff5c00"
     >
       {filterCount ? `Filter: ${filterCount}` : "Filter"}
     </ActionButton>

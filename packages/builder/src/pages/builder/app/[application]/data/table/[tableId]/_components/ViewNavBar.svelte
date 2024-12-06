@@ -181,6 +181,7 @@
 
 <div class="nav">
   <a
+    class="datasource-icon"
     href={`/builder/app/${$appStore.appId}/data/datasource/${datasource?._id}`}
   >
     <IntegrationIcon
@@ -247,6 +248,19 @@
           on:contextmenu={e => openViewContextMenu(e, view)}
           data-id={view.id}
         >
+          <svg
+            class="spectrum-Icon spectrum-Icon--sizeM"
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            focusable="false"
+            aria-label="Table"
+          >
+            <path
+              d="M15.75,2H4.25c-1.24072,0-2.25,1.00977-2.25,2.25v11.5c0,1.24023,1.00928,2.25,2.25,2.25h11.5c1.24072,0,2.25-1.00977,2.25-2.25V4.25c0-1.24023-1.00928-2.25-2.25-2.25ZM3.5,9h3v3h-3v-3ZM8,9h8.5v3h-8.5v-3ZM3.5,4.25c0-.41309.33643-.75.75-.75h11.5c.41357,0,.75.33691.75.75v3.25H3.5v-3.25ZM3.5,15.75v-2.25h3v3h-2.25c-.41357,0-.75-.33691-.75-.75ZM16.5,15.75c0,.41309-.33643.75-.75.75h-7.75v-3h8.5v2.25Z"
+              fill="var(--iconFill, currentColor)"
+              stroke-width="0"
+            />
+          </svg>
           <div class="nav-item__title">
             {view.name}
           </div>
@@ -325,7 +339,7 @@
 <style>
   /* Main containers */
   .nav {
-    height: 50px;
+    height: 48px;
     border-bottom: var(--border-light);
     display: flex;
     flex-direction: row;
@@ -336,37 +350,55 @@
     background: var(--background);
   }
   .nav__views {
+    height: 48px;
     flex: 0 1 auto;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
     overflow: hidden;
+    align-items: center;
     gap: 8px;
+    transform: translateZ(0);
   }
 
   /* Table and view items */
   .nav-item {
     padding: 0 8px;
-    height: 32px;
-    border-radius: 4px;
+    height: 28px;
+    border-radius: 8px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    gap: var(--spacing-m);
+    gap: var(--spacing-s);
     transition: background 130ms ease-out, color 130ms ease-out;
     color: var(--spectrum-global-color-gray-600);
+    position: relative;
+    font-size: 15px;
   }
   .nav-item.hidden {
     visibility: hidden;
   }
   .nav-item.active,
   .nav-item:hover {
-    background: var(--spectrum-global-color-gray-300);
+    background: var(--spectrum-global-color-gray-200);
     cursor: pointer;
     color: var(--spectrum-global-color-gray-900);
+    box-shadow: var(--spectrum-global-color-gray-300) 0px 0px 0px 1px inset;
   }
+  .nav-item.active::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    border-radius: 2px;
+    background: var(--spectrum-global-color-gray-800);
+    position: absolute;
+    bottom: -10px;
+    left: 0px;
+    z-index: 2;
+  }
+
   .nav-item:not(.active) :global(.icon) {
     display: none;
   }
@@ -380,5 +412,8 @@
   /* OVerflow items */
   .nav-overflow-item:not(.active) :global(> .spectrum-Menu-item > .icon) {
     visibility: hidden;
+  }
+  .datasource-icon {
+    height: 24px;
   }
 </style>

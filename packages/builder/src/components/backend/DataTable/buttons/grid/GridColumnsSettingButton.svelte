@@ -39,7 +39,7 @@
       on:click={popover?.open}
       selected={open || anyRestricted}
       disabled={!$tableColumns.length}
-      accentColor="#674D00"
+      accentColor="#ff5c00"
     >
       {text}
     </ActionButton>
