@@ -645,7 +645,7 @@
           type="info"
           text={"Rich text includes support for images, link"}
         >
-          <Icon size="XS" name="InfoOutline" />
+          <Icon size="XS" name="info-circle" />
         </AbsTooltip>
       </div>
 
@@ -698,7 +698,7 @@
                 ? null
                 : "We recommend not changing how timezones are handled for existing columns, as existing data will not be updated"}
             >
-              <Icon size="XS" name="InfoOutline" />
+              <Icon size="XS" name="info-circle" />
             </AbsTooltip>
           </div>
           <Toggle

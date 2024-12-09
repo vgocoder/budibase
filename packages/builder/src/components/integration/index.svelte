@@ -139,7 +139,7 @@
                               query.fields.steps[index].key
                             query.fields.steps[index].key = target
                           }}
-                          icon="ChevronUp"
+                          icon="chevron-up"
                         />
                       {/if}
                       {#if index < query.fields.steps.length - 1}
@@ -153,7 +153,7 @@
                               query.fields.steps[index].key
                             query.fields.steps[index].key = target
                           }}
-                          icon="ChevronDown"
+                          icon="chevron-down-size300"
                         />
                       {/if}
                     </div>
@@ -201,7 +201,7 @@
               <Icon
                 disabled={!editable}
                 hoverable
-                name="AddCircle"
+                name="add-circle"
                 size="S"
                 readOnly={!editable}
                 on:click={() => {

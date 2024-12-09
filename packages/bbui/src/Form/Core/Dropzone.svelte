@@ -197,14 +197,14 @@
           class:visible={selectedImageIdx > 0}
           on:click={navigateLeft}
         >
-          <Icon name="ChevronLeft" />
+          <Icon name="chevron-left" />
         </div>
         <div
           class="nav right"
           class:visible={selectedImageIdx < fileCount - 1}
           on:click={navigateRight}
         >
-          <Icon name="ChevronRight" />
+          <Icon name="chevron-right" />
         </div>
         {#if maximum !== 1}
           <div class="footer">File {selectedImageIdx + 1} of {fileCount}</div>

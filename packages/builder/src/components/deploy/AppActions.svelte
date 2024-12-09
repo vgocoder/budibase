@@ -163,7 +163,7 @@
         <div class="app-action" id="builder-app-users-button">
           <ActionButton
             quiet
-            icon="UserGroup"
+            icon="user-group"
             on:click={() => {
               builderStore.showBuilderSidePanel()
             }}
@@ -179,7 +179,7 @@
         <ActionButton
           disabled={$sortedScreens.length === 0}
           quiet
-          icon="PlayCircle"
+          icon="play"
           on:click={previewApp}
         >
           Preview
@@ -200,12 +200,14 @@
     >
       <div bind:this={appActionPopoverAnchor}>
         <div class="app-action">
-          <Icon name={$appPublished ? "GlobeCheck" : "GlobeStrike"} />
+          <Icon name={$appPublished ? "publish" : "publish-no"} />
           <TourWrap stepKeys={[TOUR_STEP_KEYS.BUILDER_APP_PUBLISH]}>
             <span class="publish-open" id="builder-app-publish-button">
               Publish
               <Icon
-                name={appActionPopoverOpen ? "ChevronUp" : "ChevronDown"}
+                name={appActionPopoverOpen
+                  ? "chevron-right"
+                  : "chevron-down-size300"}
                 size="M"
               />
             </span>
@@ -239,7 +241,7 @@
               >
                 {$appStore.url}
                 {#if $appPublished}
-                  <Icon size="S" name="LinkOut" />
+                  <Icon size="S" name="open-in" />
                 {/if}
               </span>
             </Body>

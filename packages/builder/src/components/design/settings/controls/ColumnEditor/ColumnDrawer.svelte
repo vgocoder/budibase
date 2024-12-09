@@ -155,7 +155,7 @@
       {/if}
       <div class="column">
         <div class="buttons wide">
-          <Button secondary icon="Add" on:click={addColumn}>Add column</Button>
+          <Button secondary icon="add" on:click={addColumn}>Add column</Button>
           <Button secondary quiet on:click={addAllColumns}>
             Add all columns
           </Button>

@@ -20,7 +20,7 @@ import { EventEmitter } from "events"
 export const definition: AutomationStepDefinition = {
   name: "Create Row",
   tagline: "Create a {{inputs.enriched.table.name}} row",
-  icon: "TableRowAddBottom",
+  icon: "add-circle",
   description: "Add a row to your database",
   type: AutomationStepType.ACTION,
   internal: true,

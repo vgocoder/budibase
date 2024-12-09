@@ -234,7 +234,7 @@
                     style="color:var(--spectrum-global-color-gray-700);"
                     focusable="false"
                   >
-                    <use xlink:href="#spectrum-icon-18-Reuse" />
+                    <use xlink:href="#icon-refresh" />
                   </svg>
                   <div class="iconAlign">
                     <Detail size="S">Looping</Detail>
@@ -243,17 +243,15 @@
 
                 <div class="blockTitle">
                   <AbsTooltip type="negative" text="Remove looping">
-                    <Icon
-                      on:click={removeLooping}
-                      hoverable
-                      name="DeleteOutline"
-                    />
+                    <Icon on:click={removeLooping} hoverable name="delete" />
                   </AbsTooltip>
 
                   <div style="margin-left: 10px;" on:click={() => {}}>
                     <Icon
                       hoverable
-                      name={showLooping ? "ChevronDown" : "ChevronUp"}
+                      name={showLooping
+                        ? "chevron-down-size300"
+                        : "chevron-right"}
                     />
                   </div>
                 </div>
@@ -324,7 +322,7 @@
                   <InfoDisplay
                     title={triggerInfo.title}
                     body="This trigger is tied to your '{triggerInfo.tableName}' table"
-                    icon="InfoOutline"
+                    icon="info-circle"
                   />
                 {/if}
               </Layout>

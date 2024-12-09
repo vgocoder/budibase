@@ -78,7 +78,7 @@
   <div class="header" class:scrolling>
     <Body size="S">Components</Body>
     <div on:click={toNewComponentRoute} class="addButton">
-      <Icon name="Add" />
+      <Icon name="add" />
     </div>
   </div>
   <div class="list-panel">
@@ -95,7 +95,7 @@
               `${$screenStore.selectedScreenId}-screen`}
             opened
             scrollable
-            icon="WebPage"
+            icon="web-page"
             on:drop={onDrop}
             on:click={() => {
               componentStore.select(`${$screenStore.selectedScreenId}-screen`)
@@ -110,7 +110,7 @@
             <Icon
               size="S"
               hoverable
-              name="MoreSmallList"
+              name="more"
               on:click={e => openScreenContextMenu(e, $selectedScreen?.props)}
             />
           </NavItem>

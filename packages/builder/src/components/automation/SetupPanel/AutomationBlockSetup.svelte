@@ -695,7 +695,7 @@
                       "_blank"
                     )}
                   size="XS"
-                  name="InfoOutline"
+                  name="info-circle"
                 />
               {/if}
             </div>

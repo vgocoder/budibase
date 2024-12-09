@@ -58,7 +58,7 @@
     </div>
     {#if showAddButton}
       <div class="add-button" on:click={onClickAddButton}>
-        <Icon name="Add" />
+        <Icon name="add" />
       </div>
     {/if}
     {#if showCloseButton}

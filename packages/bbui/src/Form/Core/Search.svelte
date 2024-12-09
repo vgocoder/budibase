@@ -52,7 +52,7 @@
       focusable="false"
       aria-hidden="true"
     >
-      <use xlink:href="#spectrum-icon-18-Magnify" />
+      <use xlink:href="#icon-search" />
     </svg>
     <input
       {disabled}

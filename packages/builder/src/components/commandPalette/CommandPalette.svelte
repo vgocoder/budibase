@@ -84,7 +84,7 @@
     {
       type: "Support",
       name: "Raise Github Discussion",
-      icon: "Help",
+      icon: "help-circle",
       action: () =>
         window.open(`https://github.com/Budibase/budibase/discussions/new`),
     },
@@ -130,7 +130,7 @@
     ...$sortedScreens.map(screen => ({
       type: "Screen",
       name: screen.routing.route,
-      icon: "WebPage",
+      icon: "web-page",
       action: () => {
         $goto(`./design/${screen._id}/${screen._id}-screen`)
       },

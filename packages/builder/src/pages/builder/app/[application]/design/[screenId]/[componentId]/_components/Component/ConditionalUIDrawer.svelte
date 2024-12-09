@@ -280,7 +280,7 @@
         <Body size="S">Add your first condition to get started.</Body>
       {/if}
       <div>
-        <Button secondary icon="Add" on:click={addCondition}>
+        <Button secondary icon="add" on:click={addCondition}>
           Add condition
         </Button>
       </div>

@@ -15,7 +15,7 @@ const getAppContextMenuItems = ({
       callback: onDuplicate,
     },
     {
-      icon: "Export",
+      icon: "download",
       name: "Export latest edited app",
       keyBind: null,
       visible: true,
@@ -23,7 +23,7 @@ const getAppContextMenuItems = ({
       callback: onExportDev,
     },
     {
-      icon: "Export",
+      icon: "download",
       name: "Export latest published app",
       keyBind: null,
       visible: true,

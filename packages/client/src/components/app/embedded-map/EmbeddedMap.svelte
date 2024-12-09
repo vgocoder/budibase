@@ -70,7 +70,7 @@
   const defaultMarkerOptions = {
     html:
       '<div><svg width="26px" height="26px" class="spectrum-Icon" focusable="false" stroke="#b12b27" stroke-width="1%">' +
-      '<use xlink:href="#spectrum-icon-18-Location" /></svg></div>',
+      '<use xlink:href="#icon-location" /></svg></div>',
     className: "embedded-map-marker",
     iconSize: [26, 26],
     iconAnchor: [13, 26],

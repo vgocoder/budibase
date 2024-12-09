@@ -52,7 +52,7 @@
     JavaScript: "JavaScript",
   }
   const SidePanels = {
-    Bindings: "FlashOn",
+    Bindings: "effects",
     Evaluation: "Play",
     Snippets: "Code",
   }

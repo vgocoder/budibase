@@ -26,7 +26,7 @@ const FullScreenControl = L.Control.extend({
     fullScreenContent:
       '<span class="embedded-map-control embedded-map-location-icon">' +
       '<svg width="16px" height="16px" class="spectrum-Icon" focusable="false">' +
-      '<use xlink:href="#spectrum-icon-18-FullScreen" /></svg><span>',
+      '<use xlink:href="#icon-full-screen" /></svg><span>',
     fullScreenTitle: "Enter Fullscreen",
   },
   onAdd: function () {
@@ -76,7 +76,7 @@ const LocationControl = L.Control.extend({
     locationContent:
       '<span class="embedded-map-control embedded-map-location-icon">' +
       '<svg width="16px" height="16px" class="spectrum-Icon" focusable="false">' +
-      '<use xlink:href="#spectrum-icon-18-Campaign" /></svg><span>',
+      '<use xlink:href="#icon-project-create" /></svg><span>',
     locationTitle: "Show Your Location",
   },
   onAdd: function () {

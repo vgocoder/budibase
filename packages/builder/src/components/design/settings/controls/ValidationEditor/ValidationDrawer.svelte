@@ -378,7 +378,7 @@
           </div>
         {/if}
         <div class="button">
-          <Button secondary icon="Add" on:click={addRule}>Add Rule</Button>
+          <Button secondary icon="add" on:click={addRule}>Add Rule</Button>
         </div>
       </Layout>
     </Layout>

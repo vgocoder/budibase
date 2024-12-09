@@ -338,7 +338,7 @@
                 </div>
                 <div class="group-actions">
                   <Icon
-                    name="Add"
+                    name="add"
                     hoverable
                     hoverColor="var(--ink)"
                     on:click={() => {
@@ -474,7 +474,7 @@
           {/if}
           <div class="add-group">
             <Button
-              icon="AddCircle"
+              icon="add-circle"
               size="M"
               secondary
               on:click={() => {
@@ -488,7 +488,7 @@
             {#if docsURL}
               <a href={docsURL} target="_blank">
                 <Icon
-                  name="HelpOutline"
+                  name="help-circle"
                   color="var(--spectrum-global-color-gray-600)"
                 />
               </a>

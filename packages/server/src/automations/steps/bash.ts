@@ -16,7 +16,7 @@ import {
 export const definition: AutomationStepDefinition = {
   name: "Bash Scripting",
   tagline: "Execute a bash command",
-  icon: "JourneyEvent",
+  icon: "prompt",
   description: "Run a bash script",
   type: AutomationStepType.ACTION,
   internal: true,

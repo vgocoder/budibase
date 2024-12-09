@@ -15,7 +15,7 @@
       <div>{datasources || 0}</div>
     </div>
     <div class="item">
-      <Icon name="WebPage" />
+      <Icon name="web-page" />
       <div>{screens || 0}</div>
     </div>
     <div class="item">

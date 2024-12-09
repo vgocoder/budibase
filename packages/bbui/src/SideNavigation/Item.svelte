@@ -38,7 +38,7 @@
         focusable="false"
         aria-hidden="true"
       >
-        <use xlink:href="#spectrum-icon-18-{icon}" />
+        <use xlink:href="#icon-{icon}" />
       </svg>
     {/if}
     <slot />

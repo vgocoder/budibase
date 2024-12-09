@@ -26,7 +26,7 @@
       aria-hidden="true"
       aria-label="Tag"
     >
-      <use xlink:href="#spectrum-icon-24-{icon}" />
+      <use xlink:href="#icon-{icon}" />
     </svg>
   {/if}
   <span class="spectrum-Tags-itemLabel"><slot /></span>

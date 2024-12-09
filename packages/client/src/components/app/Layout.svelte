@@ -211,7 +211,7 @@
   class:mobile={!!mobile}
   data-id={screenId}
   data-name="Screen"
-  data-icon="WebPage"
+  data-icon="web-page"
 >
   <div class="screen-wrapper layout-body">
     {#if typeClass !== "none"}
@@ -332,7 +332,7 @@
     <div class="side-panel-header">
       <Icon
         color="var(--spectrum-global-color-gray-600)"
-        name="RailRightClose"
+        name="step-forward"
         hoverable
         on:click={sidePanelStore.actions.close}
       />

@@ -138,7 +138,7 @@
         <Icon
           size="S"
           hoverable
-          name="MoreSmallList"
+          name="more"
           on:click={e => openContextMenu(e, component, opened)}
         />
       </NavItem>

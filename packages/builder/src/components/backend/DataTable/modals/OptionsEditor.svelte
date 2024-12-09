@@ -161,7 +161,7 @@
     {/each}
   </div>
   <div on:click={addNewInput} class="add-option">
-    <Icon name="Add" />
+    <Icon name="add" />
     <div>Add option</div>
   </div>
 </div>

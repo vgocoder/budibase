@@ -68,7 +68,7 @@
     class="addButton"
     class:rotate={search}
   >
-    <Icon name="Add" hoverable hoverColor="var(--ink)" />
+    <Icon name="add" hoverable hoverColor="var(--ink)" />
   </div>
 </div>
 

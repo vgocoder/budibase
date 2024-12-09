@@ -16,7 +16,7 @@
 
 <Panel
   showCloseButton
-  closeButtonIcon="RailRightClose"
+  closeButtonIcon="step-forward"
   onClickCloseButton={onClose}
   title="Query results"
   icon={"SQLQuery"}

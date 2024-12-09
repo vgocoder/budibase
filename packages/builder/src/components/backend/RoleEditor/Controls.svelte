@@ -11,12 +11,12 @@
 <div class="control top-right">
   <div class="group">
     <ActionButton
-      icon="Add"
+      icon="zoom-in"
       quiet
       on:click={() => flow.zoomIn({ duration: ZoomDuration })}
     />
     <ActionButton
-      icon="Remove"
+      icon="zoom-out"
       quiet
       on:click={() => flow.zoomOut({ duration: ZoomDuration })}
     />
@@ -24,7 +24,7 @@
   <Button secondary on:click={layoutAndFit}>Auto layout</Button>
 </div>
 <div class="control bottom-right">
-  <Button icon="Add" cta on:click={createRole}>Add role</Button>
+  <Button icon="add" cta on:click={createRole}>Add role</Button>
 </div>
 
 <style>

@@ -24,7 +24,7 @@ export const PrettyFilterConditions = {
 export const definition: AutomationStepDefinition = {
   name: "Condition",
   tagline: "{{inputs.field}} {{inputs.condition}} {{inputs.value}}",
-  icon: "Branch2",
+  icon: "invert",
   description:
     "Conditionally halt automations which do not meet certain conditions",
   type: AutomationStepType.LOGIC,

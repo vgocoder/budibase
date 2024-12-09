@@ -5,7 +5,7 @@
     TooltipType,
   } from "../Tooltip/AbsTooltip.svelte"
 
-  export let name = "Add"
+  export let name = "add"
   export let hidden = false
   export let size = "M"
   export let hoverable = false
@@ -45,7 +45,7 @@
     >
       <use
         style="pointer-events: none;"
-        xlink:href="#spectrum-icon-18-{name}"
+        xlink:href="#icon-{name.toLowerCase()}"
       />
     </svg>
   </div>

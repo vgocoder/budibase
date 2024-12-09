@@ -104,15 +104,12 @@
             <ActionMenu align="right">
               <div slot="control" class="avatar">
                 <UserAvatar user={$auth.user} showTooltip={false} />
-                <Icon size="XL" name="ChevronDown" />
+                <Icon size="XL" name="chevron-down-size300" />
               </div>
               <MenuItem icon="UserEdit" on:click={() => userInfoModal.show()}>
                 My profile
               </MenuItem>
-              <MenuItem
-                icon="LockClosed"
-                on:click={() => changePasswordModal.show()}
-              >
+              <MenuItem icon="lock" on:click={() => changePasswordModal.show()}>
                 Update password
               </MenuItem>
               {#if sdk.users.hasBuilderPermissions($auth.user)}
@@ -175,7 +172,7 @@
                         {/if}
                       </Body>
                     </div>
-                    <Icon name="ChevronRight" />
+                    <Icon name="chevron-right" />
                   </a>
                 {/each}
               </Layout>

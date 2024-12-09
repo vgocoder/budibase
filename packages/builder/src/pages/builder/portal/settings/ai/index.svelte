@@ -129,11 +129,11 @@
       <Heading size="M">AI</Heading>
       {#if !isCloud && !customAIConfigsEnabled}
         <Tags>
-          <Tag icon="LockClosed">Premium</Tag>
+          <Tag icon="lock">Premium</Tag>
         </Tags>
       {:else if isCloud && !customAIConfigsEnabled}
         <Tags>
-          <Tag icon="LockClosed">Enterprise</Tag>
+          <Tag icon="lock">Enterprise</Tag>
         </Tags>
       {/if}
     </div>

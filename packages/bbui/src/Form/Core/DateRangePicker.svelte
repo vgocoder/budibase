@@ -13,7 +13,7 @@
     enableTime={false}
   />
   <div class="arrow">
-    <Icon name="ChevronRight" />
+    <Icon name="chevron-right" />
   </div>
   <CoreDatePicker
     value={toDate}

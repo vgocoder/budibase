@@ -3,7 +3,7 @@
 
   export let title
   export let body
-  export let icon = "HelpOutline"
+  export let icon = "help-circle"
   export let quiet = false
   export let warning = false
   export let error = false

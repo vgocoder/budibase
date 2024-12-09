@@ -52,7 +52,7 @@
         </div>
       {/if}
       <div>
-        <Button icon="AddCircle" size="M" on:click={addOption} secondary>
+        <Button icon="add-circle" size="M" on:click={addOption} secondary>
           Add Option
         </Button>
       </div>

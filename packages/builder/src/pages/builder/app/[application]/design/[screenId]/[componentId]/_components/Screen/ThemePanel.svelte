@@ -25,7 +25,7 @@
 </script>
 
 <div class="info">
-  <Icon name="InfoOutline" size="S" />
+  <Icon name="info-circle" size="S" />
   <Body size="S">These settings apply to all screens</Body>
 </div>
 <Layout noPadding gap="S">

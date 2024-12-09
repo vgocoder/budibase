@@ -118,7 +118,7 @@
   </div>
   {#if editable}
     <div class="arrow" on:click={open}>
-      <Icon name="ChevronDown" />
+      <Icon name="chevron-down-size300" />
     </div>
   {/if}
 </div>

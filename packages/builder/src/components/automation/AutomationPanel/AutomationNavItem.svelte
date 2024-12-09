@@ -119,7 +119,7 @@
   selectedBy={$userSelectedResourceMap[automation._id]}
   disabled={automation.disabled}
 >
-  <Icon on:click={openContextMenu} size="S" hoverable name="MoreSmallList" />
+  <Icon on:click={openContextMenu} size="S" hoverable name="more" />
 </NavItem>
 
 <ConfirmDialog

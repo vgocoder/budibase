@@ -16,7 +16,7 @@ import env from "../../environment"
 export const definition: AutomationStepDefinition = {
   name: "Trigger an automation",
   tagline: "Triggers an automation synchronously",
-  icon: "Sync",
+  icon: "prototyping",
   description: "Triggers an automation synchronously",
   type: AutomationStepType.ACTION,
   internal: true,

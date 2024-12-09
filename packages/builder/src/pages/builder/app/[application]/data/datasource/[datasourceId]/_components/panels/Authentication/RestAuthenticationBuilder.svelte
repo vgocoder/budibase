@@ -70,7 +70,7 @@
     />
   {/if}
   <div>
-    <ActionButton on:click={() => openConfigModal()} icon="Add"
+    <ActionButton on:click={() => openConfigModal()} icon="add"
       >Add authentication</ActionButton
     >
   </div>

@@ -46,7 +46,7 @@
   {#if row.type !== BackupType.RESTORE}
     <ActionMenu align="right">
       <div slot="control">
-        <Icon size="M" hoverable name="MoreSmallList" />
+        <Icon size="M" hoverable name="more" />
       </div>
       <AbsTooltip
         position={TooltipPosition.Left}

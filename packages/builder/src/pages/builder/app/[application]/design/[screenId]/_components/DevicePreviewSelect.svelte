@@ -3,22 +3,22 @@
   import { previewStore } from "stores/builder"
 </script>
 
-<ActionGroup compact quiet>
+<ActionGroup compact>
   <ActionButton
     quiet
-    icon="DeviceDesktop"
+    icon="device-desktop"
     selected={$previewStore.previewDevice === "desktop"}
     on:click={() => previewStore.setDevice("desktop")}
   />
   <ActionButton
     quiet
-    icon="DeviceTablet"
+    icon="device-tablet"
     selected={$previewStore.previewDevice === "tablet"}
     on:click={() => previewStore.setDevice("tablet")}
   />
   <ActionButton
     quiet
-    icon="DevicePhone"
+    icon="device-phone"
     selected={$previewStore.previewDevice === "mobile"}
     on:click={() => previewStore.setDevice("mobile")}
   />

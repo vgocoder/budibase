@@ -150,7 +150,7 @@
             </div>
           {:else if helpText}
             <div class="helpText">
-              <Icon name="HelpOutline" /> <span>{helpText}</span>
+              <Icon name="help-circle" /> <span>{helpText}</span>
             </div>
           {/if}
         {/if}

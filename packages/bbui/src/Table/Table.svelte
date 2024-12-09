@@ -370,7 +370,7 @@
                     class="spectrum-Icon spectrum-Table-autoIcon"
                     focusable="false"
                   >
-                    <use xlink:href="#spectrum-icon-18-MagicWand" />
+                    <use xlink:href="#icon-MagicWand" />
                   </svg>
                 {/if}
                 {#if sortColumn === field}
@@ -388,7 +388,7 @@
                     focusable="false"
                     on:click={e => editColumn(e, field)}
                   >
-                    <use xlink:href="#spectrum-icon-18-Edit" />
+                    <use xlink:href="#icon-edit" />
                   </svg>
                 {/if}
               </div>
@@ -462,7 +462,7 @@
                   class="spectrum-Icon spectrum-Icon--sizeXXL"
                   focusable="false"
                 >
-                  <use xlink:href="#spectrum-icon-18-Table" />
+                  <use xlink:href="#icon-table" />
                 </svg>
                 <div>{placeholderText}</div>
               </div>

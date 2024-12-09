@@ -16,7 +16,7 @@ import {
 export const definition: AutomationStepDefinition = {
   name: "Update Row",
   tagline: "Update a {{inputs.enriched.table.name}} row",
-  icon: "Refresh",
+  icon: "refresh",
   description: "Update a row in your database",
   type: AutomationStepType.ACTION,
   internal: true,

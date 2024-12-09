@@ -85,8 +85,8 @@
 
     <div class="zoom">
       <div class="group">
-        <ActionButton icon="Add" quiet on:click={draggable.zoomIn} />
-        <ActionButton icon="Remove" quiet on:click={draggable.zoomOut} />
+        <ActionButton icon="zoom-in" quiet on:click={draggable.zoomIn} />
+        <ActionButton icon="zoom-out" quiet on:click={draggable.zoomOut} />
       </div>
     </div>
 
@@ -101,7 +101,6 @@
   </div>
   <div class="controls">
     <Button
-      icon={"Play"}
       cta
       disabled={!automation?.definition?.trigger}
       on:click={() => {
@@ -111,7 +110,11 @@
       Run test
     </Button>
     <div class="buttons">
-      <Icon disabled={!$automationStore.testResults} size="M" name="Multiple" />
+      <Icon
+        disabled={!$automationStore.testResults}
+        size="M"
+        name="list-multi-select"
+      />
       <div
         class:disabled={!$automationStore.testResults}
         on:click={() => {

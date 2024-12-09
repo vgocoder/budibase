@@ -54,7 +54,7 @@ const toSpectrumIcon = name => {
     aria-label="${name}-section-icon"
     style="color:var(--spectrum-global-color-gray-700)"
   >
-    <use style="pointer-events: none;" xlink:href="#spectrum-icon-18-${name}" />
+    <use style="pointer-events: none;" xlink:href="#icon-${name}" />
   </svg>`
 }
 

@@ -120,7 +120,7 @@
         style="color: {iconData?.color}"
         focusable="false"
       >
-        <use xlink:href="#spectrum-icon-18-{iconData?.icon}" />
+        <use xlink:href="#icon-{iconData?.icon}" />
       </svg>
     {/if}
     <input

@@ -388,14 +388,14 @@
         </MenuItem>
         <MenuItem
           disabled={!canMoveLeft}
-          icon="ChevronLeft"
+          icon="chevron-left"
           on:click={moveLeft}
         >
           Move left
         </MenuItem>
         <MenuItem
           disabled={!canMoveRight}
-          icon="ChevronRight"
+          icon="chevron-right"
           on:click={moveRight}
         >
           Move right

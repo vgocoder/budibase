@@ -160,7 +160,7 @@
           tooltipPosition={TooltipPosition.Top}
           hoverable
           disabled={branchIdx == 0}
-          name="ArrowLeft"
+          name="chevron-left"
         />
         <Icon
           on:click={() => {
@@ -175,7 +175,7 @@
           tooltipPosition={TooltipPosition.Top}
           hoverable
           disabled={isLast}
-          name="ArrowRight"
+          name="chevron-right"
         />
       </div>
     </FlowItemHeader>
@@ -193,7 +193,7 @@
           </PropField>
           <div class="footer">
             <Icon
-              name="InfoOutline"
+              name="info-circle"
               size="S"
               color="var(--spectrum-global-color-gray-700)"
             />

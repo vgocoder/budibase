@@ -17,7 +17,7 @@
   {#if !block.branchNode}
     <Icon
       hoverable
-      name="Branch3"
+      name="share-android"
       on:click={() => {
         dispatch("branch")
       }}
@@ -29,7 +29,7 @@
   {/if}
   <Icon
     hoverable
-    name="AddCircle"
+    name="add-circle"
     on:click={() => {
       actionModal.show()
     }}

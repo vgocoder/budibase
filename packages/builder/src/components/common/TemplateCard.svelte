@@ -28,7 +28,7 @@
         style="color: white"
         focusable="false"
       >
-        <use xlink:href="#spectrum-icon-18-{icon}" />
+        <use xlink:href="#icon-{icon}" />
       </svg>
     </div>
     <div class={overlayEnabled ? "template-thumbnail-action-overlay" : ""}>

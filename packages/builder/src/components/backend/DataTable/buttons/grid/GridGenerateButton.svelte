@@ -136,7 +136,7 @@
         <div>
           <ListItem
             title="Row is created"
-            icon="TableRowAddBottom"
+            icon="add"
             hoverable
             on:click={() => createAutomation(TriggerStepID.ROW_SAVED)}
             iconColor="var(--spectrum-global-color-gray-600)"
@@ -145,7 +145,7 @@
         <div>
           <ListItem
             title="Row is updated"
-            icon="Refresh"
+            icon="refresh"
             hoverable
             on:click={() => createAutomation(TriggerStepID.ROW_UPDATED)}
             iconColor="var(--spectrum-global-color-gray-600)"

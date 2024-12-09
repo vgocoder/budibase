@@ -90,7 +90,7 @@
   </div>
 
   <div class="align arrow-alignment">
-    <Icon name="ChevronDown" />
+    <Icon name="chevron-down-size300" />
   </div>
 </FancyField>
 

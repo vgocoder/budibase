@@ -205,7 +205,7 @@
       <Icon
         on:click={openTableContextMenu}
         hoverable
-        name="MoreSmallList"
+        name="more"
         color="var(--spectrum-global-color-gray-600)"
         hoverColor="var(--spectrum-global-color-gray-900)"
       />
@@ -231,7 +231,7 @@
           <Icon
             on:click={e => openViewContextMenu(e, view)}
             hoverable
-            name="MoreSmallList"
+            name="more"
             color="var(--spectrum-global-color-gray-600)"
             hoverColor="var(--spectrum-global-color-gray-900)"
           />
@@ -256,7 +256,7 @@
           <Icon
             on:click={e => openViewContextMenu(e, view)}
             hoverable
-            name="MoreSmallList"
+            name="more"
             color="var(--spectrum-global-color-gray-600)"
             hoverColor="var(--spectrum-global-color-gray-900)"
           />
@@ -273,7 +273,11 @@
   {#if overflowedViews.length}
     <ActionMenu align="right" bind:this={overflowMenu}>
       <div slot="control" let:open>
-        <ActionButton icon="ChevronDown" quiet selected={open || viewHidden}>
+        <ActionButton
+          icon="chevron-down-size300"
+          quiet
+          selected={open || viewHidden}
+        >
           {overflowedViews.length} more
         </ActionButton>
       </div>
@@ -293,7 +297,7 @@
             >
               <MenuItem icon={viewHidden ? "Checkmark" : null}>
                 {view.name}
-                <Icon slot="right" name="ChevronRight" />
+                <Icon slot="right" name="chevron-right" />
               </MenuItem>
             </a>
           </div>

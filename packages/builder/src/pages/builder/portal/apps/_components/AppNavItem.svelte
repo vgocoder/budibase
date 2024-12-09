@@ -58,7 +58,7 @@
           on:click={e => openContextMenu(e, app)}
           size="S"
           hoverable
-          name="MoreSmallList"
+          name="more"
         />
       {/if}
     </div>

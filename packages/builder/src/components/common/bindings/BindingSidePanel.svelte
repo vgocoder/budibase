@@ -158,7 +158,7 @@
     {#if selectedCategory}
       <div class="header">
         <Icon
-          name="BackAndroid"
+          name="step-backward"
           hoverable
           size="S"
           on:click={() => (selectedCategory = null)}
@@ -211,7 +211,7 @@
               name={categoryIcons[categoryName]}
             />
             <span class="category-name">{categoryName} </span>
-            <span class="category-chevron"><Icon name="ChevronRight" /></span>
+            <span class="category-chevron"><Icon name="chevron-right" /></span>
           </li>
         {/each}
       </ul>

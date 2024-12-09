@@ -559,7 +559,7 @@
       class="header"
     >
       {#if invitingFlow}
-        <Icon name="BackAndroid" />
+        <Icon name="step-backward" />
       {/if}
       <Heading size="S">{invitingFlow ? "Invite new user" : "Users"}</Heading>
     </div>
@@ -569,7 +569,7 @@
       {/if}
       <Icon
         color="var(--spectrum-global-color-gray-600)"
-        name="RailRightClose"
+        name="step-forward"
         hoverable
         on:click={() => {
           builderStore.hideBuilderSidePanel()

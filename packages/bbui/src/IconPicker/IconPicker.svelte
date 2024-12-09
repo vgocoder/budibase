@@ -30,7 +30,7 @@
         "Sandbox",
         "Project",
         "Organisations",
-        "Magnify",
+        "search",
         "Launch",
         "Car",
         "Camera",

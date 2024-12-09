@@ -8,7 +8,7 @@ import {
 
 export const definition: AutomationStepDefinition = {
   name: "Branch",
-  icon: "Branch3",
+  icon: "share-android",
   tagline: "Branch from this step",
   description: "Branching",
   stepId: AutomationActionStepId.BRANCH,

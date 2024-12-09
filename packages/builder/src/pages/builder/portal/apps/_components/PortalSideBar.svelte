@@ -27,7 +27,7 @@
   </div>
   <div class="side-bar-nav">
     <NavItem
-      icon="WebPages"
+      icon="web-nav-bar"
       text="All apps"
       on:click={() => $goto("./")}
       selected={!$params.appId}

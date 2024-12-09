@@ -29,7 +29,7 @@
 <DetailPopover title="Screens" bind:this={popover}>
   <svelte:fragment slot="anchor" let:open>
     <ActionButton
-      icon="WebPage"
+      icon="web-page"
       selected={open || screenCount}
       quiet
       accentColor="#364800"
@@ -52,7 +52,7 @@
     </List>
   {/if}
   <div>
-    <Button secondary icon="WebPage" on:click={generateScreen}>
+    <Button secondary icon="web-page" on:click={generateScreen}>
       Generate app screen
     </Button>
   </div>

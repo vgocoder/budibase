@@ -190,7 +190,7 @@
 
 <DetailPopover bind:this={popover} title="Configure calculations" width={480}>
   <svelte:fragment slot="anchor" let:open>
-    <ActionButton icon="WebPage" quiet on:click={openPopover} selected={open}>
+    <ActionButton icon="web-page" quiet on:click={openPopover} selected={open}>
       Configure calculations{count ? `: ${count}` : ""}
     </ActionButton>
   </svelte:fragment>
@@ -231,7 +231,7 @@
   <div class="buttons">
     <ActionButton
       quiet
-      icon="Add"
+      icon="add"
       on:click={addCalc}
       disabled={calculations.length >= 5}
     >

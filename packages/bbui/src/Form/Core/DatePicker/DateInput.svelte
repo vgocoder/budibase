@@ -41,7 +41,7 @@
         focusable="false"
         aria-hidden="true"
       >
-        <use xlink:href="#spectrum-icon-18-Alert" />
+        <use xlink:href="#icon-Alert" />
       </svg>
     {/if}
     <input

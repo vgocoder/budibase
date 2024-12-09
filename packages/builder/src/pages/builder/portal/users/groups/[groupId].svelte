@@ -125,7 +125,7 @@
           <Icon hoverable name="More" />
         </span>
         <MenuItem
-          icon="Refresh"
+          icon="refresh"
           on:click={() => editModal.show()}
           disabled={!isAdmin}
         >

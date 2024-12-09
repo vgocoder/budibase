@@ -131,7 +131,7 @@
         <div class="title">
           Snippets
           <Tags>
-            <Tag icon="LockClosed">Premium</Tag>
+            <Tag icon="lock">Premium</Tag>
           </Tags>
         </div>
       {/if}

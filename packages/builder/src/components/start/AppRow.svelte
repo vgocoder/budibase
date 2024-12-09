@@ -111,12 +111,7 @@
           </Button>
         </div>
         <div class="row-action">
-          <Icon
-            on:click={openContextMenu}
-            size="S"
-            hoverable
-            name="MoreSmallList"
-          />
+          <Icon on:click={openContextMenu} size="S" hoverable name="more" />
         </div>
       {:else}
         <!-- this can happen if an app builder has app user access to an app -->

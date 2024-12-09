@@ -58,7 +58,7 @@
   {#if window.parent.isBuilder}
     <ActionButton
       quiet
-      icon="LinkOut"
+      icon="open-in"
       on:click={() => {
         window.parent.closePreview?.()
         window.open(`/${$appStore.appId}`, "_blank")

@@ -128,7 +128,7 @@
 <DetailPopover title="Select access role" {showPopover}>
   <svelte:fragment slot="anchor" let:open>
     <ActionButton
-      icon="LockClosed"
+      icon="lock"
       selected={open || highlight}
       quiet
       accentColor={highlight ? "#ff0000" : null}

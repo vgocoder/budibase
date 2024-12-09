@@ -302,7 +302,7 @@
     bind:this={popoverAnchor}
   >
     <ActionButton
-      icon="Add"
+      icon="add"
       fullWidth
       on:click={() => {
         customPopover.show()

@@ -10,7 +10,7 @@
 </script>
 
 <Icon
-  name={app?.favourite ? "Star" : "StarOutline"}
+  name={app?.favourite ? "star-filled" : "star"}
   hoverable
   color={app?.favourite ? "var(--spectrum-global-color-yellow-1000)" : null}
   tooltip={app?.favourite ? "Remove from favourites" : "Add to favourites"}

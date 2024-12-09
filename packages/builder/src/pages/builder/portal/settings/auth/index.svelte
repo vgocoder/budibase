@@ -285,7 +285,7 @@
         </div>
         {#if !$licensing.enforceableSSO}
           <Tags>
-            <Tag icon="LockClosed">Enterprise plan</Tag>
+            <Tag icon="lock">Enterprise plan</Tag>
           </Tags>
         {/if}
       </div>

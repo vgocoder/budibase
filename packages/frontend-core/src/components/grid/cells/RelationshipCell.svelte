@@ -285,7 +285,7 @@
       {/each}
       {#if editable}
         <div class="add" on:click={open}>
-          <Icon name="Add" size="S" />
+          <Icon name="add" size="S" />
         </div>
       {/if}
     </div>

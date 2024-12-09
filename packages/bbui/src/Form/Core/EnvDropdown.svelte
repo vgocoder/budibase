@@ -114,9 +114,7 @@
         hbsValue.length ? removeVariable() : openPopover()
       }}
     >
-      <use
-        xlink:href={`#spectrum-icon-18-${!hbsValue.length ? "Key" : "Close"}`}
-      />
+      <use xlink:href={`#icon-${!hbsValue.length ? "Key" : "Close"}`} />
     </svg>
 
     <input
@@ -190,7 +188,7 @@
             focusable="false"
             aria-hidden="true"
           >
-            <use xlink:href="#spectrum-icon-18-Add" />
+            <use xlink:href="#icon-Add" />
           </svg>
           <div class="primary-text">Add Variable</div>
         </div>
@@ -201,7 +199,7 @@
             focusable="false"
             aria-hidden="true"
           >
-            <use xlink:href="#spectrum-icon-18-ArrowUp" />
+            <use xlink:href="#icon-order-one-up" />
           </svg>
           <div class="primary-text">Upgrade plan</div>
         </div>

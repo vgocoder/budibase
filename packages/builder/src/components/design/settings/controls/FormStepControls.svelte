@@ -32,7 +32,7 @@
       <ActionButton
         size="S"
         secondary
-        icon="ChevronLeft"
+        icon="chevron-left"
         disabled={currentStep === 0}
         on:click={() => {
           stepAction("previousStep")
@@ -44,7 +44,7 @@
         size="S"
         secondary
         disabled={currentStep === stepCount - 1}
-        icon="ChevronRight"
+        icon="chevron-right"
         on:click={() => {
           stepAction("nextStep")
         }}

@@ -75,7 +75,7 @@
     />
   {/each}
   <div style="margin-top: 10px">
-    <Button icon="AddCircle" secondary on:click={addField}>
+    <Button icon="add-circle" secondary on:click={addField}>
       Add
       {fieldLabel}
     </Button>

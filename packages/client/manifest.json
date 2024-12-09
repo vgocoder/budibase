@@ -163,7 +163,7 @@
   "container": {
     "name": "Container",
     "description": "This component contains things within itself",
-    "icon": "Selection",
+    "icon": "corner-radius-each",
     "hasChildren": true,
     "size": {
       "width": 500,
@@ -185,13 +185,13 @@
           {
             "label": "Flex",
             "value": "flex",
-            "barIcon": "ModernGridView",
+            "barIcon": "menu-hamburger",
             "barTitle": "Flex layout"
           },
           {
             "label": "Grid",
             "value": "grid",
-            "barIcon": "ViewGrid",
+            "barIcon": "grid-type-dots",
             "barTitle": "Grid layout"
           }
         ],
@@ -207,13 +207,13 @@
           {
             "label": "Column",
             "value": "column",
-            "barIcon": "TableSelectColumn",
+            "barIcon": "chevron-down-size300",
             "barTitle": "Column layout"
           },
           {
             "label": "Row",
             "value": "row",
-            "barIcon": "TableSelectRow",
+            "barIcon": "chevron-right",
             "barTitle": "Row layout"
           }
         ],
@@ -234,25 +234,25 @@
           {
             "label": "Left",
             "value": "left",
-            "barIcon": "AlignLeft",
+            "barIcon": "align-left",
             "barTitle": "Align left"
           },
           {
             "label": "Center",
             "value": "center",
-            "barIcon": "AlignCenter",
+            "barIcon": "align-center",
             "barTitle": "Align center"
           },
           {
             "label": "Right",
             "value": "right",
-            "barIcon": "AlignRight",
+            "barIcon": "align-right",
             "barTitle": "Align right"
           },
           {
             "label": "Stretch",
             "value": "stretch",
-            "barIcon": "MoveLeftRight",
+            "barIcon": "Distribute-space-horizontally",
             "barTitle": "Align stretched horizontally"
           }
         ],
@@ -273,25 +273,25 @@
           {
             "label": "Top",
             "value": "top",
-            "barIcon": "AlignTop",
+            "barIcon": "align-top",
             "barTitle": "Align top"
           },
           {
             "label": "Middle",
             "value": "middle",
-            "barIcon": "AlignMiddle",
+            "barIcon": "align-middle",
             "barTitle": "Align middle"
           },
           {
             "label": "Bottom",
             "value": "bottom",
-            "barIcon": "AlignBottom",
+            "barIcon": "align-bottom",
             "barTitle": "Align bottom"
           },
           {
             "label": "Stretch",
             "value": "stretch",
-            "barIcon": "MoveUpDown",
+            "barIcon": "distribute-space-vertically",
             "barTitle": "Align stretched vertically"
           }
         ],
@@ -312,13 +312,13 @@
           {
             "label": "Shrink",
             "value": "shrink",
-            "barIcon": "Minimize",
+            "barIcon": "minimize",
             "barTitle": "Shrink container"
           },
           {
             "label": "Grow",
             "value": "grow",
-            "barIcon": "Maximize",
+            "barIcon": "maximize",
             "barTitle": "Grow container"
           }
         ],
@@ -365,7 +365,7 @@
         "label": "Wrap",
         "key": "wrap",
         "showInBar": true,
-        "barIcon": "ModernGridView",
+        "barIcon": "apps-all",
         "barTitle": "Wrap",
         "dependsOn": {
           "setting": "layout",
@@ -406,13 +406,13 @@
   },
   "screenslot": {
     "name": "Screenslot",
-    "icon": "WebPage",
+    "icon": "web-page",
     "description": "Contains your app screens",
     "static": true
   },
   "buttongroup": {
     "name": "Button group",
-    "icon": "Button",
+    "icon": "interaction",
     "hasChildren": false,
     "size": {
       "width": 200,
@@ -629,7 +629,7 @@
   "button": {
     "name": "Button",
     "description": "A basic html button that is ready for styling",
-    "icon": "Button",
+    "icon": "interaction",
     "editable": true,
     "size": {
       "width": 120,
@@ -759,7 +759,7 @@
   "divider": {
     "name": "Divider",
     "description": "A basic divider",
-    "icon": "Separator",
+    "icon": "stroke-solid",
     "illegalChildren": ["section"],
     "size": {
       "width": 400,
@@ -796,7 +796,7 @@
   "repeater": {
     "name": "Repeater",
     "description": "A configurable data list that attaches to your backend tables.",
-    "icon": "JourneyData",
+    "icon": "view-list",
     "illegalChildren": ["section"],
     "hasChildren": true,
     "size": {
@@ -989,7 +989,7 @@
     "deprecated": true,
     "name": "Vertical Card",
     "description": "A basic card component that can contain content and actions.",
-    "icon": "ViewColumn",
+    "icon": "people",
     "illegalChildren": ["section"],
     "settings": [
       {
@@ -1047,9 +1047,9 @@
     ]
   },
   "text": {
-    "name": "Paragraph",
-    "description": "A component for displaying paragraph text.",
-    "icon": "TextParagraph",
+    "name": "Text",
+    "description": "A component for displaying text.",
+    "icon": "text",
     "illegalChildren": ["section"],
     "editable": true,
     "size": {
@@ -1171,7 +1171,7 @@
   },
   "heading": {
     "name": "Headline",
-    "icon": "TextBold",
+    "icon": "text-bold",
     "description": "A component for displaying heading text",
     "illegalChildren": ["section"],
     "editable": true,
@@ -1294,7 +1294,7 @@
   },
   "tag": {
     "name": "Tag",
-    "icon": "Label",
+    "icon": "tag",
     "size": {
       "width": 100,
       "height": 25
@@ -1758,7 +1758,7 @@
   "cardstat": {
     "name": "Stat Card",
     "description": "A card component for displaying numbers.",
-    "icon": "Card",
+    "icon": "text-numbers",
     "size": {
       "width": 260,
       "height": 143
@@ -1793,7 +1793,7 @@
   },
   "embed": {
     "name": "Embed",
-    "icon": "Code",
+    "icon": "full-screen-exit",
     "description": "Embed content from 3rd party sources",
     "styles": ["size"],
     "size": {
@@ -2895,7 +2895,7 @@
   },
   "form": {
     "name": "Form",
-    "icon": "Form",
+    "icon": "publish",
     "hasChildren": true,
     "illegalChildren": ["section", "form", "formblock"],
     "actions": [
@@ -3004,7 +3004,7 @@
   },
   "formstep": {
     "name": "Form Step",
-    "icon": "AssetsAdded",
+    "icon": "step-forward",
     "hasChildren": true,
     "requiredAncestors": ["form"],
     "illegalChildren": ["section", "form", "formstep", "formblock"],
@@ -3238,7 +3238,7 @@
   },
   "numberfield": {
     "name": "Number Field",
-    "icon": "123",
+    "icon": "text-numbers",
     "styles": ["size"],
     "editable": true,
     "size": {
@@ -3348,7 +3348,7 @@
   },
   "bigintfield": {
     "name": "BigInt Field",
-    "icon": "TagBold",
+    "icon": "text-numbers",
     "styles": ["size"],
     "editable": true,
     "size": {
@@ -3442,7 +3442,7 @@
   },
   "passwordfield": {
     "name": "Password Field",
-    "icon": "LockClosed",
+    "icon": "lock",
     "styles": ["size"],
     "editable": true,
     "size": {
@@ -3535,8 +3535,8 @@
     }
   },
   "optionsfield": {
-    "name": "Options Picker",
-    "icon": "Menu",
+    "name": "Select Picker",
+    "icon": "radio-button",
     "styles": ["size"],
     "editable": true,
     "size": {
@@ -3758,7 +3758,7 @@
   },
   "multifieldselect": {
     "name": "Multi-select Picker",
-    "icon": "ViewList",
+    "icon": "list-multi-select",
     "styles": ["size"],
     "editable": true,
     "size": {
@@ -3974,7 +3974,7 @@
   },
   "booleanfield": {
     "name": "Checkbox",
-    "icon": "SelectBox",
+    "icon": "check-box",
     "editable": true,
     "size": {
       "width": 400,
@@ -4107,7 +4107,7 @@
   },
   "longformfield": {
     "name": "Long Form Field",
-    "icon": "TextAlignLeft",
+    "icon": "Text-align-left",
     "styles": ["size"],
     "editable": true,
     "size": {
@@ -4239,7 +4239,7 @@
   },
   "datetimefield": {
     "name": "Date Picker",
-    "icon": "Date",
+    "icon": "calendar-day",
     "styles": ["size"],
     "editable": true,
     "size": {
@@ -4536,7 +4536,7 @@
   },
   "signaturesinglefield": {
     "name": "Signature",
-    "icon": "AnnotatePen",
+    "icon": "edit",
     "styles": ["size"],
     "size": {
       "width": 400,
@@ -4700,8 +4700,8 @@
     ]
   },
   "attachmentfield": {
-    "name": "Attachment List",
-    "icon": "DocumentFragmentGroup",
+    "name": "Attachments Multiple",
+    "icon": "asset",
     "styles": ["size"],
     "requiredAncestors": ["form"],
     "editable": true,
@@ -4797,8 +4797,8 @@
     ]
   },
   "attachmentsinglefield": {
-    "name": "Single Attachment",
-    "icon": "DocumentFragment",
+    "name": "Attachment",
+    "icon": "file",
     "styles": ["size"],
     "requiredAncestors": ["form"],
     "editable": true,
@@ -4889,7 +4889,7 @@
   },
   "relationshipfield": {
     "name": "Relationship Picker",
-    "icon": "TaskList",
+    "icon": "list-multi-select",
     "styles": ["size"],
     "requiredAncestors": ["form"],
     "editable": true,
@@ -5002,7 +5002,7 @@
   },
   "jsonfield": {
     "name": "JSON Field",
-    "icon": "Brackets",
+    "icon": "prompt",
     "styles": ["size"],
     "editable": true,
     "size": {
@@ -5107,7 +5107,7 @@
   },
   "s3upload": {
     "name": "S3 File Upload",
-    "icon": "UploadToCloud",
+    "icon": "upload-to-cloud",
     "styles": ["size"],
     "editable": true,
     "size": {
@@ -5435,7 +5435,7 @@
   },
   "spectrumcard": {
     "name": "Card",
-    "icon": "PersonalizationField",
+    "icon": "people",
     "styles": ["size"],
     "size": {
       "width": 300,
@@ -5557,7 +5557,7 @@
     "documentationLink": "https://docs.budibase.com/docs/chart",
     "block": true,
     "name": "Chart Block",
-    "icon": "GraphPie",
+    "icon": "align-bottom",
     "hasChildren": false,
     "size": {
       "width": 600,
@@ -6484,7 +6484,7 @@
   "cardsblock": {
     "block": true,
     "name": "Cards Block",
-    "icon": "PersonalizationField",
+    "icon": "people",
     "styles": ["size"],
     "size": {
       "width": 600,
@@ -6699,7 +6699,7 @@
   "repeaterblock": {
     "block": true,
     "name": "Repeater Block",
-    "icon": "ViewList",
+    "icon": "view-list",
     "illegalChildren": ["section", "rowexplorer"],
     "hasChildren": true,
     "size": {
@@ -6978,7 +6978,7 @@
   },
   "multistepformblock": {
     "name": "Multi-step Form Block",
-    "icon": "AssetsAdded",
+    "icon": "step-forward",
     "block": true,
     "hasChildren": false,
     "ejectable": false,
@@ -7189,7 +7189,7 @@
   },
   "formblock": {
     "name": "Form Block",
-    "icon": "Form",
+    "icon": "publish",
     "styles": ["padding", "size", "background", "border", "shadow"],
     "block": true,
     "info": "Form blocks are only compatible with internal or SQL tables",
@@ -7364,7 +7364,7 @@
   },
   "sidepanel": {
     "name": "Side Panel",
-    "icon": "RailRight",
+    "icon": "layout",
     "hasChildren": true,
     "ignoresLayout": true,
     "illegalChildren": ["section", "sidepanel", "modal"],
@@ -7387,7 +7387,7 @@
   },
   "modal": {
     "name": "Modal",
-    "icon": "MBox",
+    "icon": "effect-border",
     "hasChildren": true,
     "illegalChildren": ["section", "modal", "sidepanel"],
     "ignoresLayout": true,
@@ -7435,7 +7435,7 @@
   "rowexplorer": {
     "block": true,
     "name": "Row Explorer Block",
-    "icon": "PersonalizationField",
+    "icon": "layout",
     "size": {
       "width": 800,
       "height": 426
@@ -7739,7 +7739,7 @@
   "bbreferencefield": {
     "devComment": "As bb reference is only used for user subtype for now, we are using user for icon and labels",
     "name": "User List Field",
-    "icon": "UserGroup",
+    "icon": "user-group",
     "styles": ["size"],
     "editable": true,
     "size": {

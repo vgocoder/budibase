@@ -615,7 +615,7 @@ const automationActions = store => ({
       const icon = isTrigger
         ? pathBlock.icon
         : isLoopBlock
-        ? "Reuse"
+        ? "refresh"
         : pathBlock.icon
 
       if (blockIdx === 0 && isTrigger) {

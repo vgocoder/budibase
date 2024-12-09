@@ -176,7 +176,7 @@
       {#if menuItems?.length > 0 && showMenu}
         <ActionMenu>
           <div slot="control" class="control icon">
-            <Icon size="S" hoverable name="MoreSmallList" />
+            <Icon size="S" hoverable name="more" />
           </div>
           {#each menuItems as item}
             <MenuItem on:click={() => item.onClick(field)}>
@@ -192,7 +192,7 @@
   <div>
     <ActionButton
       disabled={actionButtonDisabled}
-      icon="Add"
+      icon="add"
       secondary
       thin
       outline

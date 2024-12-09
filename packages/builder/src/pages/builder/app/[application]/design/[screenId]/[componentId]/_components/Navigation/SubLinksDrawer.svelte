@@ -94,7 +94,7 @@
           </div>
         {/if}
         <div>
-          <ActionButton quiet icon="Add" on:click={addSubLink}>
+          <ActionButton quiet icon="add" on:click={addSubLink}>
             Add link
           </ActionButton>
         </div>

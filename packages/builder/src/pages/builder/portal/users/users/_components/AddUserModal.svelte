@@ -138,7 +138,7 @@
       </div>
     {:else}
       <div>
-        <ActionButton on:click={addNewInput} icon="Add">Add email</ActionButton>
+        <ActionButton on:click={addNewInput} icon="add">Add email</ActionButton>
       </div>
     {/if}
   </Layout>

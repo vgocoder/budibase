@@ -84,7 +84,7 @@
         aria-hidden="true"
         aria-label="Folder"
       >
-        <use xlink:href="#spectrum-icon-18-{icon}" />
+        <use xlink:href="#icon-{icon}" />
       </svg>
     {/if}
     <span class="spectrum-Tabs-itemLabel">{title}</span>
@@ -110,7 +110,7 @@
         aria-hidden="true"
         aria-label="Folder"
       >
-        <use xlink:href="#spectrum-icon-18-{icon}" />
+        <use xlink:href="#icon-{icon}" />
       </svg>
     {/if}
     <span class="spectrum-Tabs-itemLabel">{title}</span>

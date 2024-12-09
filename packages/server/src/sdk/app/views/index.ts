@@ -400,7 +400,7 @@ export async function enrichSchema(
         !helpers.schema.isDeprecatedSingleUserColumn(relTableField)
       ) {
         // Forcing the icon, otherwise we would need to pass the constraints to show the proper icon
-        enrichedFieldSchema.icon = "UserGroup"
+        enrichedFieldSchema.icon = "user-group"
       }
       result[relTableFieldName] = enrichedFieldSchema
     }

@@ -193,7 +193,7 @@
                 relationshipPanelAnchor = e.currentTarget
               }}
               size="S"
-              icon="ChevronRight"
+              icon="chevron-right"
               quiet
               selected={relationshipFieldName === column.name}
             />

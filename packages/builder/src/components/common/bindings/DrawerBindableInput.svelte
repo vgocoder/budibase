@@ -83,7 +83,7 @@
         bindingDrawer.show()
       }}
     >
-      <Icon size="S" name="FlashOn" />
+      <Icon size="S" name="effects" />
     </div>
   {/if}
 </div>

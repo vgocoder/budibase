@@ -57,7 +57,7 @@
               class="spectrum-Icon"
               focusable="false"
             >
-              <use xlink:href="#spectrum-icon-18-WorkflowAdd" />
+              <use xlink:href="#icon-add" />
             </svg>
             <Heading size="M">You have no automations</Heading>
             <Body size="M">Let's fix that. Call the bots!</Body>

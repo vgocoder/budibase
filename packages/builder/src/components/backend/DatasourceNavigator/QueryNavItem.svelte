@@ -87,7 +87,7 @@
   on:click={() => goto(`./query/${query._id}`)}
   selectedBy={$userSelectedResourceMap[query._id]}
 >
-  <Icon size="S" hoverable name="MoreSmallList" on:click={openContextMenu} />
+  <Icon size="S" hoverable name="more" on:click={openContextMenu} />
 </NavItem>
 
 <ConfirmDialog

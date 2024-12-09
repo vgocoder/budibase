@@ -128,7 +128,7 @@
           style="color:var(--spectrum-global-color-gray-700);"
           focusable="false"
         >
-          <use xlink:href="#spectrum-icon-18-{block.icon}" />
+          <use xlink:href="#icon-{block.icon}" />
         </svg>
       {/if}
       <div class="iconAlign">
@@ -186,7 +186,7 @@
               dispatch("toggle")
             }}
             hoverable
-            name={open ? "ChevronUp" : "ChevronDown"}
+            name={open ? "chevron-down-size300" : "chevron-right"}
           />
         </div>
       {/if}
@@ -201,12 +201,12 @@
         {#if !showTestStatus}
           {#if !isHeaderTrigger && !isLooped && !isBranch && (block?.features?.[Features.LOOPING] || !block.features)}
             <AbsTooltip type="info" text="Add looping">
-              <Icon on:click={addLooping} hoverable name="RotateCW" />
+              <Icon on:click={addLooping} hoverable name="rotate-cw" />
             </AbsTooltip>
           {/if}
           {#if !isHeaderTrigger}
             <AbsTooltip type="negative" text="Delete step">
-              <Icon on:click={deleteStep} hoverable name="DeleteOutline" />
+              <Icon on:click={deleteStep} hoverable name="delete" />
             </AbsTooltip>
           {/if}
         {/if}
@@ -220,7 +220,7 @@
               dispatch("toggle")
             }}
             hoverable
-            name={open ? "ChevronUp" : "ChevronDown"}
+            name={open ? "chevron-down-size300" : "chevron-right"}
           />
         {/if}
       </div>
@@ -228,7 +228,7 @@
         <div class="error-container">
           <AbsTooltip type="negative" text={automationNameError}>
             <div class="error-icon">
-              <Icon size="S" name="Alert" />
+              <Icon size="S" name="alert-triangle" />
             </div>
           </AbsTooltip>
         </div>

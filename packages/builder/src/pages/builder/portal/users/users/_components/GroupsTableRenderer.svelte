@@ -6,7 +6,7 @@
 
 <div class="align">
   <div class="spacing">
-    <Icon name="UserGroup" />
+    <Icon name="user-group" />
   </div>
   <div class="opacity">
     {value?.length || 0}

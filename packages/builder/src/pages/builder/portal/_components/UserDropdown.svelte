@@ -25,14 +25,14 @@
 <ActionMenu align="right">
   <div slot="control" class="user-dropdown">
     <UserAvatar user={$auth.user} showTooltip={false} />
-    <Icon size="XL" name="ChevronDown" />
+    <Icon size="XL" name="chevron-down-size300" />
   </div>
   <MenuItem icon="UserEdit" on:click={() => profileModal.show()}>
     My profile
   </MenuItem>
   <MenuItem icon="Moon" on:click={() => themeModal.show()}>Theme</MenuItem>
   {#if !$auth.isSSO}
-    <MenuItem icon="LockClosed" on:click={() => updatePasswordModal.show()}>
+    <MenuItem icon="lock" on:click={() => updatePasswordModal.show()}>
       Update password
     </MenuItem>
   {/if}

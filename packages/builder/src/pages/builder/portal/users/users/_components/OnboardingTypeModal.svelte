@@ -27,7 +27,7 @@
       }}
     >
       <div class="content onboarding-type-wrap">
-        <Icon name="WebPage" />
+        <Icon name="web-page" />
         <div class="onboarding-type-text">
           <Body size="S">Send email invites</Body>
         </div>

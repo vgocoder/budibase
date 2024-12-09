@@ -134,7 +134,7 @@
     {#if $appStore.initialised}
       <div class="topleftnav">
         <a href={$url("../../portal/apps")} class="linkWrapper back-to-apps">
-          <Icon size="S" hoverable name="BackAndroid" />
+          <Icon size="XL" hoverable name="home" />
         </a>
         <Tabs {selected} size="M">
           {#each $layout.children as { path, title }}
@@ -204,8 +204,7 @@
     display: contents;
   }
   .back-to-apps :global(.icon) {
-    margin-left: 12px;
-    margin-right: 12px;
+    margin-right: 10px;
   }
   .loading {
     min-height: 100%;
