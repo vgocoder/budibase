@@ -32,7 +32,7 @@
       icon="web-page"
       selected={open || screenCount}
       quiet
-      accentColor="#364800"
+      accentColor="#ff5c00"
     >
       Screens{screenCount ? `: ${screenCount}` : ""}
     </ActionButton>

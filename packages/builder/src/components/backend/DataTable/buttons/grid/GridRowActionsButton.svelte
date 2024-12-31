@@ -73,7 +73,7 @@
       icon="interaction"
       selected={open || actionCount}
       quiet
-      accentColor="#A24400"
+      accentColor="#ff5c00"
     >
       Row actions{actionCount ? `: ${actionCount}` : ""}
     </ActionButton>

@@ -24,8 +24,8 @@
       return ""
     }
     let style = ""
-    style += `--accent-bg-color:${hexToRGBA(color, 0.15)};`
-    style += `--accent-border-color:${hexToRGBA(color, 0.35)};`
+    style += `--accent-bg-color:${hexToRGBA(color, 0.1)};`
+    style += `--accent-border-color:${hexToRGBA(color, 0.3)};`
     return style
   }
 </script>
@@ -116,8 +116,10 @@
   }
   .accent.is-selected,
   .accent:active {
-    border: 1px solid var(--accent-border-color);
     background: var(--accent-bg-color);
+    border-radius: 10px;
+    height: 28px;
+    border: 1px dashed var(--accent-border-color);
   }
   .accent:hover {
     filter: brightness(1.2);
