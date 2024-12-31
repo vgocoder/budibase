@@ -60,7 +60,7 @@
 
 <Panel
   title="Navigation"
-  icon={$selectedScreen?.showNavigation ? "Visibility" : "VisibilityOff"}
+  icon={$selectedScreen?.showNavigation ? "visibility" : "visibility-off"}
   borderLeft
   wide
 >

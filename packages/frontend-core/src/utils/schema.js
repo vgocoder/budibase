@@ -6,13 +6,13 @@ export const getColumnIcon = column => {
     return column.schema.icon
   }
   if (column.calculationType) {
-    return "Calculator"
+    return "calculator"
   }
   if (column.schema.autocolumn) {
-    return "MagicWand"
+    return "magic-wand"
   }
   if (helpers.schema.isDeprecatedSingleUserColumn(column.schema)) {
-    return "User"
+    return "user"
   }
   const { type, subtype } = column.schema
   const result =

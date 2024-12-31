@@ -123,8 +123,8 @@
             opened
             scrollable
             icon={$selectedScreen?.showNavigation
-              ? "Visibility"
-              : "VisibilityOff"}
+              ? "visibility"
+              : "visibility-off"}
             on:drop={onDrop}
             on:click={() => {
               componentStore.select(

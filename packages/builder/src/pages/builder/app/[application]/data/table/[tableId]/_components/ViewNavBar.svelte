@@ -78,7 +78,7 @@
       table._id,
       [
         {
-          icon: "Edit",
+          icon: "edit",
           name: "Edit",
           keyBind: null,
           visible: table?.sourceType !== DB_TYPE_EXTERNAL,
@@ -110,7 +110,7 @@
       view.id,
       [
         {
-          icon: "Edit",
+          icon: "edit",
           name: "Edit",
           keyBind: null,
           visible: true,
@@ -301,7 +301,7 @@
               </MenuItem>
             </a>
           </div>
-          <MenuItem icon="Edit" on:click={() => editOverflowView(view)}>
+          <MenuItem icon="edit" on:click={() => editOverflowView(view)}>
             Edit
           </MenuItem>
           <MenuItem icon="Delete" on:click={() => deleteOverflowView(view)}>

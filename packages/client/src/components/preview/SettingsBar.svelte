@@ -257,7 +257,7 @@
       <GridStylesButton
         style={gridVAlignVar}
         value="stretch"
-        icon="MoveUpDown"
+        icon="line-height"
         title="Stretch vertically"
         active={gridVAlign === "stretch"}
         componentId={id}

@@ -7,7 +7,7 @@ export const A_VIEW = {
       name: "Auto ID",
       type: "number",
       subtype: "autoID",
-      icon: "ri-magic-line",
+      icon: "data",
       autocolumn: true,
       constraints: {
         type: "number",
@@ -23,7 +23,7 @@ export const A_VIEW = {
       name: "Created By",
       type: "link",
       subtype: "createdBy",
-      icon: "ri-magic-line",
+      icon: "data",
       autocolumn: true,
       constraints: {
         type: "array",
@@ -37,7 +37,7 @@ export const A_VIEW = {
       name: "Created At",
       type: "datetime",
       subtype: "createdAt",
-      icon: "ri-magic-line",
+      icon: "data",
       autocolumn: true,
       constraints: {
         type: "string",
@@ -53,7 +53,7 @@ export const A_VIEW = {
       name: "Updated By",
       type: "link",
       subtype: "updatedBy",
-      icon: "ri-magic-line",
+      icon: "data",
       autocolumn: true,
       constraints: {
         type: "array",
@@ -67,7 +67,7 @@ export const A_VIEW = {
       name: "Updated At",
       type: "datetime",
       subtype: "updatedAt",
-      icon: "ri-magic-line",
+      icon: "data",
       autocolumn: true,
       constraints: {
         type: "string",

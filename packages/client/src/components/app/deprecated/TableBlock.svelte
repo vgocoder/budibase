@@ -146,7 +146,7 @@
 
   const getEditTitle = (detailsFormBlockId, primaryDisplay) => {
     if (!primaryDisplay || !detailsFormBlockId) {
-      return "Edit"
+      return "edit"
     }
     const prefix = safe(detailsFormBlockId + "-repeater")
     const binding = `${prefix}.${safe(primaryDisplay)}`

@@ -89,7 +89,7 @@ const modal = async ({ tableOrView, permissions, screens }) => {
       labelPosition: "left",
       buttonPosition: "bottom",
       actionType: "Update",
-      title: "Edit",
+      title: "edit",
       rowId: `{{ ${safe("state")}.${safe(stateKey)} }}`,
     })
 

@@ -61,7 +61,7 @@
   })
 
   async function fixMountBug({ detail }) {
-    if (detail === "Edit") {
+    if (detail === "edit") {
       await tick()
       mounted = true
     } else {
@@ -87,8 +87,8 @@
   </Layout>
 
   <div>
-    <Tabs noHorizPadding selected="Edit" on:select={fixMountBug}>
-      <Tab title="Edit">
+    <Tabs noHorizPadding selected="edit" on:select={fixMountBug}>
+      <Tab title="edit">
         <div class="template-editor">
           <div class="template-text-editor">
             <Editor

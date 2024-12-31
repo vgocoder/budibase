@@ -41,7 +41,7 @@
 <DetailPopover title="Automations" bind:this={popover}>
   <svelte:fragment slot="anchor" let:open>
     <ActionButton
-      icon="JourneyVoyager"
+      icon="prototyping"
       selected={open || automationCount}
       quiet
       accentColor="#5610AD"

@@ -21,7 +21,7 @@
   const getContextMenuItems = () => {
     return [
       {
-        icon: "Edit",
+        icon: "edit",
         name: "Edit",
         keyBind: null,
         visible: table?.sourceType !== DB_TYPE_EXTERNAL,

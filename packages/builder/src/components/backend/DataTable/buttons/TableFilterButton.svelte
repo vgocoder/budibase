@@ -50,7 +50,7 @@
 <DetailPopover bind:this={popover} title="Configure filters" width={800}>
   <svelte:fragment slot="anchor" let:open>
     <ActionButton
-      icon="Filter"
+      icon="filter"
       quiet
       {disabled}
       on:click={openPopover}

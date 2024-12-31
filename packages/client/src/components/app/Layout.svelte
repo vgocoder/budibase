@@ -219,7 +219,7 @@
         class="interactive component {navigationId}"
         data-id={navigationId}
         data-name="Navigation"
-        data-icon="Visibility"
+        data-icon="visibility"
       >
         <div
           class="nav-wrapper {navigationId}-dom"

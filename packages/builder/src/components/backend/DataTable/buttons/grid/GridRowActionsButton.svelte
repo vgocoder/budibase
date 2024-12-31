@@ -70,7 +70,7 @@
 <DetailPopover title="Row actions" bind:this={popover}>
   <svelte:fragment slot="anchor" let:open>
     <ActionButton
-      icon="Engagement"
+      icon="interaction"
       selected={open || actionCount}
       quiet
       accentColor="#A24400"

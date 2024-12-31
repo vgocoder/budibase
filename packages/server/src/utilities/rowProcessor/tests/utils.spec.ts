@@ -32,7 +32,7 @@ describe("rowProcessor utility", () => {
       name: "",
       type: FieldType.LINK,
       subtype: undefined, // missing subtype
-      icon: "ri-magic-line",
+      icon: "data",
       autocolumn: true,
       constraints: { type: "array", presence: false },
       tableId: "ta_users",

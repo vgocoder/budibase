@@ -57,7 +57,7 @@ export function buildAutoColumn(tableName, name, subtype) {
     name,
     type,
     subtype,
-    icon: "ri-magic-line",
+    icon: "data",
     autocolumn: true,
     constraints,
   }

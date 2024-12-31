@@ -272,7 +272,7 @@ if (descriptions.length) {
                     name: "Row ID",
                     type: FieldType.NUMBER,
                     subtype: AutoFieldSubType.AUTO_ID,
-                    icon: "ri-magic-line",
+                    icon: "data",
                     autocolumn: true,
                     constraints: {
                       type: "number",
@@ -305,7 +305,7 @@ if (descriptions.length) {
                     name: "Row ID",
                     type: FieldType.NUMBER,
                     subtype: AutoFieldSubType.AUTO_ID,
-                    icon: "ri-magic-line",
+                    icon: "data",
                     autocolumn: true,
                     constraints: {
                       type: "number",

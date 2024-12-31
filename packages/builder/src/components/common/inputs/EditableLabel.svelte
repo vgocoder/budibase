@@ -33,7 +33,7 @@
       <Label {size}>{value || defaultValue}</Label>
     {/if}
     <div class="hide">
-      <Icon name="Edit" hoverable size="S" on:click={() => setEditing(true)} />
+      <Icon name="edit" hoverable size="S" on:click={() => setEditing(true)} />
     </div>
   {:else}
     <div class="input">

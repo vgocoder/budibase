@@ -76,7 +76,7 @@ describe("run misc tests", () => {
               name: "Auto ID",
               type: "number",
               subtype: "autoID",
-              icon: "ri-magic-line",
+              icon: "data",
               autocolumn: true,
               constraints: {
                 type: "number",

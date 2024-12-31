@@ -147,7 +147,7 @@
           >
             {snippet.name}
             <Icon
-              name="Edit"
+              name="edit"
               hoverable
               newStyles
               size="S"

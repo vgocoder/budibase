@@ -43,7 +43,7 @@
         color="var(--grey-6)"
         size="S"
         hoverable
-        name="Edit"
+        name="edit"
       />
       <Icon
         on:click={deleteHandler}

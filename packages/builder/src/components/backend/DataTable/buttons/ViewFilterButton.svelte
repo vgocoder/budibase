@@ -8,7 +8,7 @@
 </script>
 
 <ActionButton
-  icon="Filter"
+  icon="filter"
   quiet
   on:click={modal.show}
   active={view.filters?.length}

@@ -17,7 +17,7 @@
   const getContextMenuItems = () => {
     return [
       {
-        icon: "Edit",
+        icon: "edit",
         name: "Edit",
         keyBind: null,
         visible: true,

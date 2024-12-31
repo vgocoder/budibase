@@ -325,8 +325,8 @@
             hoverable
             size="S"
             name={$sort.order === SortOrder.DESCENDING
-              ? "SortOrderDown"
-              : "SortOrderUp"}
+              ? "sort-down"
+              : "sort-up"}
           />
         </div>
       {/if}
@@ -351,7 +351,7 @@
       </div>
     {:else}
       <Menu>
-        <MenuItem icon="Edit" on:click={editColumn} disabled={!editable}>
+        <MenuItem icon="edit" on:click={editColumn} disabled={!editable}>
           Edit column
         </MenuItem>
         <MenuItem
@@ -369,7 +369,7 @@
           Use as display column
         </MenuItem>
         <MenuItem
-          icon="SortOrderUp"
+          icon="sort-up"
           on:click={sortAscending}
           disabled={!canBeSortColumn(column.schema) ||
             (column.name === $sort.column &&
@@ -378,7 +378,7 @@
           Sort {sortingLabels.ascending}
         </MenuItem>
         <MenuItem
-          icon="SortOrderDown"
+          icon="sort-down"
           on:click={sortDescending}
           disabled={!canBeSortColumn(column.schema) ||
             (column.name === $sort.column &&
@@ -402,7 +402,7 @@
         </MenuItem>
         <MenuItem
           disabled={column.primaryDisplay || !$config.showControls}
-          icon="VisibilityOff"
+          icon="visibility-off"
           on:click={hideColumn}
         >
           Hide column

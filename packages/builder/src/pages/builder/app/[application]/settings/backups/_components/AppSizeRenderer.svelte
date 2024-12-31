@@ -19,7 +19,7 @@
       <div>{screens || 0}</div>
     </div>
     <div class="item">
-      <Icon name="JourneyVoyager" />
+      <Icon name="prototyping" />
       <div>{automations || 0}</div>
     </div>
   {/if}

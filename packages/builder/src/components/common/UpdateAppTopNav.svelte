@@ -19,7 +19,7 @@
   >
     <slot />
     <span class="edit-icon">
-      <Icon size="S" name="Edit" color={"var(--grey-7)"} />
+      <Icon size="S" name="edit" color={"var(--grey-7)"} />
     </span>
   </div>
 </div>

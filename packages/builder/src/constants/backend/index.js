@@ -133,7 +133,7 @@ export const FIELDS = {
   SIGNATURE_SINGLE: {
     name: "Signature",
     type: FieldType.SIGNATURE_SINGLE,
-    icon: "AnnotatePen",
+    icon: "edit",
     constraints: {
       presence: false,
     },

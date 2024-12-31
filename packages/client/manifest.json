@@ -548,7 +548,7 @@
               {
                 "label": "Stretch",
                 "value": "stretch",
-                "barIcon": "MoveUpDown",
+                "barIcon": "line-height",
                 "barTitle": "Align stretched vertically"
               }
             ],
@@ -705,7 +705,7 @@
         "label": "Quiet",
         "key": "quiet",
         "showInBar": true,
-        "barIcon": "VisibilityOff",
+        "barIcon": "visibility-off",
         "barTitle": "Quiet variant",
         "barSeparator": false
       },
@@ -904,7 +904,7 @@
           {
             "label": "Stretch",
             "value": "stretch",
-            "barIcon": "MoveUpDown",
+            "barIcon": "line-height",
             "barTitle": "Align stretched vertically"
           }
         ],
@@ -6870,7 +6870,7 @@
               {
                 "label": "Stretch",
                 "value": "stretch",
-                "barIcon": "MoveUpDown",
+                "barIcon": "line-height",
                 "barTitle": "Align stretched vertically"
               }
             ],

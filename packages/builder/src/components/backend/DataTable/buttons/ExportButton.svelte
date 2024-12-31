@@ -104,7 +104,7 @@
 <DetailPopover title="Export data" bind:this={popover}>
   <svelte:fragment slot="anchor" let:open>
     <ActionButton
-      icon="DataDownload"
+      icon="export-to"
       quiet
       on:click={openPopover}
       {disabled}

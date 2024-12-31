@@ -62,7 +62,7 @@ const AUTO_COLUMNS: TableSchema = {
     name: "Created At",
     type: FieldType.DATETIME,
     subtype: AutoFieldSubType.CREATED_AT,
-    icon: "ri-magic-line",
+    icon: "data",
     autocolumn: true,
     constraints: {
       type: FieldType.STRING,
@@ -78,7 +78,7 @@ const AUTO_COLUMNS: TableSchema = {
     name: "Updated At",
     type: FieldType.DATETIME,
     subtype: AutoFieldSubType.UPDATED_AT,
-    icon: "ri-magic-line",
+    icon: "data",
     autocolumn: true,
     constraints: {
       type: FieldType.STRING,
@@ -105,7 +105,7 @@ export const DEFAULT_INVENTORY_TABLE_SCHEMA: Table = {
       name: "Item ID",
       type: FieldType.NUMBER,
       subtype: AutoFieldSubType.AUTO_ID,
-      icon: "ri-magic-line",
+      icon: "data",
       autocolumn: true,
       constraints: {
         type: FieldType.NUMBER,
@@ -278,7 +278,7 @@ export const DEFAULT_EMPLOYEE_TABLE_SCHEMA: Table = {
       name: "EMPLOYEE ID",
       type: FieldType.NUMBER,
       subtype: AutoFieldSubType.AUTO_ID,
-      icon: "ri-magic-line",
+      icon: "data",
       autocolumn: true,
       constraints: {
         type: FieldType.NUMBER,
@@ -363,7 +363,7 @@ export const DEFAULT_JOBS_TABLE_SCHEMA: Table = {
       name: "Job ID",
       type: FieldType.NUMBER,
       subtype: AutoFieldSubType.AUTO_ID,
-      icon: "ri-magic-line",
+      icon: "data",
       autocolumn: true,
       constraints: {
         type: FieldType.NUMBER,
@@ -522,7 +522,7 @@ export const DEFAULT_EXPENSES_TABLE_SCHEMA: Table = {
       name: "Expense ID",
       type: FieldType.NUMBER,
       subtype: AutoFieldSubType.AUTO_ID,
-      icon: "ri-magic-line",
+      icon: "data",
       autocolumn: true,
       constraints: {
         type: FieldType.NUMBER,
