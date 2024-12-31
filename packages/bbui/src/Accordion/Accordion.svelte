@@ -26,7 +26,7 @@
         {header}
       </button>
       <svg
-        class="spectrum-Icon spectrum-UIIcon-ChevronRight100 spectrum-Accordion-itemIndicator"
+        class="spectrum-Icon spectrum-UIIcon-chevron-right100 spectrum-Accordion-itemIndicator"
         focusable="false"
         aria-hidden="true"
       >

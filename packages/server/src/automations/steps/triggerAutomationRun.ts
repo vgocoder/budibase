@@ -14,7 +14,7 @@ import { features } from "@budibase/pro"
 import env from "../../environment"
 
 export const definition: AutomationStepDefinition = {
-  name: "Trigger an automation",
+  name: "Trigger automation",
   tagline: "Triggers an automation synchronously",
   icon: "prototyping",
   description: "Triggers an automation synchronously",

@@ -140,7 +140,7 @@
       on:click={stepDown}
     >
       <svg
-        class="spectrum-Icon spectrum-UIIcon-ChevronDown75"
+        class="spectrum-Icon spectrum-UIIcon-Chevron-down-size30075"
         focusable="false"
         aria-hidden="true"
       >

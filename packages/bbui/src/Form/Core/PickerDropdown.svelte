@@ -287,7 +287,7 @@
           focusable="false"
           aria-hidden="true"
         >
-          <use xlink:href="#spectrum-css-icon-Chevron100" />
+          <use xlink:href="#icon-chevron-down-size300" />
         </svg>
       </button>
       {#if secondaryOpen}

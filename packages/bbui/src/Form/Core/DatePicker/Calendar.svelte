@@ -121,7 +121,7 @@
       on:click={() => (calendarDate = calendarDate.add(1, "month"))}
     >
       <svg
-        class="spectrum-Icon spectrum-UIIcon-ChevronRight100"
+        class="spectrum-Icon spectrum-UIIcon-chevron-right100"
         focusable="false"
         aria-hidden="true"
       >

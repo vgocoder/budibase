@@ -14,7 +14,7 @@
   <a on:click class="spectrum-TreeView-itemLink" {href}>
     {#if $$slots.default}
       <svg
-        class="spectrum-Icon spectrum-UIIcon-ChevronRight100 spectrum-TreeView-itemIndicator"
+        class="spectrum-Icon spectrum-UIIcon-chevron-right100 spectrum-TreeView-itemIndicator"
         focusable="false"
         aria-hidden="true"
       >

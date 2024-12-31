@@ -17,7 +17,7 @@
     </span>
     <span class="dash-card-action">
       {#if actionDefined}
-        <Icon name={actionIcon || "ChevronRight"} />
+        <Icon name={actionIcon || "chevron-right"} />
       {/if}
     </span>
   </div>

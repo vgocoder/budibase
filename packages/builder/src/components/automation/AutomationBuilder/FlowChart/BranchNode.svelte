@@ -8,8 +8,6 @@
     Layout,
     Body,
     Divider,
-    TooltipPosition,
-    TooltipType,
     Button,
     Modal,
     ModalContent,
@@ -29,7 +27,6 @@
   export let pathTo
   export let branchIdx
   export let step
-  export let isLast
   export let bindings
   export let automation
 
@@ -37,7 +34,7 @@
 
   let drawer
   let condition
-  let open = true
+  let open = false
   let confirmDeleteModal
 
   $: branch = step.inputs?.branches?.[branchIdx]
@@ -145,40 +142,7 @@
         await automationStore.actions.save(updatedAuto)
       }}
       on:toggle={() => (open = !open)}
-    >
-      <div slot="custom-actions" class="branch-actions">
-        <Icon
-          on:click={() => {
-            automationStore.actions.branchLeft(
-              branchBlockRef.pathTo,
-              $selectedAutomation.data,
-              step
-            )
-          }}
-          tooltip={"Move left"}
-          tooltipType={TooltipType.Info}
-          tooltipPosition={TooltipPosition.Top}
-          hoverable
-          disabled={branchIdx == 0}
-          name="chevron-left"
-        />
-        <Icon
-          on:click={() => {
-            automationStore.actions.branchRight(
-              branchBlockRef.pathTo,
-              $selectedAutomation.data,
-              step
-            )
-          }}
-          tooltip={"Move right"}
-          tooltipType={TooltipType.Info}
-          tooltipPosition={TooltipPosition.Top}
-          hoverable
-          disabled={isLast}
-          name="chevron-right"
-        />
-      </div>
-    </FlowItemHeader>
+    />
     {#if open}
       <Divider noMargin />
       <div class="blockSection">
@@ -256,11 +220,11 @@
     display: inline-block;
   }
   .block {
-    width: 480px;
+    width: 380px;
     font-size: 16px;
     background-color: var(--background);
     border: 1px solid var(--spectrum-global-color-gray-300);
-    border-radius: 4px 4px 4px 4px;
+    border-radius: 12px;
   }
 
   .blockSection {

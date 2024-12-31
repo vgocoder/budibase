@@ -18,7 +18,8 @@
 
   $: expanded = !!$navStateStore[text]
   $: renderLeftNav = leftNav || mobile
-  $: icon = !renderLeftNav || expanded ? "chevron-down-size300" : "ChevronRight"
+  $: icon =
+    !renderLeftNav || expanded ? "chevron-down-size300" : "chevron-right"
 
   const onClickLink = () => {
     dispatch("clickLink")

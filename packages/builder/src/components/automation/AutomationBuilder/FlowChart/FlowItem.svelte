@@ -9,10 +9,10 @@
     Icon,
     Divider,
     Layout,
-    Detail,
     Modal,
     Label,
     AbsTooltip,
+    InlineAlert,
   } from "@budibase/bbui"
   import { sdk } from "@budibase/shared-core"
   import AutomationBlockSetup from "../../SetupPanel/AutomationBlockSetup.svelte"
@@ -25,7 +25,6 @@
   import DragHandle from "components/design/settings/controls/DraggableList/drag-handle.svelte"
   import { getContext } from "svelte"
   import DragZone from "./DragZone.svelte"
-  import InfoDisplay from "pages/builder/app/[application]/design/[screenId]/[componentId]/_components/Component/InfoDisplay.svelte"
 
   export let block
   export let blockRef
@@ -40,8 +39,8 @@
   const contentPos = getContext("contentPos")
 
   let webhookModal
-  let open = true
-  let showLooping = false
+  let open = false
+  let showLooping = true
   let role
   let blockEle
   let positionStyles
@@ -227,17 +226,19 @@
                 class="splitHeader"
               >
                 <div class="center-items">
-                  <svg
-                    width="28px"
-                    height="28px"
-                    class="spectrum-Icon"
-                    style="color:var(--spectrum-global-color-gray-700);"
-                    focusable="false"
-                  >
-                    <use xlink:href="#icon-refresh" />
-                  </svg>
+                  <div class="icon-background-loop">
+                    <svg
+                      width="20px"
+                      height="20px"
+                      class="spectrum-Icon"
+                      style="color:#000000;"
+                      focusable="false"
+                    >
+                      <use xlink:href="#spectrum-icon-18-Reuse" />
+                    </svg>
+                  </div>
                   <div class="iconAlign">
-                    <Detail size="S">Looping</Detail>
+                    <p class="label">Looping</p>
                   </div>
                 </div>
 
@@ -245,8 +246,7 @@
                   <AbsTooltip type="negative" text="Remove looping">
                     <Icon on:click={removeLooping} hoverable name="delete" />
                   </AbsTooltip>
-
-                  <div style="margin-left: 10px;" on:click={() => {}}>
+                  <div on:click={() => {}}>
                     <Icon
                       hoverable
                       name={showLooping
@@ -319,10 +319,9 @@
                   {bindings}
                 />
                 {#if isTrigger && triggerInfo}
-                  <InfoDisplay
-                    title={triggerInfo.title}
-                    body="This trigger is tied to your '{triggerInfo.tableName}' table"
-                    icon="info-circle"
+                  <InlineAlert
+                    header={triggerInfo.type}
+                    message={`This trigger is tied to the "${triggerInfo.rowAction.name}" row action in your ${triggerInfo.table.name} table`}
                   />
                 {/if}
               </Layout>
@@ -371,6 +370,9 @@
     display: flex;
     align-items: center;
   }
+  .label {
+    margin: 0;
+  }
   .splitHeader {
     display: flex;
     justify-content: space-between;
@@ -381,9 +383,8 @@
     display: inline-block;
   }
   .block {
-    width: 480px;
+    width: 360px;
     font-size: 16px;
-    border-radius: 4px;
   }
   .block .wrap {
     width: 100%;
@@ -394,31 +395,56 @@
     flex-direction: row;
   }
   .block.draggable .wrap .handle {
-    height: auto;
+    position: absolute;
+    top: -0.5px;
+    left: -14px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--grey-3);
-    padding: 6px;
+    padding: 0 4px;
+    height: 100%;
     color: var(--grey-6);
     cursor: grab;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    transition: background 200ms ease;
+  }
+  .block.draggable .wrap .handle:hover {
+    background-color: var(--grey-4);
   }
   .block.draggable .wrap .handle.grabbing {
     cursor: grabbing;
   }
   .block.draggable .wrap .handle :global(.drag-handle) {
     width: 6px;
+    margin-left: 1px;
+    padding-top: 4px;
   }
   .block .wrap .block-content {
     width: 100%;
     display: flex;
     flex-direction: row;
     background-color: var(--background);
-    border: 1px solid var(--grey-3);
-    border-radius: 4px;
+    border: 1px solid var(--spectrum-global-color-gray-300);
+    border-radius: 12px;
+  }
+  .block-content:has(.handle) {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
   }
   .blockSection {
     padding: var(--spacing-xl);
+  }
+  .icon-background-loop {
+    background-color: #6afdef;
+    padding: 0;
+    border-radius: 8px;
+    min-height: 32px;
+    min-width: 32px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
   }
   .separator {
     width: 1px;
@@ -430,7 +456,7 @@
   .blockTitle {
     display: flex;
     align-items: center;
-    gap: var(--spacing-s);
+    gap: var(--spacing-l);
   }
   .drag-placeholder {
     height: calc(var(--psheight) - 2px);

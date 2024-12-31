@@ -73,11 +73,11 @@
     on:click={() => (open = !open)}
   >
     <svg
-      class="spectrum-Icon spectrum-UIIcon-ChevronDown100 spectrum-Picker-menuIcon spectrum-InputGroup-icon"
+      class="spectrum-Icon spectrum-Picker-menuIcon spectrum-InputGroup-icon"
       focusable="false"
       aria-hidden="true"
     >
-      <use xlink:href="#spectrum-css-icon-Chevron100" />
+      <use xlink:href="#chevron-down-size300" />
     </svg>
   </button>
 </div>
