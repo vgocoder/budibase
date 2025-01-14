@@ -56,7 +56,7 @@
     <List>
       {#each connectedAutomations as automation}
         <ListItem
-          icon={automation.disabled ? "PauseCircle" : "PlayCircle"}
+          icon={automation.disabled ? "circle" : "checkmark-circle"}
           iconColor={automation.disabled
             ? "var(--spectrum-global-color-gray-600)"
             : "var(--spectrum-global-color-green-600)"}
@@ -68,7 +68,7 @@
     </List>
   {/if}
   <div>
-    <Button secondary icon="JourneyVoyager" on:click={generateAutomation}>
+    <Button secondary icon="add" on:click={generateAutomation}>
       Generate automation
     </Button>
   </div>

@@ -52,7 +52,7 @@
     </List>
   {/if}
   <div>
-    <Button secondary icon="web-page" on:click={generateScreen}>
+    <Button secondary icon="add" on:click={generateScreen}>
       Generate app screen
     </Button>
   </div>

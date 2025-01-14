@@ -496,19 +496,19 @@
               {
                 "label": "Left",
                 "value": "left",
-                "barIcon": "AlignLeft",
+                "barIcon": "align-left",
                 "barTitle": "Align left"
               },
               {
                 "label": "Center",
                 "value": "center",
-                "barIcon": "AlignCenter",
+                "barIcon": "align-center",
                 "barTitle": "Align center"
               },
               {
                 "label": "Right",
                 "value": "right",
-                "barIcon": "AlignRight",
+                "barIcon": "align-right",
                 "barTitle": "Align right"
               },
               {
@@ -530,7 +530,7 @@
               {
                 "label": "Top",
                 "value": "top",
-                "barIcon": "AlignTop",
+                "barIcon": "align-top",
                 "barTitle": "Align top"
               },
               {
@@ -542,8 +542,8 @@
               {
                 "label": "Bottom",
                 "value": "bottom",
-                "barIcon": "AlignBottom",
-                "barTitle": "Align bottom"
+                "barIcon": "align-botton",
+                "barTitle": "align-botton"
               },
               {
                 "label": "Stretch",
@@ -852,19 +852,19 @@
           {
             "label": "Left",
             "value": "left",
-            "barIcon": "AlignLeft",
+            "barIcon": "align-left",
             "barTitle": "Align left"
           },
           {
             "label": "Center",
             "value": "center",
-            "barIcon": "AlignCenter",
+            "barIcon": "align-center",
             "barTitle": "Align center"
           },
           {
             "label": "Right",
             "value": "right",
-            "barIcon": "AlignRight",
+            "barIcon": "align-right",
             "barTitle": "Align right"
           },
           {
@@ -886,19 +886,19 @@
           {
             "label": "Top",
             "value": "top",
-            "barIcon": "AlignTop",
+            "barIcon": "align-top",
             "barTitle": "Align top"
           },
           {
             "label": "Middle",
             "value": "middle",
-            "barIcon": "AlignMiddle",
+            "barIcon": "align-middle",
             "barTitle": "Align middle"
           },
           {
             "label": "Bottom",
             "value": "bottom",
-            "barIcon": "AlignBottom",
+            "barIcon": "align-botton",
             "barTitle": "Align bottom"
           },
           {
@@ -1144,25 +1144,25 @@
           {
             "label": "Left",
             "value": "left",
-            "barIcon": "TextAlignLeft",
+            "barIcon": "text-align-left",
             "barTitle": "Align left"
           },
           {
             "label": "Center",
             "value": "center",
-            "barIcon": "TextAlignCenter",
+            "barIcon": "text-align-center",
             "barTitle": "Align center"
           },
           {
             "label": "Right",
             "value": "right",
-            "barIcon": "TextAlignRight",
+            "barIcon": "text-align-right",
             "barTitle": "Align right"
           },
           {
             "label": "Justify",
             "value": "justify",
-            "barIcon": "TextAlignJustify",
+            "barIcon": "text-align-justify",
             "barTitle": "Justify text"
           }
         ]
@@ -1267,25 +1267,25 @@
           {
             "label": "Left",
             "value": "left",
-            "barIcon": "TextAlignLeft",
+            "barIcon": "text-align-left",
             "barTitle": "Align left"
           },
           {
             "label": "Center",
             "value": "center",
-            "barIcon": "TextAlignCenter",
+            "barIcon": "text-align-center",
             "barTitle": "Align center"
           },
           {
             "label": "Right",
             "value": "right",
-            "barIcon": "TextAlignRight",
+            "barIcon": "text-align-right",
             "barTitle": "Align right"
           },
           {
             "label": "Justify",
             "value": "justify",
-            "barIcon": "TextAlignJustify",
+            "barIcon": "text-align-justify",
             "barTitle": "Justify text"
           }
         ]
@@ -1618,7 +1618,7 @@
         "label": "Bold",
         "key": "bold",
         "showInBar": true,
-        "barIcon": "TagBold",
+        "barIcon": "text-bold",
         "barTitle": "Bold text",
         "barSeparator": false
       },
@@ -1627,7 +1627,7 @@
         "label": "Italic",
         "key": "italic",
         "showInBar": true,
-        "barIcon": "TagItalic",
+        "barIcon": "text-italic",
         "barTitle": "Italic text",
         "barSeparator": false
       },
@@ -1650,25 +1650,25 @@
           {
             "label": "Left",
             "value": "left",
-            "barIcon": "TextAlignLeft",
+            "barIcon": "text-align-left",
             "barTitle": "Align left"
           },
           {
             "label": "Center",
             "value": "center",
-            "barIcon": "TextAlignCenter",
+            "barIcon": "text-align-center",
             "barTitle": "Align center"
           },
           {
             "label": "Right",
             "value": "right",
-            "barIcon": "TextAlignRight",
+            "barIcon": "text-align-right",
             "barTitle": "Align right"
           },
           {
             "label": "Justify",
             "value": "justify",
-            "barIcon": "TextAlignJustify",
+            "barIcon": "text-align-justify",
             "barTitle": "Justify text"
           }
         ]
@@ -3172,25 +3172,25 @@
           {
             "label": "Left",
             "value": "left",
-            "barIcon": "TextAlignLeft",
+            "barIcon": "text-align-left",
             "barTitle": "Align left"
           },
           {
             "label": "Center",
             "value": "center",
-            "barIcon": "TextAlignCenter",
+            "barIcon": "text-align-center",
             "barTitle": "Align center"
           },
           {
             "label": "Right",
             "value": "right",
-            "barIcon": "TextAlignRight",
+            "barIcon": "text-align-right",
             "barTitle": "Align right"
           },
           {
             "label": "Justify",
             "value": "justify",
-            "barIcon": "TextAlignJustify",
+            "barIcon": "text-align-justify",
             "barTitle": "Justify text"
           }
         ]
@@ -6818,19 +6818,19 @@
               {
                 "label": "Left",
                 "value": "left",
-                "barIcon": "AlignLeft",
+                "barIcon": "align-left",
                 "barTitle": "Align left"
               },
               {
                 "label": "Center",
                 "value": "center",
-                "barIcon": "AlignCenter",
+                "barIcon": "align-center",
                 "barTitle": "Align center"
               },
               {
                 "label": "Right",
                 "value": "right",
-                "barIcon": "AlignRight",
+                "barIcon": "align-right",
                 "barTitle": "Align right"
               },
               {
@@ -6852,7 +6852,7 @@
               {
                 "label": "Top",
                 "value": "top",
-                "barIcon": "AlignTop",
+                "barIcon": "align-top",
                 "barTitle": "Align top"
               },
               {
@@ -6864,7 +6864,7 @@
               {
                 "label": "Bottom",
                 "value": "bottom",
-                "barIcon": "AlignBottom",
+                "barIcon": "align-botton",
                 "barTitle": "Align bottom"
               },
               {

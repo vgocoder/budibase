@@ -83,11 +83,11 @@
         props: {
           options: [
             {
-              barIcon: "ModernGridView",
+              barIcon: "menu-hamburger",
               value: "flex",
             },
             {
-              barIcon: "ViewGrid",
+              barIcon: "grid-type-dots",
               value: "grid",
             },
           ],

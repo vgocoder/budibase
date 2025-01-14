@@ -106,7 +106,7 @@
     </List>
   {/if}
   <div>
-    <Button secondary icon="Engagement" on:click={showCreateModal}>
+    <Button secondary icon="add" on:click={showCreateModal}>
       Create row action
     </Button>
   </div>

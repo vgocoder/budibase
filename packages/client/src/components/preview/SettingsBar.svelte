@@ -200,7 +200,7 @@
       <GridStylesButton
         style={gridHAlignVar}
         value="start"
-        icon="AlignLeft"
+        icon="align-left"
         title="Align left"
         active={gridHAlign === "start"}
         componentId={id}
@@ -208,7 +208,7 @@
       <GridStylesButton
         style={gridHAlignVar}
         value="center"
-        icon="AlignCenter"
+        icon="align-center"
         title="Align center"
         active={gridHAlign === "center"}
         componentId={id}
@@ -216,7 +216,7 @@
       <GridStylesButton
         style={gridHAlignVar}
         value="end"
-        icon="AlignRight"
+        icon="align-right"
         title="Align right"
         active={gridHAlign === "end"}
         componentId={id}
@@ -233,7 +233,7 @@
       <GridStylesButton
         style={gridVAlignVar}
         value="start"
-        icon="AlignTop"
+        icon="align-top"
         title="Align top"
         active={gridVAlign === "start"}
         componentId={id}
@@ -249,7 +249,7 @@
       <GridStylesButton
         style={gridVAlignVar}
         value="end"
-        icon="AlignBottom"
+        icon="align-botton"
         title="Align bottom"
         active={gridVAlign === "end"}
         componentId={id}
