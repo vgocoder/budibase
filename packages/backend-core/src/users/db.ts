@@ -113,7 +113,7 @@ export class UserDB {
       requirePassword: true,
     },
     tenantId: string,
-    dbUser?: any,
+    dbUser?: User,
     account?: Account
   ): Promise<User> {
     let { password, _id } = user
@@ -181,7 +181,7 @@ export class UserDB {
   }
 
   static async countUsersByApp(appId: string) {
-    let response: any = await usersCore.searchGlobalUsersByApp(appId, {})
+    let response = await usersCore.searchGlobalUsersByApp(appId, {})
     return {
       userCount: response.length,
     }
@@ -330,11 +330,11 @@ export class UserDB {
   ): Promise<BulkUserCreated> {
     const tenantId = getTenantId()
 
-    let usersToSave: any[] = []
-    let newUsers: any[] = []
-    let newCreators: any[] = []
+    let usersToSave: Promise<User>[] = []
+    let newUsers: User[] = []
+    let newCreators: User[] = []
 
-    const emails = newUsersRequested.map((user: User) => user.email)
+    const emails = newUsersRequested.map(user => user.email)
     const existingEmails = await searchExistingEmails(emails)
     const unsuccessful: { email: string; reason: string }[] = []
 
@@ -364,13 +364,13 @@ export class UserDB {
       newCreators.length,
       async () => {
         // create the promises array that will be called by bulkDocs
-        newUsers.forEach((user: any) => {
+        newUsers.forEach(user => {
           usersToSave.push(
             UserDB.buildUser(
               user,
               {
                 hashPassword: true,
-                requirePassword: user.requirePassword,
+                requirePassword: (user as any).requirePassword,
               },
               tenantId,
               undefined, // no dbUser
@@ -386,7 +386,7 @@ export class UserDB {
         for (const user of usersToBulkSave) {
           // TODO: Refactor to bulk insert users into the info db
           // instead of relying on looping tenant creation
-          await platform.users.addUser(tenantId, user._id, user.email)
+          await platform.users.addUser(tenantId, user._id!, user.email)
           await eventHelpers.handleSaveEvents(user, undefined)
         }
 
@@ -400,7 +400,7 @@ export class UserDB {
         // now update the groups
         if (Array.isArray(saved) && groups) {
           const groupPromises = []
-          const createdUserIds = saved.map(user => user._id)
+          const createdUserIds = saved.map(user => user._id!)
           for (let groupId of groups) {
             groupPromises.push(UserDB.groups.addUsers(groupId, createdUserIds))
           }
