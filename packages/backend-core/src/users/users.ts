@@ -138,7 +138,7 @@ export async function doesUserExist(email: string) {
 }
 
 export async function searchGlobalUsersByApp(
-  appId: any,
+  appId: string,
   opts: DatabaseQueryOpts,
   getOpts?: GetOpts
 ) {
@@ -166,7 +166,7 @@ export async function searchGlobalUsersByApp(
   Admins, developers and app users with the explicitly role.
 */
 export async function searchGlobalUsersByAppAccess(
-  appId: any,
+  appId: string,
   opts?: { limit?: number }
 ) {
   const roleSelector = `roles.${appId}`
@@ -215,7 +215,7 @@ export function getGlobalUserByAppPage(appId: string, user: User) {
  */
 export async function searchGlobalUsersByEmail(
   email: string | unknown,
-  opts: any,
+  opts: DatabaseQueryOpts,
   getOpts?: GetOpts
 ) {
   if (typeof email !== "string") {
@@ -266,7 +266,7 @@ export async function paginatedUsers({
     userList = [await getById(query.equal._id)]
   } else if (appId) {
     userList = await searchGlobalUsersByApp(appId, opts)
-    getKey = (doc: any) => getGlobalUserByAppPage(appId, doc)
+    getKey = (doc: User) => getGlobalUserByAppPage(appId, doc)
   } else if (query?.string?.email) {
     userList = await searchGlobalUsersByEmail(query?.string?.email, opts)
     property = "email"
