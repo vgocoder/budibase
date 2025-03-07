@@ -5,7 +5,7 @@ import { getTenantId } from "../context"
 import { User, UserRoles, CloudAccount } from "@budibase/types"
 import { hasBuilderPermissions, hasAdminPermissions } from "./utils"
 
-export const handleDeleteEvents = async (user: any) => {
+export const handleDeleteEvents = async (user: User) => {
   await events.user.deleted(user)
 
   if (hasBuilderPermissions(user)) {
@@ -20,7 +20,7 @@ export const handleDeleteEvents = async (user: any) => {
 const assignAppRoleEvents = async (
   user: User,
   roles: UserRoles,
-  existingRoles: UserRoles
+  existingRoles: UserRoles | undefined
 ) => {
   for (const [appId, role] of Object.entries(roles)) {
     // app role in existing is not same as new
@@ -33,7 +33,7 @@ const assignAppRoleEvents = async (
 const unassignAppRoleEvents = async (
   user: User,
   roles: UserRoles,
-  existingRoles: UserRoles
+  existingRoles: UserRoles | undefined
 ) => {
   if (!existingRoles) {
     return
@@ -46,7 +46,10 @@ const unassignAppRoleEvents = async (
   }
 }
 
-const handleAppRoleEvents = async (user: any, existingUser: any) => {
+const handleAppRoleEvents = async (
+  user: User,
+  existingUser: User | undefined
+) => {
   const roles = user.roles
   const existingRoles = existingUser?.roles
 
@@ -106,23 +109,23 @@ export const handleSaveEvents = async (
   await handleAppRoleEvents(user, existingUser)
 }
 
-export const isAddingBuilder = (user: any, existingUser: any) => {
+export const isAddingBuilder = (user: User, existingUser: User | undefined) => {
   return isAddingPermission(user, existingUser, hasBuilderPermissions)
 }
 
-export const isRemovingBuilder = (user: any, existingUser: any) => {
+export const isRemovingBuilder = (user: User, existingUser: User) => {
   return isRemovingPermission(user, existingUser, hasBuilderPermissions)
 }
 
-const isAddingAdmin = (user: any, existingUser: any) => {
+const isAddingAdmin = (user: User, existingUser: User | undefined) => {
   return isAddingPermission(user, existingUser, hasAdminPermissions)
 }
 
-const isRemovingAdmin = (user: any, existingUser: any) => {
+const isRemovingAdmin = (user: User, existingUser: User) => {
   return isRemovingPermission(user, existingUser, hasAdminPermissions)
 }
 
-const isOnboardingComplete = (user: any, existingUser: any) => {
+const isOnboardingComplete = (user: User, existingUser: User) => {
   return !existingUser?.onboardedAt && typeof user.onboardedAt === "string"
 }
 
@@ -130,9 +133,9 @@ const isOnboardingComplete = (user: any, existingUser: any) => {
  * Check if a permission is being added to a new or existing user.
  */
 const isAddingPermission = (
-  user: any,
-  existingUser: any,
-  hasPermission: any
+  user: User,
+  existingUser: User | undefined,
+  hasPermission: (user: User) => boolean
 ) => {
   // new user doesn't have the permission
   if (!hasPermission(user)) {
@@ -152,9 +155,9 @@ const isAddingPermission = (
  * Check if a permission is being removed from an existing user.
  */
 const isRemovingPermission = (
-  user: any,
-  existingUser: any,
-  hasPermission: any
+  user: User,
+  existingUser: User,
+  hasPermission: (user: User) => boolean
 ) => {
   // new user has the permission
   if (hasPermission(user)) {
