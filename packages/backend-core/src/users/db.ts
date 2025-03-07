@@ -187,7 +187,7 @@ export class UserDB {
     }
   }
 
-  static async getUsersByAppAccess(opts: { appId?: string; limit?: number }) {
+  static async getUsersByAppAccess(opts: { appId: string; limit?: number }) {
     let response: User[] = await usersCore.searchGlobalUsersByAppAccess(
       opts.appId,
       { limit: opts.limit || 50 }

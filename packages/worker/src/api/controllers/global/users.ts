@@ -250,10 +250,14 @@ export const destroy = async (ctx: UserCtx<void, DeleteUserResponse>) => {
 }
 
 export const getAppUsers = async (ctx: Ctx<SearchUsersRequest>) => {
-  const body = ctx.request.body
+  const { appId, limit } = ctx.request.body
+  if (!appId) {
+    ctx.throw(400, "App ID is required")
+  }
+
   const users = await userSdk.db.getUsersByAppAccess({
-    appId: body.appId,
-    limit: body.limit,
+    appId,
+    limit,
   })
 
   ctx.body = { data: users }
