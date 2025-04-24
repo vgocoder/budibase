@@ -47,4 +47,6 @@ export interface GenerateScreenRequest {
   prompt: string
 }
 
-export interface GenerateScreenResponse {}
+export interface GenerateScreenResponse {
+  response: any
+}
