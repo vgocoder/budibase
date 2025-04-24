@@ -9,6 +9,7 @@
   import { screenStore } from "@/stores/builder"
   import { licensing } from "@/stores/portal"
   import { AutoScreenTypes } from "@/constants"
+  import AIScreenGeneration from "./AIScreenGeneration.svelte"
 
   export let onClose = null
 
@@ -28,6 +29,8 @@
     <div class="subHeading">
       <Body>Start from scratch or create screens from your data</Body>
     </div>
+
+    <AIScreenGeneration />
 
     <div class="cards">
       <div
