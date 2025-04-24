@@ -11,12 +11,16 @@
   $: isEnabled = $auth?.user?.llm && !$licensing.aiCreditsExceeded
 
   async function submitPrompt(message: string) {
-    const result = await API.generateScreen({ prompt: message })
-    notifications.success("Screen created successfully!")
+    try {
+      const result = await API.generateScreen({ prompt: message })
+      notifications.success("Screen created successfully!")
 
-    window.location.pathname = $url(
-      `../${result.screenId}/${result.screenId}-screen`
-    )
+      window.location.pathname = $url(
+        `./${result.screenId}/${result.screenId}-screen`
+      )
+    } catch (e: any) {
+      notifications.error(e.message)
+    }
   }
 
   const examplePrompts = [
