@@ -32,6 +32,7 @@ export async function generateScreen(
   const { prompt } = ctx.request.body
 
   const screenGenerator = await ai.ScreenGeneration.init({
+    getSources: sdk.tables.getAllTables,
     generateScreen: sdk.ai.helpers.generateScreen,
   })
 

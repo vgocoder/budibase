@@ -3,59 +3,43 @@ import { helpers, utils } from "@budibase/shared-core"
 import { ai } from "@budibase/pro"
 import { Component, Screen } from "@budibase/types"
 import { v4 } from "uuid"
+import { HTTPError } from "@budibase/backend-core"
 
-function mapDatasource(datasourceName: string) {
-  const datasources = {
-    Users: {
-      label: "Users",
-      tableId: "ta_users",
-      type: "table",
-      resourceId: "ta_users",
-    },
-    Employees: {
-      label: "Employees",
-      tableId: "ta_bb_employee",
-      type: "table",
-      datasourceName: "Sample Data",
-      resourceId: "ta_bb_employee",
-    },
-    Expenses: {
-      label: "Expenses",
-      tableId: "ta_bb_expenses",
-      type: "table",
-      datasourceName: "Sample Data",
-      resourceId: "ta_bb_expenses",
-    },
-    Inventory: {
-      label: "Inventory",
-      tableId: "ta_bb_inventory",
-      type: "table",
-      datasourceName: "Sample Data",
-      resourceId: "ta_bb_inventory",
-    },
-    Jobs: {
-      label: "Jobs",
-      tableId: "ta_bb_jobs",
-      type: "table",
-      datasourceName: "Sample Data",
-      resourceId: "ta_bb_jobs",
-    },
-  }
-
-  return datasources[datasourceName]
+async function getSourceByName(name: string) {
+  const tables = await sdk.tables.getAllTables()
+  return tables.find(t => t.name === name)
 }
 
-function mapComponent(component: ai.Component): Component {
+async function mapSource(sourceName: string) {
+  const source = await getSourceByName(sourceName)
+  if (!source) {
+    throw new HTTPError(`Source ${sourceName} not found`, 500)
+  }
+  return {
+    label: source.name,
+    tableId: source._id!,
+    type: "table",
+    resourceId: source._id!,
+  }
+}
+
+async function mapComponent(component: ai.Component): Promise<Component> {
   const { type } = component
   switch (type) {
-    case ai.ComponentType.Container:
+    case ai.ComponentType.Container: {
+      const children: Component[] = []
+      for (const child of component.children) {
+        children.push(await mapComponent(child))
+      }
+
       return {
         _id: v4(),
         _instanceName: "New Container",
         _component: "@budibase/standard-components/container",
         _styles: {},
-        _children: component.children.map(mapComponent),
+        _children: children,
       }
+    }
     case ai.ComponentType.Label:
       return {
         _id: v4(),
@@ -81,7 +65,7 @@ function mapComponent(component: ai.Component): Component {
         _component: "@budibase/standard-components/formblock",
         _styles: {},
         title: component.title,
-        dataSource: mapDatasource(component.datasource),
+        dataSource: await mapSource(component.datasource),
         actionType: component.actionType,
       }
     default:
@@ -98,6 +82,11 @@ export async function generateScreen({
     screen.name
   )
 
+  const children: Component[] = []
+  for (const child of screen.components) {
+    children.push(await mapComponent(child))
+  }
+
   const result = await sdk.screens.create({
     name: name,
     routing: {
@@ -109,7 +98,7 @@ export async function generateScreen({
       _component: "@budibase/standard-components/container",
       _instanceName: "Screen",
       _styles: {},
-      _children: screen.components.map(mapComponent),
+      _children: children,
     },
   })
   return result

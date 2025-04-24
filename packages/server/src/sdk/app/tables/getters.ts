@@ -1,4 +1,4 @@
-import { context } from "@budibase/backend-core"
+import { context, DEFAULT_BB_DATASOURCE_ID } from "@budibase/backend-core"
 import { getTableParams } from "../../../db/utils"
 import {
   breakExternalTableId,
@@ -82,7 +82,12 @@ async function getAllExternalTables(): Promise<Table[]> {
   // this is all datasources, we'll need to filter out internal
   const datasources = await sdk.datasources.fetch({ enriched: true })
   const allEntities = datasources
-    .filter(datasource => datasource._id !== INTERNAL_TABLE_SOURCE_ID)
+    .filter(
+      datasource =>
+        ![INTERNAL_TABLE_SOURCE_ID, DEFAULT_BB_DATASOURCE_ID].includes(
+          datasource._id!
+        )
+    )
     .map(datasource => datasource.entities)
   let final: Table[] = []
   for (let entities of allEntities) {
