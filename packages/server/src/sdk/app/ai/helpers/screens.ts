@@ -63,6 +63,7 @@ function mapComponent(component: ai.Component): Component {
         _component: "@budibase/standard-components/textv2",
         _styles: {},
         text: component.text,
+        size: component.fontSize,
       }
     case ai.ComponentType.TextField:
       return {
