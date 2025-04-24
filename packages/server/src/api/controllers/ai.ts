@@ -1,4 +1,6 @@
 import {
+  GenerateScreenRequest,
+  GenerateScreenResponse,
   GenerateTablesRequest,
   GenerateTablesResponse,
   UserCtx,
@@ -22,4 +24,20 @@ export async function generateTables(
   ctx.body = {
     createdTables,
   }
+}
+
+export async function generateScreens(
+  ctx: UserCtx<GenerateScreenRequest, GenerateScreenResponse>
+) {
+  const { prompt } = ctx.request.body
+
+  const screenGenerator = await ai.ScreenGeneration.init({
+    generateTablesDelegate: sdk.ai.helpers.generateTables,
+    getTablesDelegate: sdk.tables.getTables,
+    generateDataDelegate: sdk.ai.helpers.generateRows,
+  })
+
+  await screenGenerator.generate(prompt)
+
+  ctx.body = {}
 }

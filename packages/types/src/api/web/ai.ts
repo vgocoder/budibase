@@ -42,3 +42,9 @@ export interface GenerateTablesRequest {
 export interface GenerateTablesResponse {
   createdTables: { id: string; name: string }[]
 }
+
+export interface GenerateScreenRequest {
+  prompt: string
+}
+
+export interface GenerateScreenResponse {}
