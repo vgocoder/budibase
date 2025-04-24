@@ -83,6 +83,7 @@ async function mapComponent(component: ai.Component): Promise<Component> {
             labelColumn: component.labelColumn,
             valueColumn: component.valueColumn,
             palette: "Palette 1",
+            height: component.height.toString(),
           }
         case "bar":
           return {
@@ -96,6 +97,7 @@ async function mapComponent(component: ai.Component): Promise<Component> {
             labelColumn: component.labelColumn,
             valueColumns: component.valueColumns,
             palette: "Palette 1",
+            height: component.height.toString(),
           }
 
         default:
