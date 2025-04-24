@@ -52,7 +52,7 @@ async function mapComponent(component: ai.Component): Promise<Component> {
     case ai.ComponentType.TextField:
       return {
         _id: v4(),
-        _instanceName: "New Container",
+        _instanceName: "New Text Field",
         _component: "@budibase/standard-components/stringfield",
         _styles: {},
         label: component.label,
@@ -61,12 +61,24 @@ async function mapComponent(component: ai.Component): Promise<Component> {
     case ai.ComponentType.FormBlock:
       return {
         _id: v4(),
-        _instanceName: "New Container",
+        _instanceName: "New Form",
         _component: "@budibase/standard-components/formblock",
         _styles: {},
         title: component.title,
         dataSource: await mapSource(component.datasource),
         actionType: component.actionType,
+      }
+    case ai.ComponentType.ChartBlock:
+      return {
+        _id: v4(),
+        _instanceName: "New Chart",
+        _component: "@budibase/standard-components/chartblock",
+        _styles: {},
+        title: component.title,
+        dataSource: await mapSource(component.datasource),
+        chartType: component.chartType,
+        labelColumn: component.labelColumn,
+        valueColumn: component.valueColumn,
       }
     default:
       throw utils.unreachable(type)
