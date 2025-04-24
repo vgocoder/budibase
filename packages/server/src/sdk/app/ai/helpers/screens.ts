@@ -68,6 +68,14 @@ async function mapComponent(component: ai.Component): Promise<Component> {
         dataSource: await mapSource(component.datasource),
         actionType: component.actionType,
       }
+    case ai.ComponentType.TableBlock:
+      return {
+        _id: v4(),
+        _instanceName: "New Table",
+        _component: "@budibase/standard-components/gridblock",
+        _styles: {},
+        table: await mapSource(component.datasource),
+      }
     case ai.ComponentType.ChartBlock: {
       const { chartType } = component
       switch (chartType) {
