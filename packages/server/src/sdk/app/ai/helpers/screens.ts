@@ -4,6 +4,47 @@ import { ai } from "@budibase/pro"
 import { Component, Screen } from "@budibase/types"
 import { v4 } from "uuid"
 
+function mapDatasource(datasourceName: string) {
+  const datasources = {
+    Users: {
+      label: "Users",
+      tableId: "ta_users",
+      type: "table",
+      resourceId: "ta_users",
+    },
+    Employees: {
+      label: "Employees",
+      tableId: "ta_bb_employee",
+      type: "table",
+      datasourceName: "Sample Data",
+      resourceId: "ta_bb_employee",
+    },
+    Expenses: {
+      label: "Expenses",
+      tableId: "ta_bb_expenses",
+      type: "table",
+      datasourceName: "Sample Data",
+      resourceId: "ta_bb_expenses",
+    },
+    Inventory: {
+      label: "Inventory",
+      tableId: "ta_bb_inventory",
+      type: "table",
+      datasourceName: "Sample Data",
+      resourceId: "ta_bb_inventory",
+    },
+    Jobs: {
+      label: "Jobs",
+      tableId: "ta_bb_jobs",
+      type: "table",
+      datasourceName: "Sample Data",
+      resourceId: "ta_bb_jobs",
+    },
+  }
+
+  return datasources[datasourceName]
+}
+
 function mapComponent(component: ai.Component): Component {
   const { type } = component
   switch (type) {
@@ -31,6 +72,15 @@ function mapComponent(component: ai.Component): Component {
         _styles: {},
         label: component.label,
         placeholder: component.placeholder,
+      }
+    case ai.ComponentType.FormBlock:
+      return {
+        _id: v4(),
+        _instanceName: "New Container",
+        _component: "@budibase/standard-components/formblock",
+        _styles: {},
+        title: component.title,
+        dataSource: mapDatasource(component.datasource),
       }
     default:
       throw utils.unreachable(type)
