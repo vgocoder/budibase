@@ -1,6 +1,8 @@
 import {
   GenerateJsRequest,
   GenerateJsResponse,
+  GenerateScreenRequest,
+  GenerateScreenResponse,
   GenerateTablesRequest,
   GenerateTablesResponse,
 } from "@budibase/types"
@@ -12,6 +14,9 @@ export interface AIEndpoints {
   generateTables: (
     req: GenerateTablesRequest
   ) => Promise<GenerateTablesResponse>
+  generateScreen: (
+    req: GenerateScreenRequest
+  ) => Promise<GenerateScreenResponse>
 }
 
 export const buildAIEndpoints = (API: BaseAPIClient): AIEndpoints => ({
@@ -35,6 +40,13 @@ export const buildAIEndpoints = (API: BaseAPIClient): AIEndpoints => ({
   generateTables: async req => {
     return await API.post({
       url: "/api/ai/tables",
+      body: req,
+    })
+  },
+
+  generateScreen: async req => {
+    return await API.post({
+      url: "/api/ai/screen",
       body: req,
     })
   },

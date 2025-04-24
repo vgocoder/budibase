@@ -48,5 +48,5 @@ export interface GenerateScreenRequest {
 }
 
 export interface GenerateScreenResponse {
-  response: any
+  screenId: string
 }

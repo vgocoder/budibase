@@ -9,9 +9,9 @@
   $: isEnabled = $auth?.user?.llm && !$licensing.aiCreditsExceeded
 
   async function submitPrompt(message: string) {
-    console.warn(message)
-    // await API.generateTables(message)
-    notifications.success("Screens created successfully!")
+    const result = await API.generateScreen({ prompt: message })
+    notifications.success("Screen created successfully!")
+    console.error(result)
   }
 
   const examplePrompts = [

@@ -26,7 +26,7 @@ export async function generateTables(
   }
 }
 
-export async function generateScreens(
+export async function generateScreen(
   ctx: UserCtx<GenerateScreenRequest, GenerateScreenResponse>
 ) {
   const { prompt } = ctx.request.body
@@ -35,9 +35,9 @@ export async function generateScreens(
     generateScreen: sdk.ai.helpers.generateScreen,
   })
 
-  const result = await screenGenerator.generate(prompt)
+  const screenId = await screenGenerator.generate(prompt)
 
   ctx.body = {
-    response: result,
+    screenId,
   }
 }
