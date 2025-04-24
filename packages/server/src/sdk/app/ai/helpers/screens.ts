@@ -82,6 +82,7 @@ function mapComponent(component: ai.Component): Component {
         _styles: {},
         title: component.title,
         dataSource: mapDatasource(component.datasource),
+        actionType: component.actionType,
       }
     default:
       throw utils.unreachable(type)
