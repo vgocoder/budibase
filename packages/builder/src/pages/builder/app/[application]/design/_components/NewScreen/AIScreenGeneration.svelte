@@ -3,6 +3,7 @@
   import AiInput from "@/components/common/ai/AIInput.svelte"
   import { auth, licensing } from "@/stores/portal"
   import { ActionButton, notifications } from "@budibase/bbui"
+  import { goto } from "@roxi/routify"
 
   let promptText = ""
 
@@ -11,7 +12,7 @@
   async function submitPrompt(message: string) {
     const result = await API.generateScreen({ prompt: message })
     notifications.success("Screen created successfully!")
-    console.error(result)
+    $goto(`../${result.screenId}`)
   }
 
   const examplePrompts = [
