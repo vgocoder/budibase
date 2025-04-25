@@ -16,7 +16,7 @@
 
       notifications.success("Screen created successfully!")
 
-      $goto(`./${screen._id}/${screen.props._id}`)
+      $goto(`./${screen._id}`)
     } catch (e: any) {
       notifications.error(e.message)
     }

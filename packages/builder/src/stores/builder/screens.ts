@@ -529,7 +529,7 @@ export class ScreenStore extends BudiStore<ScreenState> {
         state.screens.push(screen)
       }
 
-      state.selectedScreenId = screen._id
+      state.selectedScreenId = screen.props._id
 
       componentStore.update(state => ({
         ...state,
