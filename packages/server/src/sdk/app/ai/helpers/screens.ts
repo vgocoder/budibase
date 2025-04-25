@@ -3,7 +3,7 @@ import { helpers, utils } from "@budibase/shared-core"
 import { ai } from "@budibase/pro"
 import { Component, Screen } from "@budibase/types"
 import { v4 } from "uuid"
-import { HTTPError } from "@budibase/backend-core"
+import { context, HTTPError } from "@budibase/backend-core"
 
 async function getSourceByName(name: string) {
   const tables = await sdk.tables.getAllTables()
@@ -136,11 +136,12 @@ export async function generateScreen({
   for (const child of screen.components) {
     children.push(await mapComponent(child))
   }
+  const route = `/${name.replace(/ /g, "").toLowerCase()}`
 
   const result = await sdk.screens.create({
     name: name,
     routing: {
-      route: `/${name.replace(/ /g, "").toLowerCase()}`,
+      route,
       roleId: "BASIC",
     },
     showNavigation: true,
@@ -152,5 +153,17 @@ export async function generateScreen({
       _children: children,
     },
   })
+
+  const metadata = await sdk.applications.metadata.tryGet()
+  if (metadata?.navigation) {
+    metadata.navigation.links ??= []
+    metadata.navigation.links.push({
+      text: name,
+      url: route,
+    })
+    const db = context.getAppDB()
+    await db.put(metadata)
+  }
+
   return result
 }
