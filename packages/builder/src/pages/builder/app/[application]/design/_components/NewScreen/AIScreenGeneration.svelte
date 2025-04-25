@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { API } from "@/api"
   import AiInput from "@/components/common/ai/AIInput.svelte"
+  import { screenStore } from "@/stores/builder"
   import { auth, licensing } from "@/stores/portal"
 
   import { ActionButton, notifications } from "@budibase/bbui"
-  import { url } from "@roxi/routify"
+  import { goto } from "@roxi/routify"
 
   let promptText = ""
 
@@ -12,12 +12,11 @@
 
   async function submitPrompt(message: string) {
     try {
-      const result = await API.generateScreen({ prompt: message })
+      const screen = await screenStore.generateAIScreen(message)
+
       notifications.success("Screen created successfully!")
 
-      window.location.pathname = $url(
-        `./${result.screenId}/${result.screenId}-screen`
-      )
+      $goto(`./${screen._id}/${screen.props._id}`)
     } catch (e: any) {
       notifications.error(e.message)
     }

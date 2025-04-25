@@ -517,6 +517,32 @@ export class ScreenStore extends BudiStore<ScreenState> {
   async usageInScreens(sourceId: string) {
     return API.usageInScreens(sourceId)
   }
+
+  async generateAIScreen(prompt: string) {
+    const { screen } = await API.generateScreen({ prompt })
+
+    this.update(state => {
+      const idx = state.screens.findIndex(x => x._id === screen._id)
+      if (idx !== -1) {
+        state.screens.splice(idx, 1, screen)
+      } else {
+        state.screens.push(screen)
+      }
+
+      state.selectedScreenId = screen._id
+
+      componentStore.update(state => ({
+        ...state,
+        selectedComponentId: screen.props._id,
+      }))
+
+      return state
+    })
+
+    // await this.syncScreenData(screen)
+
+    return screen
+  }
 }
 
 export const screenStore = new ScreenStore()
@@ -526,6 +552,7 @@ export const selectedScreen = derived(screenStore, $store => {
 })
 
 export const sortedScreens = derived(screenStore, $screenStore => {
+  console.error("sortedScreens")
   return $screenStore.screens.slice().sort((a, b) => {
     // Sort by role first
     const roleA = RoleUtils.getRolePriority(a.routing.roleId)
