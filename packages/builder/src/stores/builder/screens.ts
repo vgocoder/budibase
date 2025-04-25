@@ -552,7 +552,6 @@ export const selectedScreen = derived(screenStore, $store => {
 })
 
 export const sortedScreens = derived(screenStore, $screenStore => {
-  console.error("sortedScreens")
   return $screenStore.screens.slice().sort((a, b) => {
     // Sort by role first
     const roleA = RoleUtils.getRolePriority(a.routing.roleId)
