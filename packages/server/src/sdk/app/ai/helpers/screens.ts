@@ -33,14 +33,16 @@ async function mapComponent(component: ai.Component): Promise<Component> {
         children.push(await mapComponent(child))
       }
 
+      const isColumn = type === ai.ComponentType.Column
+
       return {
         _id: v4(),
-        _instanceName: "New Container",
+        _instanceName: isColumn ? "New Column" : "New Row",
         _component: "@budibase/standard-components/container",
         _styles: {},
         _children: children,
         layout: "flex",
-        direction: type === ai.ComponentType.Column ? "column" : "row",
+        direction: isColumn ? "column" : "row",
         vAlign: component.vAlign,
         hAlign: component.hAlign,
         gap: component.gap[0],
