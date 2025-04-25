@@ -143,6 +143,7 @@ export async function generateScreen({
       route: `/${name.replace(/ /g, "").toLowerCase()}`,
       roleId: "BASIC",
     },
+    showNavigation: true,
     props: {
       _id: v4(),
       _component: "@budibase/standard-components/container",
