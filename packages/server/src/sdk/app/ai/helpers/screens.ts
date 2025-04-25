@@ -26,7 +26,8 @@ async function mapSource(sourceName: string) {
 async function mapComponent(component: ai.Component): Promise<Component> {
   const { type } = component
   switch (type) {
-    case ai.ComponentType.Container: {
+    case ai.ComponentType.Column:
+    case ai.ComponentType.Row: {
       const children: Component[] = []
       for (const child of component.children) {
         children.push(await mapComponent(child))
@@ -38,6 +39,8 @@ async function mapComponent(component: ai.Component): Promise<Component> {
         _component: "@budibase/standard-components/container",
         _styles: {},
         _children: children,
+        layout: "flex",
+        direction: type === ai.ComponentType.Column ? "column" : "row",
       }
     }
     case ai.ComponentType.Label:
