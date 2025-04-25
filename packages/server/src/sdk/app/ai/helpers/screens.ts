@@ -41,6 +41,9 @@ async function mapComponent(component: ai.Component): Promise<Component> {
         _children: children,
         layout: "flex",
         direction: type === ai.ComponentType.Column ? "column" : "row",
+        vAlign: component.vAlign,
+        hAlign: component.hAlign,
+        gap: component.gap[0],
       }
     }
     case ai.ComponentType.Label:
