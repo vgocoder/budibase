@@ -36,9 +36,9 @@ export async function generateScreen(
     generateScreen: sdk.ai.helpers.generateScreen,
   })
 
-  const screenId = await screenGenerator.generate(prompt)
+  const screen = await screenGenerator.generate(prompt)
 
   ctx.body = {
-    screenId,
+    screen,
   }
 }

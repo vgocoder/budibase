@@ -1,5 +1,6 @@
 import openai from "openai"
 import { EnrichedBinding } from "../../ui"
+import { Screen } from "../../documents"
 
 export interface Message {
   role: "system" | "user"
@@ -48,5 +49,5 @@ export interface GenerateScreenRequest {
 }
 
 export interface GenerateScreenResponse {
-  screenId: string
+  screen: Screen
 }
