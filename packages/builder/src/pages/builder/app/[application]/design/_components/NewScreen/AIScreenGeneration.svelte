@@ -26,6 +26,7 @@
     "Create me a basic registry form",
     "Create me a form for the courses table",
     "A dashboard to monitorise the jobs datasource",
+    "Two pie charts next to each other (in a row)",
   ]
 </script>
 
