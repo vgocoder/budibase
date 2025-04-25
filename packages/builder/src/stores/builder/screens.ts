@@ -541,6 +541,12 @@ export class ScreenStore extends BudiStore<ScreenState> {
 
     // await this.syncScreenData(screen)
 
+    await navigationStore.saveLink(
+      screen.routing.route,
+      screen.name || "",
+      screen.routing.roleId
+    )
+
     return screen
   }
 }
