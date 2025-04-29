@@ -18,7 +18,7 @@ import {
   RelationshipType,
 } from "@budibase/types"
 import { context } from "@budibase/backend-core"
-import { generator, mocks } from "@budibase/backend-core/tests"
+import { generator } from "@budibase/backend-core/tests"
 import { quotas, ai } from "@budibase/pro"
 import { MockLLMResponseFn } from "../../../tests/utilities/mocks/ai"
 import { mockAnthropicResponse } from "../../../tests/utilities/mocks/ai/anthropic"
@@ -40,22 +40,27 @@ interface TestSetup {
 }
 
 function budibaseAI(): SetupFn {
-  return async () => {
-    const cleanup = setEnv({
-      OPENAI_API_KEY: "test-key",
+  return async (config: TestConfiguration) => {
+    await config.doInTenant(async () => {
+      await configs.save({
+        type: ConfigType.AI,
+        config: {
+          budibaseAI: {
+            provider: "BudibaseAI",
+            name: "Budibase AI",
+            active: true,
+            isDefault: true,
+          },
+        },
+      })
     })
-    mocks.licenses.useBudibaseAI()
-    return async () => {
-      mocks.licenses.useCloudFree()
-      cleanup()
-    }
+
+    return setEnv({ OPENAI_API_KEY: "test-key", SELF_HOSTED: false })
   }
 }
 
 function customAIConfig(providerConfig: Partial<ProviderConfig>): SetupFn {
   return async (config: TestConfiguration) => {
-    mocks.licenses.useAICustomConfigs()
-
     const innerConfig: AIInnerConfig = {
       myaiconfig: {
         provider: "OpenAI",
@@ -77,8 +82,6 @@ function customAIConfig(providerConfig: Partial<ProviderConfig>): SetupFn {
     )
 
     return async () => {
-      mocks.licenses.useCloudFree()
-
       await config.doInTenant(async () => {
         const db = context.getGlobalDB()
         await db.remove(id, rev)
@@ -467,7 +470,9 @@ describe("BudibaseAI", () => {
     ) =>
       mockChatGPTResponse(JSON.stringify(aiColumnGeneration), {
         format: zodResponseFormat(
-          ai.aiColumnSchemas(generationStructure),
+          ai.aiColumnSchemas(
+            ai.aiTableResponseToTableSchema(generationStructure)
+          ),
           "key"
         ),
       })
@@ -681,7 +686,7 @@ describe("BudibaseAI", () => {
             },
           },
         ],
-        "Employees 2": [
+        Employees: [
           {
             "First Name": "Joshua",
             "Last Name": "Lee",
@@ -803,6 +808,7 @@ describe("BudibaseAI", () => {
               constraints: {
                 presence: true,
               },
+              aiGenerated: true,
             },
             Description: {
               name: "Description",
@@ -810,6 +816,7 @@ describe("BudibaseAI", () => {
               constraints: {
                 presence: true,
               },
+              aiGenerated: true,
             },
             Priority: {
               name: "Priority",
@@ -818,6 +825,7 @@ describe("BudibaseAI", () => {
                 inclusion: ["Low", "Medium", "High"],
                 presence: true,
               },
+              aiGenerated: true,
             },
             Status: {
               name: "Status",
@@ -826,6 +834,7 @@ describe("BudibaseAI", () => {
                 inclusion: ["Open", "In Progress", "Closed"],
                 presence: true,
               },
+              aiGenerated: true,
             },
             Assignee: {
               name: "Assignee",
@@ -833,12 +842,14 @@ describe("BudibaseAI", () => {
               tableId: createdTables[1].id,
               fieldName: "AssignedTickets",
               relationshipType: "one-to-many",
+              aiGenerated: true,
             },
             "Created Date": {
               name: "Created Date",
               type: "datetime",
               ignoreTimezones: false,
               dateOnly: true,
+              aiGenerated: true,
             },
             "Resolution Time (Days)": {
               name: "Resolution Time (Days)",
@@ -846,16 +857,19 @@ describe("BudibaseAI", () => {
               formula:
                 '{{ js "cmV0dXJuIChuZXcgRGF0ZSgpIC0gbmV3IERhdGUoJCgiQ3JlYXRlZCBEYXRlIikpKSAvICgxMDAwICogNjAgKiA2MCAqIDI0KTs=" }}',
               responseType: "number",
+              aiGenerated: true,
             },
             Attachment: {
               name: "Attachment",
               type: "attachment_single",
+              aiGenerated: true,
             },
             "Ticket Summary": {
               name: "Ticket Summary",
               type: "ai",
               operation: "SUMMARISE_TEXT",
               columns: ["Title", "Description"],
+              aiGenerated: true,
             },
             "Translated Description": {
               name: "Translated Description",
@@ -863,8 +877,10 @@ describe("BudibaseAI", () => {
               operation: "TRANSLATE",
               column: "Description",
               language: "es",
+              aiGenerated: true,
             },
           },
+          aiGenerated: true,
         }),
         expect.objectContaining({
           name: "Employees 2",
@@ -875,6 +891,7 @@ describe("BudibaseAI", () => {
               },
               name: "First Name",
               type: "string",
+              aiGenerated: true,
             },
             "Last Name": {
               constraints: {
@@ -882,11 +899,13 @@ describe("BudibaseAI", () => {
               },
               name: "Last Name",
               type: "string",
+              aiGenerated: true,
             },
             Photo: {
               name: "Photo",
               subtype: "image",
               type: "attachment_single",
+              aiGenerated: true,
             },
             Position: {
               constraints: {
@@ -894,6 +913,7 @@ describe("BudibaseAI", () => {
               },
               name: "Position",
               type: "string",
+              aiGenerated: true,
             },
             AssignedTickets: {
               fieldName: "Assignee",
@@ -901,10 +921,12 @@ describe("BudibaseAI", () => {
               relationshipType: "many-to-one",
               tableId: createdTables[0].id,
               type: "link",
+              aiGenerated: true,
             },
             Documents: {
               name: "Documents",
               type: "attachment",
+              aiGenerated: true,
             },
             "Role Category": {
               categories: "Manager,Staff,Intern,Contractor",
@@ -912,8 +934,10 @@ describe("BudibaseAI", () => {
               name: "Role Category",
               operation: "CATEGORISE_TEXT",
               type: "ai",
+              aiGenerated: true,
             },
           },
+          aiGenerated: true,
         }),
       ])
 
