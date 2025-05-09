@@ -77,7 +77,7 @@ async function buildEmail(
 ) {
   // this isn't a full email
   if (FULL_EMAIL_PURPOSES.indexOf(purpose) === -1) {
-    throw `Unable to build an email of type ${purpose}`
+    throw new Error(`Unable to build an email of type ${purpose}`)
   }
   let [base, body] = await Promise.all([
     getTemplateByPurpose(TYPE, EmailTemplatePurpose.BASE),
@@ -88,7 +88,7 @@ async function buildEmail(
   let core = EmailTemplates[EmailTemplatePurpose.CORE]
 
   if (!base || !body || !core) {
-    throw "Unable to build email, missing base components"
+    throw new Error("Unable to build email, missing base components")
   }
 
   let name: string | undefined
@@ -139,7 +139,7 @@ export async function sendEmail(
 ) {
   const config = await configs.getSMTPConfig(opts?.automation)
   if (!config && !TEST_MODE) {
-    throw "Unable to find SMTP configuration."
+    throw new Error("Unable to find SMTP configuration.")
   }
   const transport = createSMTPTransport(config)
   // if there is a link code needed this will retrieve it

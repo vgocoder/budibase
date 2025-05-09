@@ -20,7 +20,9 @@ export async function generateTables(
         f => f.type === FieldType.LINK
       )) {
         if (!tables.find(t => t.name === linkField.tableId)) {
-          throw `Table ${linkField.tableId} not found in the json response.`
+          throw new Error(
+            `Table ${linkField.tableId} not found in the json response.`
+          )
         }
       }
     }

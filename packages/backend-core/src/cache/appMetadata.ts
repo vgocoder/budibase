@@ -78,7 +78,7 @@ export async function getAppMetadata(appId: string): Promise<App | DeletedApp> {
  */
 export async function invalidateAppMetadata(appId: string, newMetadata?: any) {
   if (!appId) {
-    throw "Cannot invalidate if no app ID provided."
+    throw new Error("Cannot invalidate if no app ID provided.")
   }
   const client = await getAppClient()
   await client.delete(appId)

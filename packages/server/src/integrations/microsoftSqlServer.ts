@@ -429,7 +429,7 @@ class SqlServerIntegration extends Sql implements DatasourcePlus {
     await this.connect()
     let tableInfo: MSSQLTablesResponse[] = await this.runSQL(this.TABLES_SQL)
     if (tableInfo == null || !Array.isArray(tableInfo)) {
-      throw "Unable to get list of tables in database"
+      throw new Error("Unable to get list of tables in database")
     }
 
     const schemaName = this.config.schema || DEFAULT_SCHEMA

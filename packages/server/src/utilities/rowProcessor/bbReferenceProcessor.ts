@@ -84,7 +84,7 @@ export async function processInputBBReferences(
 
   switch (subtype) {
     case undefined:
-      throw "Subtype must be defined"
+      throw new Error("Subtype must be defined")
     case BBReferenceFieldSubType.USER:
     case BBReferenceFieldSubType.USERS: {
       const { notFoundIds } = await cache.user.getUsers(referenceIds)

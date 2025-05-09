@@ -18,7 +18,7 @@ function typeToFile(type: any) {
       filename = "./automation"
       break
     default:
-      throw "Unknown thread type"
+      throw new Error("Unknown thread type")
   }
   // have to use require here, to make it work with worker-farm
   return require.resolve(filename)

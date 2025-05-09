@@ -34,6 +34,6 @@ export async function getAllDbs(url: string) {
   if (response.status === 200) {
     return await response.json()
   } else {
-    throw "Cannot connect to CouchDB instance"
+    throw new Error("Cannot connect to CouchDB instance")
   }
 }

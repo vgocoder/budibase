@@ -59,7 +59,7 @@ exports.getTable = async (apiKey, appId, tableName) => {
   const json = await res.json()
   const table = json.data.find(t => t.name === tableName)
   if (!table) {
-    throw `Table '${tableName} not found`
+    throw new Error(`Table '${tableName} not found`)
   }
   return table
 }

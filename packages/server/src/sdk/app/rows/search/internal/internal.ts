@@ -119,7 +119,7 @@ export async function exportRows(
       content: jsonWithSchema(schema, exportRows),
     }
   } else {
-    throw "Format not recognised"
+    throw new Error("Format not recognised")
   }
 }
 
@@ -236,7 +236,7 @@ async function getView(db: Database, viewName: string) {
     await migration(db, viewName)
   }
   if (!viewInfo) {
-    throw "View does not exist."
+    throw new Error("View does not exist.")
   }
   return viewInfo
 }

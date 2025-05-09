@@ -139,7 +139,7 @@ export default abstract class BaseDataFetch<
       ...opts,
     }
     if (!this.API) {
-      throw "An API client is required for fetching data"
+      throw new Error("An API client is required for fetching data")
     }
 
     // Bind all functions to properly scope "this"

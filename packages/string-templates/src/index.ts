@@ -48,7 +48,7 @@ function testObject(object: any) {
   try {
     JSON.stringify(object)
   } catch (err) {
-    throw "Unable to process inputs to JSON, cannot recurse"
+    throw new Error("Unable to process inputs to JSON, cannot recurse")
   }
 }
 

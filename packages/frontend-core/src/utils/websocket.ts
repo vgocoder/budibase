@@ -14,7 +14,7 @@ export const createWebsocket = (
   options = DefaultOptions
 ): ExtendedSocket => {
   if (!path) {
-    throw "A websocket path must be provided"
+    throw new Error("A websocket path must be provided")
   }
   const { heartbeat } = {
     ...DefaultOptions,

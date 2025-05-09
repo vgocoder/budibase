@@ -298,7 +298,7 @@ describe("/automations", () => {
           return
         }
       }
-      throw "Failed to find the rows"
+      throw new Error("Failed to find the rows")
     })
   })
 

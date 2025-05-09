@@ -133,7 +133,7 @@ export async function exportView(ctx: Ctx) {
     ctx.attachment(`${viewName}.json`)
     ctx.body = apiFileReturn(jsonWithSchema(schema, exportRows))
   } else {
-    throw "Format not recognised"
+    throw new Error("Format not recognised")
   }
 
   if (viewName.startsWith(DocumentType.TABLE)) {

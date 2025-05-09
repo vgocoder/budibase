@@ -169,7 +169,7 @@ export class ScreenStore extends BudiStore<ScreenState> {
         componentStore.getDefinition(component._component)
 
       if (definition == null) {
-        throw `Invalid defintion ${component._component}`
+        throw new Error(`Invalid defintion ${component._component}`)
       }
 
       // Reset whitelist for direct children
@@ -206,7 +206,7 @@ export class ScreenStore extends BudiStore<ScreenState> {
     const illegalChild = findIllegalChild(screen.props)
     if (illegalChild) {
       const def = componentStore.getDefinition(illegalChild)
-      throw `You can't place a ${def?.name} here`
+      throw new Error(`You can't place a ${def?.name} here`)
     }
   }
 

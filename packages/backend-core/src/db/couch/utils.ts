@@ -50,6 +50,6 @@ export async function directCouchQuery(
   if (response.status < 300) {
     return await response.json()
   } else {
-    throw "Cannot connect to CouchDB instance"
+    throw new Error("Cannot connect to CouchDB instance")
   }
 }

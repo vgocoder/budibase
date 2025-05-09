@@ -146,7 +146,7 @@ export class UserDB {
     const requirePasswords =
       opts.requirePassword && !(await UserDB.features.isSSOEnforced())
     if (!hashedPassword && requirePasswords) {
-      throw "Password must be specified."
+      throw new Error("Password must be specified.")
     }
 
     _id = _id || dbUtils.generateGlobalUserID()
@@ -329,7 +329,7 @@ export class UserDB {
         return db.get(builtUser._id!)
       } catch (err: any) {
         if (err.status === 409) {
-          throw "User exists already"
+          throw new Error("User exists already")
         } else {
           throw err
         }

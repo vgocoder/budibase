@@ -24,6 +24,7 @@ import {
   db as dbCore,
   encryption,
   utils,
+  HTTPError,
 } from "@budibase/backend-core"
 import structures, { CSRF_TOKEN } from "./structures"
 import {
@@ -99,8 +100,8 @@ class TestConfiguration {
     request.request = {
       body: config,
     }
-    request.throw = (status: any, err: any) => {
-      throw { status, message: err }
+    request.throw = (status: number, err: string) => {
+      throw new HTTPError(err, status)
     }
     if (params) {
       request.params = params

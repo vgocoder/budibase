@@ -1792,7 +1792,7 @@ class SqlQueryBuilder extends SqlTableQueryBuilder {
       case Operation.DELETE_TABLE:
         return this._tableQuery(json)
       default:
-        throw `Operation type is not supported by SQL query builder`
+        throw new Error("Operation type is not supported by SQL query builder")
     }
 
     return this.convertToNative(query, opts)

@@ -15,19 +15,19 @@ export const createActions = (context: StoreContext): NonPlusActions => {
   const { columns, table, viewV2 } = context
 
   const saveDefinition = async () => {
-    throw "This datasource does not support updating the definition"
+    throw new Error("This datasource does not support updating the definition")
   }
 
   const saveRow = async () => {
-    throw "This datasource does not support saving rows"
+    throw new Error("This datasource does not support saving rows")
   }
 
   const deleteRows = async () => {
-    throw "This datasource does not support deleting rows"
+    throw new Error("This datasource does not support deleting rows")
   }
 
   const getRow = () => {
-    throw "This datasource does not support fetching individual rows"
+    throw new Error("This datasource does not support fetching individual rows")
   }
 
   const isDatasourceValid = (datasource: UIDatasource) => {

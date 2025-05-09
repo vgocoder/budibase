@@ -30,7 +30,7 @@ export async function makeExternalQuery(
   const Integration = await getIntegration(json.datasource.source)
 
   if (!isDatasourcePlusConstructor(Integration)) {
-    throw "Datasource does not support query."
+    throw new Error("Datasource does not support query.")
   }
 
   const integration = new Integration(json.datasource.config)

@@ -22,7 +22,7 @@ const createAppStore = () => {
   const fetchAppDefinition = async () => {
     const appId = get(store)?.appId
     if (!appId) {
-      throw "Cannot fetch app definition without app ID set"
+      throw new Error("Cannot fetch app definition without app ID set")
     }
     try {
       const appDefinition = await API.fetchAppPackage(appId)

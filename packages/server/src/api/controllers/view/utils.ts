@@ -5,7 +5,7 @@ import {
   SEPARATOR,
 } from "../../../db/utils"
 import env from "../../../environment"
-import { context } from "@budibase/backend-core"
+import { context, HTTPError } from "@budibase/backend-core"
 import viewBuilder from "./viewBuilder"
 import {
   Database,
@@ -168,7 +168,7 @@ export async function getFromDesignDoc(db: Database, viewName: string) {
   const designDoc = await db.get<DesignDocument>("_design/database")
   let view = designDoc.views?.[viewName]
   if (view == null) {
-    throw { status: 404, message: "Unable to get view" }
+    throw new HTTPError("Unable to get view", 404)
   }
   return view
 }
@@ -181,6 +181,6 @@ export async function getFromMemoryDoc(
   if (view) {
     return view.view
   } else {
-    throw { status: 404, message: "Unable to get view" }
+    throw new HTTPError("Unable to get view", 404)
   }
 }

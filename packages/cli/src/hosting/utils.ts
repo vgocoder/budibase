@@ -66,7 +66,9 @@ export function checkInitComplete() {
     !fs.existsSync(makeFiles.ENV_PATH) &&
     !fs.existsSync(makeFiles.COMPOSE_PATH)
   ) {
-    throw "Please run the hosting --init command before any other hosting command."
+    throw new Error(
+      "Please run the hosting --init command before any other hosting command."
+    )
   }
 }
 
@@ -77,7 +79,7 @@ export async function handleError(func: Function) {
     if (err && err.err) {
       logErrorToFile(ERROR_FILE, err.err)
     }
-    throw `Failed to start - logs written to file: ${ERROR_FILE}`
+    throw new Error(`Failed to start - logs written to file: ${ERROR_FILE}`)
   }
 }
 

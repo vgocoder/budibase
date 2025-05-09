@@ -145,7 +145,9 @@ export async function updateLinks(args: {
     case EventType.TABLE_DELETE:
       return await linkController.tableDeleted()
     default:
-      throw "Type of event is not known, linked row handler requires update."
+      throw new Error(
+        "Type of event is not known, linked row handler requires update."
+      )
   }
 }
 

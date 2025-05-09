@@ -21,7 +21,7 @@ const loadIconSet = (name, markup) => {
       // Insert it into the head
       document.head.insertBefore(svg, null)
     } else {
-      throw "Invalid tag type for SVG definition"
+      throw new Error("Invalid tag type for SVG definition")
     }
   } catch (err) {
     // Swallow error, but icons won't work

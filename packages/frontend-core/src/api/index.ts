@@ -171,7 +171,7 @@ export const createAPIClient = (config: APIClientConfig = {}): APIClient => {
         }
       } catch (error) {
         delete cache[url]
-        throw `Failed to parse response: ${error}`
+        throw new Error(`Failed to parse response: ${error}`)
       }
     } else {
       delete cache[url]

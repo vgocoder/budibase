@@ -32,7 +32,7 @@ yargs
     },
     async args => {
       if (!env.isDev()) {
-        throw "Only works in dev"
+        throw new Error("Only works in dev")
       }
       const name = args.name,
         appId = args.appId

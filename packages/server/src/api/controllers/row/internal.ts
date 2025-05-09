@@ -50,7 +50,7 @@ export async function patch(ctx: UserCtx<PatchRowRequest, PatchRowResponse>) {
         _id: inputs._id,
       }
     } else {
-      throw "Row does not exist"
+      throw new Error("Row does not exist")
     }
   }
 
@@ -117,7 +117,7 @@ export async function destroy(ctx: UserCtx) {
   let _rev = ctx.request.body._rev || row._rev
 
   if (row.tableId !== table._id) {
-    throw "Supplied tableId doesn't match the row's tableId"
+    throw new Error("Supplied tableId doesn't match the row's tableId")
   }
   // update the row to include full relationships before deleting them
   row = await outputProcessing(table, row, {

@@ -426,7 +426,7 @@ export class ComponentStore extends BudiStore<ComponentState> {
   ): Component | null {
     const screen = get(selectedScreen)
     if (!screen) {
-      throw "A valid screen must be selected"
+      throw new Error("A valid screen must be selected")
     }
 
     const definition = this.getDefinition(componentType)
@@ -815,7 +815,7 @@ export class ComponentStore extends BudiStore<ComponentState> {
     const componentId = state.selectedComponentId
     const screen = get(selectedScreen)
     if (!screen) {
-      throw "A valid screen must be selected"
+      throw new Error("A valid screen must be selected")
     }
     const parent = findComponentParent(screen.props, componentId)!
     const index = parent?._children?.findIndex(
@@ -867,7 +867,7 @@ export class ComponentStore extends BudiStore<ComponentState> {
     const componentId = component?._id
     const screen = get(selectedScreen)
     if (!screen) {
-      throw "A valid screen must be selected"
+      throw new Error("A valid screen must be selected")
     }
     const parent = findComponentParent(screen.props, componentId)
     const index = parent?._children?.findIndex(

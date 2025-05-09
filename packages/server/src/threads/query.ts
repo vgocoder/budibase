@@ -81,7 +81,7 @@ class QueryRunner {
 
     const Integration = await getIntegration(datasourceClone.source)
     if (!Integration) {
-      throw "Integration type does not exist."
+      throw new Error("Integration type does not exist.")
     }
 
     if (datasourceClone.config?.authConfigs) {

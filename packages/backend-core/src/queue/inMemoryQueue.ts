@@ -117,7 +117,7 @@ export class InMemoryQueue<T = any> implements Partial<Queue<T>> {
 
           const indexToRemove = this._messages.indexOf(message)
           if (indexToRemove === -1) {
-            throw "Failed deleting a processed message"
+            throw new Error("Failed deleting a processed message")
           }
           this._messages.splice(indexToRemove, 1)
         } catch (e: any) {
@@ -158,7 +158,7 @@ export class InMemoryQueue<T = any> implements Partial<Queue<T>> {
     }
 
     if (typeof data !== "object") {
-      throw "Queue only supports carrying JSON."
+      throw new Error("Queue only supports carrying JSON.")
     }
     if (jobId) {
       this._queuedJobIds.add(jobId)

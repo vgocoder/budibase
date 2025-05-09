@@ -403,7 +403,7 @@ export default class TestConfiguration {
     return context.doInAppContext(appId, async () => {
       userId = !userId ? `us_uuid1` : userId
       if (!this.request) {
-        throw "Server has not been opened, cannot login."
+        throw new Error("Server has not been opened, cannot login.")
       }
       // make sure the user exists in the global DB
       if (roleId !== roles.BUILTIN_ROLE_IDS.PUBLIC) {
@@ -702,7 +702,7 @@ export default class TestConfiguration {
     config?: TableToBuild
   ) {
     if (!this.table) {
-      throw "Must have created a table first."
+      throw new Error("Must have created a table first.")
     }
     const tableConfig = config || basicTable()
     if (!tableConfig.sourceId) {
@@ -739,7 +739,7 @@ export default class TestConfiguration {
 
   async createRow(config?: Row): Promise<Row> {
     if (!this.table) {
-      throw "Test requires table to be configured."
+      throw new Error("Test requires table to be configured.")
     }
     const tableId = (config && config.tableId) || this.table._id!
     config = config || basicRow(tableId!)
@@ -770,7 +770,7 @@ export default class TestConfiguration {
 
   async createLegacyView(config?: View) {
     if (!this.table && !config) {
-      throw "Test requires table to be configured."
+      throw new Error("Test requires table to be configured.")
     }
     const view = config || {
       tableId: this.table!._id,
@@ -786,7 +786,7 @@ export default class TestConfiguration {
     }
   ) {
     if (!this.table && !config?.tableId) {
-      throw "Test requires table to be configured."
+      throw new Error("Test requires table to be configured.")
     }
 
     const view: CreateViewRequest = {
@@ -827,7 +827,7 @@ export default class TestConfiguration {
 
   async createWebhook(config?: Webhook) {
     if (!this.automation) {
-      throw "Must create an automation before creating webhook."
+      throw new Error("Must create an automation before creating webhook.")
     }
     config = config || basicWebhook(this.automation._id!)
 

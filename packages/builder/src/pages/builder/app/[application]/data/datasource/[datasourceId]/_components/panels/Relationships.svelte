@@ -67,7 +67,7 @@
     const { connected } = await API.validateDatasource(datasource)
 
     if (!connected) {
-      throw "Invalid connection"
+      throw new Error("Invalid connection")
     }
   }
 

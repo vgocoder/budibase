@@ -31,7 +31,7 @@
       subtype !== BBReferenceFieldSubType.USER &&
       subtype !== BBReferenceFieldSubType.USERS
     ) {
-      throw `Search for '${subtype}' not implemented`
+      throw new Error(`Search for '${subtype}' not implemented`)
     }
 
     // As we are overriding the search function from RelationshipCell, we want to map one shape to the expected one for the specific API

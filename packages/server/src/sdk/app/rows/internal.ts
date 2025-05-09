@@ -82,7 +82,7 @@ export async function findRow(sourceId: string, rowId: string) {
     row = await db.get(rowId)
   }
   if (row.tableId !== tableId) {
-    throw "Supplied tableId does not match the rows tableId"
+    throw new Error("Supplied tableId does not match the rows tableId")
   }
   return row
 }

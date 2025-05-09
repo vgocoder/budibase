@@ -39,7 +39,9 @@ export async function getCode(code: string): Promise<Invite> {
   const client = await redis.getInviteClient()
   const value = (await client.get(code)) as Invite | undefined
   if (!value) {
-    throw "Invitation is not valid or has expired, please request a new one."
+    throw new Error(
+      "Invitation is not valid or has expired, please request a new one."
+    )
   }
   return value
 }

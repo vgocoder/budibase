@@ -47,5 +47,5 @@ export const cloneDeep = value => {
     return cloneObject
   }
 
-  throw `Unsupported value: "${value}" of type: "${typeof value}"`
+  throw new Error(`Unsupported value: "${value}" of type: "${typeof value}"`)
 }

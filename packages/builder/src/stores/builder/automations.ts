@@ -1007,7 +1007,7 @@ const automationActions = (store: AutomationStore) => ({
       result = await API.testAutomation(automation._id!, testData)
     } catch (err: any) {
       const message = err.message || err.status || JSON.stringify(err)
-      throw `Automation test failed - ${message}`
+      throw new Error(`Automation test failed - ${message}`)
     }
     store.update(state => {
       state.testResults = result

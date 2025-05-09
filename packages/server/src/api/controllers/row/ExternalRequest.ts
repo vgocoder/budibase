@@ -701,7 +701,7 @@ export class ExternalRequest<T extends Operation> {
       operation === Operation.DELETE &&
       (filters == null || Object.keys(filters).length === 0)
     ) {
-      throw "Deletion must be filtered"
+      throw new Error("Deletion must be filtered")
     }
 
     let json: QueryJson = {

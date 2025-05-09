@@ -364,7 +364,7 @@ export class RestIntegration implements IntegrationBase {
       case BodyType.JSON:
         // if JSON error, throw it
         if (error) {
-          throw "Invalid JSON for request body"
+          throw new Error("Invalid JSON for request body")
         }
         addPaginationToBody((key: string, value: any) => {
           object[key] = value

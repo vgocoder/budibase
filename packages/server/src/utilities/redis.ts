@@ -76,7 +76,7 @@ export async function clearLock(devAppId: string, user: ContextUser) {
   }
   const userId = getGlobalIDFromUserMetadataID(user._id!)
   if (value._id !== userId) {
-    throw "User does not hold lock, cannot clear it."
+    throw new Error("User does not hold lock, cannot clear it.")
   }
   await devAppClient.delete(devAppId)
 }

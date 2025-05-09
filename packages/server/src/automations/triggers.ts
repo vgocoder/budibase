@@ -71,7 +71,9 @@ async function queueRelevantRowAutomations(
 ) {
   const tableId = event.row.tableId
   if (event.appId == null) {
-    throw `No appId specified for ${eventType} - check event emitters.`
+    throw new Error(
+      `No appId specified for ${eventType} - check event emitters.`
+    )
   }
 
   // make sure table exists and is valid before proceeding

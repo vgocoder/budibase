@@ -113,7 +113,7 @@
     const cols = parseInt(domGrid.dataset.cols || "")
     const colSize = parseInt(domGrid.dataset.colSize || "")
     if (isNaN(cols) || isNaN(colSize)) {
-      throw "DOM grid missing required dataset attributes"
+      throw new Error("DOM grid missing required dataset attributes")
     }
     const diffX = mouseX - startX
     let deltaX = Math.round(diffX / colSize)

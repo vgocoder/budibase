@@ -172,7 +172,7 @@
 
     const device = document.getElementById("app-root")
     if (!device) {
-      throw "app-root node not found"
+      throw new Error("app-root node not found")
     }
     const deviceBounds = device.getBoundingClientRect()
     nextState.indicators = elements.map((element, idx) => {

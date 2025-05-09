@@ -235,7 +235,7 @@ export async function importApp(
   // @ts-ignore
   const { ok } = await db.load(dbStream)
   if (!ok) {
-    throw "Error loading database dump from template."
+    throw new Error("Error loading database dump from template.")
   }
   if (opts.updateAttachmentColumns) {
     await updateAttachmentColumns(prodAppId, db)

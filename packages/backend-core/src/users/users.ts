@@ -104,7 +104,7 @@ export async function getGlobalUserByEmail(
   opts?: GetOpts
 ): Promise<User | undefined> {
   if (email == null) {
-    throw "Must supply an email address to view"
+    throw new Error("Must supply an email address to view")
   }
 
   const response = await queryGlobalView<User>(ViewName.USER_BY_EMAIL, {

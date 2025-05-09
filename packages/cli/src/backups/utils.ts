@@ -48,13 +48,13 @@ export async function askQuestions() {
 
 export function loadEnvironment(path: string) {
   if (!fs.existsSync(path)) {
-    throw "Unable to file specified .env file"
+    throw new Error("Unable to file specified .env file")
   }
   const env = fs.readFileSync(path, "utf8")
   const config = checkURLs(dotenv.parse(env))
   for (let required of REQUIRED) {
     if (!config[required.value]) {
-      throw `Cannot find "${required.value}" property in .env file`
+      throw new Error(`Cannot find "${required.value}" property in .env file`)
     }
   }
   return config
