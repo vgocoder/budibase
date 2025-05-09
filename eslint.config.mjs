@@ -81,6 +81,7 @@ export default [
           caughtErrors: "none",
         },
       ],
+      "no-throw-literal": "error",
     },
   },
   ...eslintPluginSvelte.configs["flat/recommended"].map(config => ({
