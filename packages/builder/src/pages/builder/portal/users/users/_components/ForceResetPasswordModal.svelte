@@ -1,13 +1,14 @@
-<script>
+<script lang="ts">
   import { createEventDispatcher } from "svelte"
   import { ModalContent, Body, Input, notifications } from "@budibase/bbui"
   import { users } from "@/stores/portal"
+  import type { User } from "@budibase/types"
 
   const dispatch = createEventDispatcher()
 
-  export let user
+  export let user: User
 
-  const generatePassword = length => {
+  const generatePassword = (length: number) => {
     const array = new Uint8Array(length)
     crypto.getRandomValues(array)
     return Array.from(array, byte => byte.toString(36).padStart(2, "0"))
@@ -40,7 +41,7 @@
   cancelText="Cancel"
   showCloseIcon={false}
 >
-  <Body noPadding
+  <Body
     >Before you reset the users password, do not forget to copy the new
     password. The user will need this to login. Once the user has logged in they
     will be asked to create a new password that is more secure.</Body
