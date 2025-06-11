@@ -18,7 +18,7 @@ export * from "../docIds"
 export async function getAllDbs(opts = { efficient: false }) {
   const efficient = opts && opts.efficient
 
-  let dbs: any[] = []
+  let dbs: string[] = []
   async function addDbs(queryString?: string) {
     const json = await directCouchAllDbs(queryString)
     dbs = dbs.concat(json)
@@ -53,13 +53,18 @@ export async function getAllApps({
   all,
   idsOnly,
   efficient,
-}: any = {}): Promise<App[] | string[]> {
+}: {
+  dev?: boolean
+  all?: boolean
+  idsOnly?: boolean
+  efficient?: boolean
+} = {}): Promise<App[] | string[]> {
   let tenantId = getTenantId()
   if (!env.MULTI_TENANCY && !tenantId) {
     tenantId = DEFAULT_TENANT_ID
   }
-  let dbs = await getAllDbs({ efficient })
-  const appDbNames = dbs.filter((dbName: any) => {
+  const dbs = await getAllDbs({ efficient: !!efficient })
+  const appDbNames = dbs.filter(dbName => {
     if (env.isTest() && !dbName) {
       return false
     }
@@ -92,7 +97,7 @@ export async function getAllApps({
         return appDbNames
     }
   }
-  const appPromises = appDbNames.map((app: any) =>
+  const appPromises = appDbNames.map(app =>
     // skip setup otherwise databases could be re-created
     getAppMetadata(app)
   )
