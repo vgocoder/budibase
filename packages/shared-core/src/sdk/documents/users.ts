@@ -25,7 +25,7 @@ export function isBuilder(
   return false
 }
 
-export function isGlobalBuilder(user: User | ContextUser): boolean {
+export function isGlobalBuilder(user: User | ContextUser | undefined): boolean {
   return (isBuilder(user) && !hasAppBuilderPermissions(user)) || isAdmin(user)
 }
 
@@ -50,7 +50,9 @@ export function isAdminOrBuilder(
   return isBuilder(user, appId) || isAdmin(user)
 }
 
-export function isAdminOrGlobalBuilder(user: User | ContextUser): boolean {
+export function isAdminOrGlobalBuilder(
+  user: User | ContextUser | undefined
+): boolean {
   return isGlobalBuilder(user) || isAdmin(user)
 }
 
