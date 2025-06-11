@@ -14,8 +14,8 @@ export type AppTemplate =
     }
 
 export interface AppIdentifierMetadata {
-  devId?: string
-  devRev?: string
+  devId: string
+  devRev: string
   prodId?: string
   prodRev?: string
 }

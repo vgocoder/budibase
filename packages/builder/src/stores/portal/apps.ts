@@ -82,7 +82,7 @@ export class AppsStore extends BudiStore<PortalAppsStore> {
         appMap[id] = {
           ...app,
           devId: app.appId,
-          devRev: app._rev,
+          devRev: app._rev!,
         }
       })
 

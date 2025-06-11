@@ -5,11 +5,11 @@
   import { users } from "@/stores/portal"
   import type { User } from "@budibase/types"
 
-  export let user: User
+  export let user: User | undefined
 
   async function deleteUser() {
     try {
-      await users.delete(user._id!)
+      await users.delete(user!._id!)
       notifications.success(`User ${user?.email} deleted.`)
       $goto("./")
     } catch (error) {

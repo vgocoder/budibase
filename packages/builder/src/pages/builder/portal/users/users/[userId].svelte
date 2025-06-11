@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { goto, url } from "@roxi/routify"
   import {
     ActionMenu,
@@ -40,8 +40,9 @@
   import { sdk } from "@budibase/shared-core"
   import ActiveDirectoryInfo from "../_components/ActiveDirectoryInfo.svelte"
   import { capitalise } from "@/helpers"
+  import type { AccountMetadata, User, UserGroup } from "@budibase/types"
 
-  export let userId
+  export let userId: string
 
   $: groupSchema = {
     name: {
@@ -88,18 +89,18 @@
     },
   ]
 
-  let deleteModal
-  let resetPasswordModal
-  let popoverAnchor
-  let searchTerm = ""
-  let popover
-  let user, tenantOwner
-  let loaded = false
-  let userFieldsToUpdate = {}
+  let deleteModal: Modal
+  let resetPasswordModal: Modal
+  let popoverAnchor: HTMLElement
+  let searchTerm: string = ""
+  let popover: Popover
+  let user: User | undefined, tenantOwner: AccountMetadata | undefined
+  let loaded: boolean = false
+  let userFieldsToUpdate: Partial<User> = {}
 
   $: internalGroups = $groups?.filter(g => !g?.scimInfo?.isSync)
 
-  $: isSSO = !!user?.provider
+  $: isSSO = user && "provider" in user
   $: isAdmin = sdk.users.isAdmin($auth.user)
   $: isScim = user?.scimInfo?.isSync
   $: readonly = !isAdmin || isScim
@@ -115,9 +116,9 @@
     })
   })
   $: globalRole = users.getUserRole(user)
-  $: isTenantOwner = tenantOwner?.email && tenantOwner.email === user?.email
+  $: isTenantOwner = !!tenantOwner?.email && tenantOwner.email === user?.email
 
-  const getApps = (user, appIds) => {
+  const getApps = (user: User, appIds: string[]) => {
     let availableApps = $appsStore.apps
       .slice()
       .filter(app =>
@@ -134,7 +135,7 @@
     })
   }
 
-  const getFilteredGroups = (groups, search) => {
+  const getFilteredGroups = (groups: UserGroup[], search: string) => {
     if (!search) {
       return groups
     }
@@ -142,7 +143,7 @@
     return groups.filter(group => group.name?.toLowerCase().includes(search))
   }
 
-  const getRole = (prodAppId, user) => {
+  const getRole = (prodAppId: string, user: User | undefined) => {
     if (privileged) {
       return Constants.Roles.ADMIN
     }
@@ -158,17 +159,17 @@
     // check if access via group for creator
     const foundGroup = $groups?.find(
       group => group.roles?.[prodAppId] || group.builder?.apps[prodAppId]
-    )
+    )!
     if (foundGroup.builder?.apps[prodAppId]) {
       return Constants.Roles.CREATOR
     }
     // can't tell how groups will control role
-    if (foundGroup.roles[prodAppId]) {
+    if (foundGroup.roles?.[prodAppId]) {
       return Constants.Roles.GROUP
     }
   }
 
-  const getNameLabel = user => {
+  const getNameLabel = (user: User | undefined) => {
     const { firstName, lastName, email } = user || {}
     if (!firstName && !lastName) {
       return email || ""
@@ -186,6 +187,10 @@
   }
 
   async function saveUser() {
+    if (!user) {
+      console.error("User must be defined")
+      return
+    }
     try {
       await users.save({ ...user, ...userFieldsToUpdate })
       userFieldsToUpdate = {}
@@ -195,15 +200,15 @@
     }
   }
 
-  async function updateUserFirstName(evt) {
+  async function updateUserFirstName(evt: any) {
     userFieldsToUpdate.firstName = evt.target.value
   }
 
-  async function updateUserLastName(evt) {
+  async function updateUserLastName(evt: any) {
     userFieldsToUpdate.lastName = evt.target.value
   }
 
-  async function updateUserRole({ detail }) {
+  async function updateUserRole({ detail }: CustomEvent) {
     let flags = {}
     if (detail === Constants.BudibaseRoles.Developer) {
       flags = { admin: { global: false }, builder: { global: true } }
@@ -228,19 +233,19 @@
   }
 
   async function fetchUser() {
-    user = await users.get(userId)
+    user = (await users.get(userId)) ?? undefined
     if (!user?._id) {
       $goto("./")
     }
-    tenantOwner = await users.getAccountHolder()
+    tenantOwner = (await users.getAccountHolder()) ?? undefined
   }
 
-  const addGroup = async groupId => {
+  const addGroup = async (groupId: string) => {
     await groups.addUser(groupId, userId)
     await fetchUser()
   }
 
-  const removeGroup = async groupId => {
+  const removeGroup = async (groupId: string) => {
     await groups.removeUser(groupId, userId)
     await fetchUser()
   }
@@ -265,7 +270,7 @@
   <Layout gap="L" noPadding>
     <Breadcrumbs>
       <Breadcrumb url={$url("./")} text="Users" />
-      <Breadcrumb text={user?.email} />
+      <Breadcrumb text={user?.email || ""} />
     </Breadcrumbs>
 
     <div class="title">
@@ -327,12 +332,12 @@
           />
         </div>
         <!-- don't let a user remove the privileges that let them be here -->
-        {#if userId !== $auth.user._id}
+        {#if userId !== $auth.user?._id}
           <!-- Disabled if it's not admin, enabled for SCIM integration   -->
           <div class="field">
             <Label size="L">Role</Label>
             <Select
-              placeholder={null}
+              placeholder={""}
               disabled={!sdk.users.isAdmin($auth.user) || isTenantOwner}
               value={isTenantOwner ? "owner" : globalRole}
               options={isTenantOwner
@@ -359,14 +364,16 @@
           <Heading size="S">Groups</Heading>
           {#if internalGroups?.length && isAdmin}
             <div bind:this={popoverAnchor}>
-              <Button on:click={popover.show()} secondary>Add to group</Button>
+              <Button on:click={() => popover.show()} secondary
+                >Add to group</Button
+              >
             </div>
             <Popover align="right" bind:this={popover} anchor={popoverAnchor}>
               <UserGroupPicker
                 labelKey="name"
                 bind:searchTerm
                 list={filteredGroups}
-                selected={user.userGroups}
+                selected={user?.userGroups}
                 on:select={e => addGroup(e.detail)}
                 on:deselect={e => removeGroup(e.detail)}
                 iconComponent={GroupIcon}
@@ -420,7 +427,9 @@
   <DeleteUserModal {user} />
 </Modal>
 <Modal bind:this={resetPasswordModal}>
-  <ForceResetPasswordModal {user} on:update={fetchUser} />
+  {#if user}
+    <ForceResetPasswordModal {user} on:update={fetchUser} />
+  {/if}
 </Modal>
 
 <style>

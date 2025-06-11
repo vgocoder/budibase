@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { createEventDispatcher } from "svelte"
 
   let dispatch = createEventDispatcher()
@@ -6,10 +6,10 @@
   export let type = "info"
   export let icon = "Info"
   export let size = "S"
-  export let extraButtonText
-  export let extraButtonAction
-  export let extraLinkText
-  export let extraLinkAction
+  export let extraButtonText: string | undefined = undefined
+  export let extraButtonAction: (() => void) | undefined = undefined
+  export let extraLinkText: string | undefined = undefined
+  export let extraLinkAction: (() => void) | undefined = undefined
   export let showCloseButton = true
 
   let show = true

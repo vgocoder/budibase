@@ -3,8 +3,8 @@
   import { helpers } from "@budibase/shared-core"
   import type { User } from "@budibase/types"
 
-  export let user: User
-  export let size: "XS" | "S" | "M" = "S"
+  export let user: User | undefined
+  export let size: "XS" | "S" | "M" | "L" | "XL" | "XXL" = "S"
   export let tooltipPosition: TooltipPosition = TooltipPosition.Top
   export let showTooltip: boolean = true
 </script>

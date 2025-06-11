@@ -1,21 +1,27 @@
-<script>
+<script lang="ts" generics="O extends Document">
+  import type GroupIcon from "@/pages/builder/portal/users/groups/_components/GroupIcon.svelte"
   import { Icon, Search, Layout } from "@budibase/bbui"
+  import type { Document } from "@budibase/types"
   import { createEventDispatcher } from "svelte"
 
-  export let searchTerm = ""
-  export let selected
-  export let list = []
-  export let labelKey
-  export let iconComponent = null
-  export let extractIconProps = x => x
+  type EnrichedValue = O & {
+    selected: boolean
+  }
+
+  export let searchTerm: string = ""
+  export let selected: string[] | undefined
+  export let list: O[] = []
+  export let labelKey: keyof O
+  export let iconComponent: typeof GroupIcon | null = null
+  export let extractIconProps = (x: O): any => x
 
   const dispatch = createEventDispatcher()
 
   $: enrichedList = enrich(list, selected)
   $: sortedList = sort(enrichedList)
 
-  const enrich = (list, selected) => {
-    return list.map(item => {
+  const enrich = (list: O[], selected: string[] | undefined) => {
+    return list.map<EnrichedValue>(item => {
       return {
         ...item,
         selected: selected?.find(x => x === item._id) != null,
@@ -23,7 +29,7 @@
     })
   }
 
-  const sort = list => {
+  const sort = (list: EnrichedValue[]) => {
     let sortedList = list.slice()
     sortedList.sort((a, b) => {
       if (a.selected === b.selected) {
